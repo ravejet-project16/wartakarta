@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direktori UKM & Wisata Bandung Selatan - WARTAKARTA.COM</title>
+    
+    <!-- Memuat Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Memuat Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- Memuat Google Fonts: Poppins dan Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F7F9FC; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        .text-primary { color: #0D47A1; } .bg-primary { background-color: #0D47A1; }
+        .text-accent { color: #FF9800; } .bg-accent { background-color: #FF9800; }
+        .directory-card { transition: all 0.3s ease; }
+        .directory-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 20px -5px rgb(0 0 0 / 0.1); 
+        }
+        .svg-white { filter: brightness(0) invert(1); }
+        #search-modal {
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        #search-modal .modal-container {
+            transition: transform 0.3s ease-in-out;
+        }
+        #search-modal.is-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        #search-modal.is-visible .modal-container {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div id="main-content">
+        <!-- ===== HEADER UNIVERSAL ===== -->
+        <header class="bg-white shadow-sm sticky top-0 z-40">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <div>
+                    <a href="home.html">
+                        <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/logo.svg" alt="WartaKarta Logo" class="h-10 w-auto">
+                    </a>
+                </div>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="home.html" class="text-subtle hover:text-primary transition-colors">Beranda</a>
+                    <a href="article.html" class="text-subtle hover:text-primary transition-colors">Kabar Taruna</a>
+                    <a href="explore.html" class="text-subtle hover:text-primary transition-colors">Jelajah</a>
+                    <a href="directory.html" class="text-main font-semibold hover:text-primary transition-colors">Direktori</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <button id="search-button" class="text-subtle hover:text-primary" aria-label="Cari"><i class="fa-solid fa-magnifying-glass text-lg"></i></button>
+                    <a href="contact.html" class="hidden sm:block bg-accent text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-90 transition-all text-sm"><i class="fa-solid fa-paper-plane mr-2"></i>Sampaikan Berita</a>
+                    <button id="mobile-menu-btn" class="md:hidden text-main" aria-label="Menu"><i class="fa-solid fa-bars text-xl"></i></button>
+                </div>
+            </div>
+            <div id="mobile-nav" class="hidden md:hidden bg-white border-t py-4 px-4">
+                <a href="home.html" class="block py-2 text-subtle">Beranda</a>
+                <a href="article.html" class="block py-2 text-subtle">Kabar Taruna</a>
+                <a href="explore.html" class="block py-2 text-subtle">Jelajah</a>
+                <a href="directory.html" class="block py-2 text-main font-semibold">Direktori</a>
+                <a href="contact.html" class="w-full text-center mt-4 bg-accent text-white font-bold py-2 px-4 rounded-lg block"><i class="fa-solid fa-paper-plane mr-2"></i>Sampaikan Berita</a>
+            </div>
+        </header>
+
+        <!-- ===== KONTEN UTAMA ===== -->
+        <main class="container mx-auto px-4 py-12">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-main">Direktori Lokal</h1>
+                <p class="mt-2 text-lg text-subtle max-w-2xl mx-auto">Temukan UKM, tempat wisata, kuliner, dan layanan terbaik di Bandung Selatan.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <!-- Kolom Filter -->
+                <aside class="lg:col-span-1">
+                    <div class="sticky top-24 space-y-8">
+                        <div class="bg-white p-6 rounded-xl shadow-md">
+                            <h3 class="font-bold text-xl mb-4 pb-3 border-b">Filter Pencarian</h3>
+                            <form>
+                                <div class="mb-4">
+                                    <label for="search-keyword" class="block text-sm font-medium text-gray-700 mb-1">Kata Kunci</label>
+                                    <input type="text" id="search-keyword" placeholder="Cari Nama Tempat..." class="w-full border-gray-300 rounded-md shadow-sm focus:border-primary focus:ring-primary">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="search-category" class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
+                                    <select id="search-category" class="w-full border-gray-300 rounded-md shadow-sm focus:border-primary focus:ring-primary">
+                                        <option>Semua Kategori</option>
+                                        <option>Kuliner</option>
+                                        <option>Wisata Alam</option>
+                                        <option>Akomodasi</option>
+                                        <option>Kerajinan</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="search-location" class="block text-sm font-medium text-gray-700 mb-1">Lokasi</label>
+                                    <select id="search-location" class="w-full border-gray-300 rounded-md shadow-sm focus:border-primary focus:ring-primary">
+                                        <option>Semua Lokasi</option>
+                                        <option>Cimaung</option>
+                                        <option>Banjaran</option>
+                                        <option>Ciwidey</option>
+                                        <option>Pangalengan</option>
+                                    </select>
+                                </div>
+                                <button class="w-full mt-6 bg-primary text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-90">Terapkan Filter</button>
+                            </form>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden directory-card">
+                            <a href="advertise.html" class="block group"><figure><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/iklankopi.jpeg" alt="Iklan Kopi" class="group-hover:opacity-90 transition-opacity w-full"><figcaption class="p-3 text-xs text-center text-subtle bg-gray-50">IKLAN | Kopi Gunung Puntang, Nikmatnya Juara!</figcaption></figure></a>
+                        </div>
+                        <div class="bg-accent text-white p-6 rounded-xl shadow-md text-center">
+                            <i class="fa-solid fa-map-pin text-4xl mb-3"></i>
+                            <h3 class="font-bold text-xl">Punya Usaha atau Info Destinasi?</h3>
+                            <p class="text-sm mt-2 mb-4 opacity-90">Bantu kami melengkapi direktori ini! Daftarkan usaha atau tempat wisata Anda agar semakin dikenal.</p>
+                            <a href="contact.html" class="bg-white text-accent font-bold py-2 px-4 rounded-lg hover:bg-opacity-90 transition-all text-sm">Daftarkan Sekarang</a>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Kolom Hasil Direktori -->
+                <div class="lg:col-span-3">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <a href="directory-detail.html" class="block bg-white rounded-xl overflow-hidden shadow-md directory-card border-2 border-green-500"><div class="relative"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/kedai-min.jpg" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x250/FF9800/FFFFFF?text=Error';"><div class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full flex items-center"><i class="fa-solid fa-check mr-1"></i> Terverifikasi</div></div><div class="p-5"><h4 class="font-bold text-lg truncate">Kopi Asli Cimaung</h4><p class="text-sm text-subtle mt-1">Kedai Kopi</p><div class="flex items-center mt-2"><i class="fa-solid fa-star text-yellow-400"></i><span class="text-sm font-bold ml-1">4.8</span><span class="text-xs text-subtle ml-2">(120 ulasan)</span></div></div></a>
+                        <a href="directory-detail.html" class="block bg-white rounded-xl overflow-hidden shadow-md directory-card"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/situpatenggang.webp" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x250/00BCD4/FFFFFF?text=Error';"><div class="p-5"><h4 class="font-bold text-lg truncate">Danau Situ Patenggang</h4><p class="text-sm text-subtle mt-1">Wisata Alam</p><div class="flex items-center mt-2"><i class="fa-solid fa-star text-yellow-400"></i><span class="text-sm font-bold ml-1">4.7</span><span class="text-xs text-subtle ml-2">(500+ ulasan)</span></div></div></a>
+                        <a href="directory-detail.html" class="block bg-white rounded-xl overflow-hidden shadow-md directory-card"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/villakayu-min.jpg" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x250/3F51B5/FFFFFF?text=Error';"><div class="p-5"><h4 class="font-bold text-lg truncate">Villa Kayu Jati</h4><p class="text-sm text-subtle mt-1">Akomodasi</p><div class="flex items-center mt-2"><i class="fa-solid fa-star text-yellow-400"></i><span class="text-sm font-bold ml-1">4.9</span><span class="text-xs text-subtle ml-2">(88 ulasan)</span></div></div></a>
+                        <a href="directory-detail.html" class="block bg-white rounded-xl overflow-hidden shadow-md directory-card"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/liwetkomplit.webp" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x250/795548/FFFFFF?text=Error';"><div class="p-5"><h4 class="font-bold text-lg truncate">Warung Nasi Liwet Sunda</h4><p class="text-sm text-subtle mt-1">Kuliner</p><div class="flex items-center mt-2"><i class="fa-solid fa-star text-yellow-400"></i><span class="text-sm font-bold ml-1">4.6</span><span class="text-xs text-subtle ml-2">(210 ulasan)</span></div></div></a>
+                        <a href="directory-detail.html" class="block bg-white rounded-xl overflow-hidden shadow-md directory-card"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/sate.jpg" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x250/F44336/FFFFFF?text=Error';"><div class="p-5"><h4 class="font-bold text-lg truncate">Sate Kelinci Pak Asep</h4><p class="text-sm text-subtle mt-1">Kuliner</p><div class="flex items-center mt-2"><i class="fa-solid fa-star text-yellow-400"></i><span class="text-sm font-bold ml-1">4.5</span><span class="text-xs text-subtle ml-2">(150 ulasan)</span></div></div></a>
+                        <a href="directory-detail.html" class="block bg-white rounded-xl overflow-hidden shadow-md directory-card"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/glamping-min.jpg" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x250/607D8B/FFFFFF?text=Error';"><div class="p-5"><h4 class="font-bold text-lg truncate">Glamping Lakeside Rancabali</h4><p class="text-sm text-subtle mt-1">Akomodasi</p><div class="flex items-center mt-2"><i class="fa-solid fa-star text-yellow-400"></i><span class="text-sm font-bold ml-1">4.8</span><span class="text-xs text-subtle ml-2">(320 ulasan)</span></div></div></a>
+                        <a href="directory-detail.html" class="block bg-white rounded-xl overflow-hidden shadow-md directory-card"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/wayang.webp" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x250/9E9E9E/FFFFFF?text=Error';"><div class="p-5"><h4 class="font-bold text-lg truncate">Sanggar Wayang Golek</h4><p class="text-sm text-subtle mt-1">Kerajinan</p><div class="flex items-center mt-2"><i class="fa-solid fa-star text-yellow-400"></i><span class="text-sm font-bold ml-1">4.9</span><span class="text-xs text-subtle ml-2">(45 ulasan)</span></div></div></a>
+                        <a href="directory-detail.html" class="block bg-white rounded-xl overflow-hidden shadow-md directory-card"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/upas-min.jpg" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x250/FF9800/FFFFFF?text=Error';"><div class="p-5"><h4 class="font-bold text-lg truncate">Ranca Upas Camping Ground</h4><p class="text-sm text-subtle mt-1">Wisata Alam</p><div class="flex items-center mt-2"><i class="fa-solid fa-star text-yellow-400"></i><span class="text-sm font-bold ml-1">4.6</span><span class="text-xs text-subtle ml-2">(1.2k ulasan)</span></div></div></a>
+                        <a href="directory-detail.html" class="block bg-white rounded-xl overflow-hidden shadow-md directory-card"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/homestay.webp" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x250/E91E63/FFFFFF?text=Error';"><div class="p-5"><h4 class="font-bold text-lg truncate">Homestay Teh Nini</h4><p class="text-sm text-subtle mt-1">Akomodasi</p><div class="flex items-center mt-2"><i class="fa-solid fa-star text-yellow-400"></i><span class="text-sm font-bold ml-1">5.0</span><span class="text-xs text-subtle ml-2">(30 ulasan)</span></div></div></a>
+                    </div>
+
+                    <div class="mt-12 flex justify-center">
+                        <nav class="flex items-center space-x-2">
+                            <a href="#" class="px-4 py-2 text-gray-500 bg-white rounded-md hover:bg-gray-100"><i class="fa-solid fa-chevron-left"></i></a>
+                            <a href="#" class="px-4 py-2 text-white bg-primary rounded-md">1</a>
+                            <a href="#" class="px-4 py-2 text-gray-700 bg-white rounded-md hover:bg-gray-100">2</a>
+                            <a href="#" class="px-4 py-2 text-gray-700 bg-white rounded-md hover:bg-gray-100">3</a>
+                            <span class="px-4 py-2 text-gray-500">...</span>
+                            <a href="#" class="px-4 py-2 text-gray-700 bg-white rounded-md hover:bg-gray-100">10</a>
+                            <a href="#" class="px-4 py-2 text-gray-700 bg-white rounded-md hover:bg-gray-100"><i class="fa-solid fa-chevron-right"></i></a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="bg-primary text-white mt-16">
+            <div class="container mx-auto px-4 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                    <div><a href="home.html"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/logo.svg" alt="WartaKarta Logo" class="h-10 w-auto svg-white"></a><p class="text-sm mt-4 text-gray-300">Denyut Nadi Komunitas Digital.</p></div>
+                    <div><h4 class="font-bold">Tautan Cepat</h4><ul class="mt-2 space-y-1 text-sm text-gray-300"><li><a href="about.html" class="hover:underline">Tentang Kami</a></li><li><a href="contact.html" class="hover:underline">Hubungi Redaksi</a></li><li><a href="advertise.html" class="hover:underline">Pasang Iklan</a></li></ul></div>
+                    <div><h4 class="font-bold">Ikuti Kami</h4><div class="flex space-x-4 mt-2"><a href="#" class="text-2xl hover:opacity-80"><i class="fa-brands fa-facebook"></i></a><a href="#" class="text-2xl hover:opacity-80"><i class="fa-brands fa-twitter"></i></a><a href="#" class="text-2xl hover:opacity-80"><i class="fa-brands fa-instagram"></i></a><a href="#" class="text-2xl hover:opacity-80"><i class="fa-brands fa-tiktok"></i></a><a href="#" class="text-2xl hover:opacity-80"><i class="fa-brands fa-youtube"></i></a></div></div>
+                </div>
+                <div class="border-t border-blue-800 mt-8 pt-6 text-center text-xs text-gray-400">&copy; 2025 WARTAKARTA.COM</div>
+            </div>
+        </footer>
+    </div>
+    
+    <div id="search-modal" class="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 bg-black bg-opacity-50 p-4 opacity-0 invisible">
+        <div class="modal-container bg-white w-full max-w-2xl rounded-xl shadow-xl transform -translate-y-10">
+            <div class="relative"><input type="text" id="search-input" placeholder="Ketik untuk mencari berita..." class="w-full border-2 border-transparent rounded-xl shadow-sm p-4 pr-12 text-lg focus:border-primary focus:ring-primary"><button class="absolute right-0 top-0 h-full px-5 text-gray-500 hover:text-primary"><i class="fa-solid fa-magnifying-glass text-xl"></i></button></div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileNav = document.getElementById('mobile-nav');
+            const searchButton = document.getElementById('search-button');
+            const searchModal = document.getElementById('search-modal');
+            const searchInput = document.getElementById('search-input');
+            mobileMenuBtn.addEventListener('click', () => { mobileNav.classList.toggle('hidden'); });
+            const toggleSearchModal = (show) => {
+                if (show) {
+                    searchModal.classList.remove('invisible');
+                    setTimeout(() => {
+                        searchModal.classList.add('is-visible');
+                        searchModal.querySelector('.modal-container').classList.remove('-translate-y-10');
+                        searchInput.focus();
+                    }, 10);
+                } else {
+                    searchModal.classList.remove('is-visible');
+                    searchModal.querySelector('.modal-container').classList.add('-translate-y-10');
+                    setTimeout(() => {
+                        searchModal.classList.add('invisible');
+                    }, 300);
+                }
+            };
+            searchButton.addEventListener('click', (e) => { e.stopPropagation(); toggleSearchModal(true); });
+            document.addEventListener('click', (e) => { if (searchModal.classList.contains('is-visible') && !searchModal.querySelector('.modal-container').contains(e.target) && !searchButton.contains(e.target)) { toggleSearchModal(false); } });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && searchModal.classList.contains('is-visible')) { toggleSearchModal(false); } });
+        });
+    </script>
+</body>
+</html>
+

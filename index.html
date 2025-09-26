@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Datang di WARTA KARTA</title>
+    
+    <!-- Memuat Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Memuat Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- Memuat Google Fonts: Poppins dan Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden; 
+            background-color: #F7F9FC;
+        }
+        
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        .text-primary { color: #0D47A1; } .bg-primary { background-color: #0D47A1; }
+        .text-secondary { color: #4CAF50; } .bg-secondary { background-color: #4CAF50; }
+        .text-accent { color: #FF9800; } .bg-accent { background-color: #FF9800; }
+        .news-card {
+            transition: all 0.3s ease;
+        }
+        .news-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 20px -5px rgb(0 0 0 / 0.1); 
+        }
+        .svg-white {
+            filter: brightness(0) invert(1);
+        }
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .timeline-card-image .bg-image {
+            transition: transform 0.4s ease-out;
+        }
+        .timeline-card-image:hover .bg-image {
+            transform: scale(1.05);
+        }
+
+        @keyframes scroll-diagonal {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50%, -50%); }
+        }
+        #background-collage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200vw;
+            height: 200vh;
+            z-index: -20;
+            animation: scroll-diagonal 80s linear infinite;
+        }
+        #background-collage .grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 1rem;
+            transform: rotate(-30deg) scale(1.2);
+        }
+        #background-collage img {
+            width: 100%;
+            height: 40vh;
+            object-fit: cover;
+            border-radius: 1rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            opacity: 0.35;
+        }
+        .background-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: -10;
+            background-color: rgba(247, 249, 252, 0.40);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+<body class="text-main">
+
+    <div id="background-collage">
+        <div class="grid">
+            <script>
+                const images = [ "https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/hero-1.jpg", "https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/curugpanganten-min.jpg", "https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/kedai-min.jpg", "https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/profilkarta.webp", "https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/umkm.jpg", "https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/citarum-min.jpg", "https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/fest.jpg", "https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/drone.webp", "https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/iklanliwet.jpg", "https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/sponsorship.jpeg", "https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/wayang.webp", "https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/lomba.webp" ];
+                let imageHtml = '';
+                for (let i = 0; i < 48; i++) {
+                    imageHtml += `<img src="${images[i % images.length]}" alt="background image collage">`;
+                }
+                document.querySelector('#background-collage .grid').innerHTML = imageHtml;
+            </script>
+        </div>
+    </div>
+    <div class="background-overlay"></div>
+
+
+    <div id="main-content" class="relative z-10">
+        <!-- ===== HEADER KHUSUS HALAMAN PEMBUKA ===== -->
+        <header class="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-40">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <div>
+                    <a href="home.html">
+                        <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/logo.svg" alt="WartaKarta Logo" class="h-10 w-auto">
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="contact.html" class="bg-accent text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-90 transition-all text-sm"><i class="fa-solid fa-paper-plane mr-2"></i>Sampaikan Berita</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- ===== KONTEN UTAMA TIMELINE ===== -->
+        <main class="container mx-auto px-4 py-12">
+            <div class="text-center mb-20">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-main">Denyut Nadi Komunitas Digital</h1>
+                <p class="mt-4 text-lg text-subtle max-w-3xl mx-auto">Selamat datang di WartaKarta. Kami bukan sekadar portal berita. Kami adalah panggung digital untuk setiap cerita, potensi, dan suara dari pelosok Bandung Selatan.</p>
+            </div>
+
+            <div class="relative max-w-4xl mx-auto">
+                <!-- Garis Tengah Timeline -->
+                <div class="absolute left-1/2 -translate-x-1/2 h-full w-0.5 bg-gray-300 top-20"></div>
+
+                <div class="relative mb-20 flex justify-center w-full">
+                    <div class="z-10 bg-white rounded-full shadow-xl w-40 h-40 flex items-center justify-center p-6 news-card">
+                        <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/logo.svg" alt="WartaKarta Logo" class="w-full h-auto">
+                    </div>
+                </div>
+
+                <!-- Item Timeline 1: Pengenalan Website -->
+                <div class="relative mb-20 flex justify-between items-center w-full">
+                    <div class="order-1 w-5/12"></div>
+                    <div class="z-10 flex items-center order-1 bg-primary shadow-xl w-12 h-12 rounded-full">
+                        <h1 class="mx-auto font-semibold text-lg text-white"><i class="fa-solid fa-rocket"></i></h1>
+                    </div>
+                    <div class="order-1 bg-white rounded-xl shadow-md w-5/12 px-8 py-6 news-card">
+                        <h3 class="font-bold text-xl text-primary">Awal Mula Perjalanan</h3>
+                        <p class="text-base leading-relaxed tracking-wide text-subtle mt-2">WartaKarta lahir dari sebuah keyakinan sederhana: setiap komunitas punya cerita yang layak didengar. Misi kami adalah menjadi panggung digital bagi Karang Taruna, UMKM, dan potensi lokal untuk bersinar.</p>
+                    </div>
+                </div>
+
+                <!-- Item Timeline 2: Berita Trending -->
+                <div class="relative mb-20 flex justify-between flex-row-reverse items-center w-full">
+                    <div class="order-1 w-5/12"></div>
+                    <div class="z-10 flex items-center order-1 bg-accent shadow-xl w-12 h-12 rounded-full">
+                        <h1 class="mx-auto text-white text-lg"><i class="fa-solid fa-fire"></i></h1>
+                    </div>
+                    <div class="order-1 rounded-xl shadow-md w-5/12 h-96 news-card overflow-hidden relative timeline-card-image">
+                        <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/hero-1.jpg" class="absolute inset-0 w-full h-full object-cover bg-image">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end">
+                            <span class="text-xs text-accent font-semibold bg-white/20 backdrop-blur-sm py-1 px-2 rounded-full self-start">KABAR TARUNA</span>
+                            <h3 class="font-bold text-2xl text-white mt-2 text-shadow">Karang Taruna Cimaung Gelar Festival UMKM</h3>
+                            <a href="article.html" class="bg-primary text-white font-semibold py-2 px-4 rounded-md hover:bg-opacity-90 inline-block mt-4 self-start">Baca Berita</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item Timeline 3: Tombol Masuk Berita -->
+                <div class="relative mb-20 flex justify-between items-center w-full">
+                    <div class="order-1 w-5/12"></div>
+                    <div class="z-10 flex items-center order-1 bg-primary shadow-xl w-12 h-12 rounded-full">
+                        <h1 class="mx-auto font-semibold text-lg text-white"><i class="fa-solid fa-newspaper"></i></h1>
+                    </div>
+                    <div class="order-1 bg-white rounded-xl shadow-md w-5/12 px-8 py-6 news-card text-center">
+                        <h3 class="font-bold text-xl text-primary">Siap Menjelajah?</h3>
+                        <p class="text-base leading-relaxed tracking-wide text-subtle my-3">Ribuan cerita dan informasi menanti Anda di halaman utama kami.</p>
+                        <a href="home.html" class="bg-primary text-white font-semibold py-2 px-4 rounded-lg hover:bg-opacity-90 transition-all inline-block">Masuk ke Beranda</a>
+                    </div>
+                </div>
+                
+                 <div class="relative mb-20 flex justify-between flex-row-reverse items-center w-full">
+                    <div class="order-1 w-5/12"></div>
+                    <div class="z-10 flex items-center order-1 bg-secondary shadow-xl w-12 h-12 rounded-full" style="background-color: #4CAF50;">
+                         <h1 class="mx-auto text-white text-lg"><i class="fa-solid fa-tree"></i></h1>
+                    </div>
+                    <div class="order-1 rounded-xl shadow-md w-5/12 h-96 news-card overflow-hidden relative timeline-card-image">
+                         <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/curugpanganten-min.jpg" class="absolute inset-0 w-full h-full object-cover bg-image">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end">
+                            <span class="text-xs font-semibold bg-white/20 backdrop-blur-sm py-1 px-2 rounded-full self-start">JELAJAH</span>
+                            <h3 class="font-bold text-2xl text-white mt-2 text-shadow">Menikmati Sejuknya Curug Penganten</h3>
+                            <a href="explore.html" class="bg-primary text-white font-semibold py-2 px-4 rounded-md hover:bg-opacity-90 inline-block mt-4 self-start">Lihat Jelajah</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item Timeline 5: Pengenalan Direktori -->
+                <div class="relative mb-20 flex justify-between items-center w-full">
+                    <div class="order-1 w-5/12"></div>
+                    <div class="z-10 flex items-center order-1 bg-accent shadow-xl w-12 h-12 rounded-full">
+                        <h1 class="mx-auto font-semibold text-lg text-white"><i class="fa-solid fa-store"></i></h1>
+                    </div>
+                    <div class="order-1 bg-white rounded-xl shadow-md w-5/12 px-8 py-6 news-card">
+                        <h3 class="font-bold text-xl text-accent">Temukan Potensi Lokal</h3>
+                        <p class="text-base leading-relaxed tracking-wide text-subtle mt-2">Dari kedai kopi tersembunyi hingga pengrajin lokal, jelajahi direktori kami untuk mendukung dan menemukan produk serta layanan terbaik di sekitar Anda.</p>
+                        <a href="directory.html" class="bg-accent text-white font-semibold py-2 px-4 rounded-md hover:bg-opacity-90 inline-block mt-4 self-start">Buka Direktori</a>
+                    </div>
+                </div>
+
+                <!-- Item Timeline 6: Pengenalan Fitur -->
+                <div class="relative flex justify-between flex-row-reverse items-center w-full">
+                    <div class="order-1 w-5/12"></div>
+                    <div class="z-10 flex items-center order-1 bg-secondary shadow-xl w-12 h-12 rounded-full" style="background-color: #4CAF50;">
+                        <h1 class="mx-auto font-semibold text-lg text-white"><i class="fa-solid fa-users"></i></h1>
+                    </div>
+                    <div class="order-1 bg-white rounded-xl shadow-md w-5/12 px-8 py-6 news-card">
+                        <h3 class="font-bold text-xl" style="color: #4CAF50;">Suara Anda, Berita Kita</h3>
+                        <p class="text-base leading-relaxed tracking-wide text-subtle mt-2">Melalui tombol "Sampaikan Berita", Anda bisa menjadi mata dan telinga komunitas. Setiap laporan berharga bagi kami.</p>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- ===== FOOTER UNIVERSAL ===== -->
+        <footer class="bg-primary text-white mt-16">
+            <div class="container mx-auto px-4 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                    <div>
+                        <a href="home.html">
+                            <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/logo.svg" alt="WartaKarta Logo" class="h-10 w-auto svg-white">
+                        </a>
+                        <p class="text-sm mt-4 text-gray-300">Denyut Nadi Komunitas Digital.</p>
+                    </div>
+                    <div><h4 class="font-bold">Tautan Cepat</h4><ul class="mt-2 space-y-1 text-sm text-gray-300"><li><a href="about.html" class="hover:underline">Tentang Kami</a></li><li><a href="contact.html" class="hover:underline">Hubungi Redaksi</a></li><li><a href="advertise.html" class="hover:underline">Pasang Iklan</a></li></ul></div>
+                    <div><h4 class="font-bold">Ikuti Kami</h4><div class="flex space-x-4 mt-2"><a href="#" class="text-2xl hover:opacity-80"><i class="fa-brands fa-facebook"></i></a><a href="#" class="text-2xl hover:opacity-80"><i class="fa-brands fa-twitter"></i></a><a href="#" class="text-2xl hover:opacity-80"><i class="fa-brands fa-instagram"></i></a><a href="#" class="text-2xl hover:opacity-80"><i class="fa-brands fa-tiktok"></i></a><a href="#" class="text-2xl hover:opacity-80"><i class="fa-brands fa-youtube"></i></a></div></div>
+                </div>
+                <div class="border-t border-blue-800 mt-8 pt-6 text-center text-xs text-gray-400">&copy; 2025 WARTAKARTA.COM</div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+

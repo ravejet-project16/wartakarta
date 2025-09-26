@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kopi Asli Cimaung - Direktori WARTAKARTA.COM</title>
+    
+    <!-- Memuat Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Memuat Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- Memuat Google Fonts: Poppins dan Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F7F9FC; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        .text-primary { color: #0D47A1; } .bg-primary { background-color: #0D47A1; }
+        .text-accent { color: #FF9800; } .bg-accent { background-color: #FF9800; }
+        .svg-white { filter: brightness(0) invert(1); }
+        #search-modal {
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        #search-modal .modal-container {
+            transition: transform 0.3s ease-in-out;
+        }
+        #search-modal.is-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        #search-modal.is-visible .modal-container {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div id="main-content">
+        <!-- ===== HEADER UNIVERSAL ===== -->
+        <header class="bg-white shadow-sm sticky top-0 z-40">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <div>
+                    <a href="home.html">
+                        <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/logo.svg" alt="WartaKarta Logo" class="h-10 w-auto">
+                    </a>
+                </div>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="home.html" class="text-subtle hover:text-primary transition-colors">Beranda</a>
+                    <a href="article.html" class="text-subtle hover:text-primary transition-colors">Kabar Taruna</a>
+                    <a href="explore.html" class="text-subtle hover:text-primary transition-colors">Jelajah</a>
+                    <a href="directory.html" class="text-main font-semibold hover:text-primary transition-colors">Direktori</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <button id="search-button" class="text-subtle hover:text-primary" aria-label="Cari"><i class="fa-solid fa-magnifying-glass text-lg"></i></button>
+                    <a href="contact.html" class="hidden sm:block bg-accent text-white font-bold py-2 px-4 rounded-lg hover:bg-opacity-90 transition-all text-sm"><i class="fa-solid fa-paper-plane mr-2"></i>Sampaikan Berita</a>
+                    <button id="mobile-menu-btn" class="md:hidden text-main" aria-label="Menu"><i class="fa-solid fa-bars text-xl"></i></button>
+                </div>
+            </div>
+            <div id="mobile-nav" class="hidden md:hidden bg-white border-t py-4 px-4">
+                <a href="home.html" class="block py-2 text-subtle">Beranda</a>
+                <a href="article.html" class="block py-2 text-subtle">Kabar Taruna</a>
+                <a href="explore.html" class="block py-2 text-subtle">Jelajah</a>
+                <a href="directory.html" class="block py-2 text-main font-semibold">Direktori</a>
+                <a href="contact.html" class="w-full text-center mt-4 bg-accent text-white font-bold py-2 px-4 rounded-lg block"><i class="fa-solid fa-paper-plane mr-2"></i>Sampaikan Berita</a>
+            </div>
+        </header>
+
+        <!-- ===== KONTEN UTAMA ===== -->
+        <main class="container mx-auto px-4 py-8">
+            <!-- [PERBAIKAN] GALERI FOTO dengan layout baru -->
+            <section class="grid grid-cols-4 grid-rows-2 gap-2 rounded-xl overflow-hidden shadow-lg h-[60vh]">
+                <a href="#" class="col-span-2 row-span-2 group overflow-hidden">
+                    <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/kedai-min.jpg" alt="Foto Utama Kedai Kopi" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                </a>
+                <a href="#" class="group overflow-hidden">
+                    <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/biji.webp" alt="Foto Biji Kopi" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                </a>
+                <a href="#" class="group overflow-hidden">
+                    <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/suasana.jpg" alt="Foto Suasana Kedai" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                </a>
+                <a href="#" class="group overflow-hidden">
+                    <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/menu.webp" alt="Foto Menu" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                </a>
+                <a href="#" class="group overflow-hidden">
+                    <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/interior.jpg" alt="Foto Interior" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                </a>
+            </section>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mt-8">
+                <!-- Kolom Konten Detail -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white p-8 rounded-xl shadow-md">
+                        <div class="flex flex-col sm:flex-row justify-between sm:items-center border-b pb-6">
+                            <div>
+                                <h1 class="text-4xl font-bold text-main">Kopi Asli Cimaung</h1>
+                                <p class="text-lg text-subtle mt-1">Kedai Kopi & Sangrai</p>
+                                <div class="flex items-center mt-2">
+                                    <i class="fa-solid fa-star text-yellow-400"></i>
+                                    <span class="text-sm font-bold ml-1">4.8</span>
+                                    <span class="text-xs text-subtle ml-2">(120 ulasan)</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 sm:mt-0">
+                                <span class="bg-green-100 text-green-800 text-sm font-bold px-4 py-2 rounded-full flex items-center"><i class="fa-solid fa-check mr-2"></i> Terverifikasi</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Blok Aksi -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 my-6">
+                            <a href="tel:08123456789" class="bg-blue-100 text-blue-800 font-semibold p-3 rounded-lg text-center hover:bg-blue-200 transition"><i class="fa-solid fa-phone mr-2"></i> Telepon</a>
+                            <a href="https://maps.app.goo.gl/vr6xnML6t3yFpCH89" target="_blank" class="bg-green-100 text-green-800 font-semibold p-3 rounded-lg text-center hover:bg-green-200 transition"><i class="fa-solid fa-diamond-turn-right mr-2"></i> Arahkan</a>
+                            <a href="#" class="bg-gray-100 text-gray-800 font-semibold p-3 rounded-lg text-center hover:bg-gray-200 transition"><i class="fa-solid fa-globe mr-2"></i> Website</a>
+                        </div>
+                        
+                        <!-- Deskripsi -->
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold mb-4">Tentang Kopi Asli Cimaung</h2>
+                            <p class="text-subtle leading-relaxed">Berawal dari kecintaan terhadap kopi lokal Gunung Puntang, Kopi Asli Cimaung didirikan untuk menyajikan secangkir kebahagiaan otentik dari biji kopi pilihan. Kami menyangrai sendiri biji kopi kami untuk memastikan kualitas dan kesegaran terbaik. Nikmati suasana tenang pedesaan sambil menyeruput kopi terbaik dari tanah Pasundan.</p>
+                        </div>
+
+                        <!-- Peta Lokasi -->
+                        <div class="mt-8">
+                             <h2 class="text-2xl font-bold mb-4">Lokasi Kami</h2>
+                             <div class="rounded-xl overflow-hidden shadow-lg"><iframe src="https://maps.google.com/maps?q=-7.114497,107.573873&hl=id&z=15&output=embed" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+                        </div>
+
+                        <!-- Ulasan Pengunjung -->
+                        <div class="mt-8">
+                            <h2 class="text-2xl font-bold mb-4">Ulasan Pengunjung</h2>
+                            <div class="space-y-6">
+                                <div class="flex items-start space-x-4"><img src="https://placehold.co/48x48/4CAF50/FFFFFF?text=A" alt="Avatar" class="w-12 h-12 rounded-full"><div class="flex-1"><div class="flex justify-between"><strong>Asep Hidayat</strong><span class="text-yellow-400"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span></div><p class="text-sm text-subtle mt-1">Kopinya juara! Suasananya adem banget, cocok buat kerja atau sekadar santai.</p></div></div>
+                                <div class="flex items-start space-x-4"><img src="https://placehold.co/48x48/FF9800/FFFFFF?text=S" alt="Avatar" class="w-12 h-12 rounded-full"><div class="flex-1"><div class="flex justify-between"><strong>Siti Nurjanah</strong><span class="text-yellow-400"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></span></div><p class="text-sm text-subtle mt-1">Tempatnya agak masuk ke dalam, tapi *worth it* banget. V60-nya wajib coba!</p></div></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Kolom Sidebar -->
+                <aside class="lg:col-span-1">
+                    <div class="sticky top-24 space-y-8">
+                        <div class="bg-white p-6 rounded-xl shadow-md">
+                            <h3 class="font-bold text-xl mb-4 pb-3 border-b">Informasi Detail</h3>
+                            <div class="space-y-4 text-subtle">
+                                <div class="flex"><i class="fa-solid fa-location-dot w-6 mt-1"></i><span>Jl. Gunung Puntang KM 2, Cimaung, Kab. Bandung</span></div>
+                                <div class="flex"><i class="fa-solid fa-clock w-6"></i><span><b>Jam Buka:</b><br>Setiap Hari, 08:00 - 22:00 WIB</span></div>
+                                <div class="flex"><i class="fa-solid fa-tags w-6"></i><span><b>Kisaran Harga:</b><br>Rp 15.000 - Rp 50.000</span></div>
+                                <div class="flex"><i class="fa-solid fa-wifi w-6"></i><span>WiFi Cepat & Gratis</span></div>
+                                <div class="flex"><i class="fa-solid fa-square-parking w-6"></i><span>Area Parkir Luas</span></div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden directory-card">
+                            <a href="advertise.html" class="block group"><figure><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/iklankopi.jpeg" alt="Iklan Kopi" class="group-hover:opacity-90 transition-opacity w-full"><figcaption class="p-3 text-xs text-center text-subtle bg-gray-50">IKLAN | Kopi Gunung Puntang, Nikmatnya Juara!</figcaption></figure></a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </main>
+
+        <footer class="bg-primary text-white mt-16">
+            <div class="container mx-auto px-4 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                    <div><a href="home.html"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/logo.svg" alt="WartaKarta Logo" class="h-10 w-auto svg-white"></a><p class="text-sm mt-4 text-gray-300">Denyut Nadi Komunitas Digital.</p></div>
+                    <div><h4 class="font-bold">Tautan Cepat</h4><ul class="mt-2 space-y-1 text-sm text-gray-300"><li><a href="about.html" class="hover:underline">Tentang Kami</a></li><li><a href="contact.html" class="hover:underline">Hubungi Redaksi</a></li><li><a href="advertise.html" class="hover:underline">Pasang Iklan</a></li></ul></div>
+                    <div><h4 class="font-bold">Ikuti Kami</h4><div class="flex space-x-4 mt-2"><a href="#" class="text-2xl hover:opacity-80"><i class="fa-brands fa-facebook"></i></a><a href="#" class="text-2xl hover:opacity-80"><i class="fa-brands fa-twitter"></i></a><a href="#" class="text-2xl hover:opacity-80"><i class="fa-brands fa-instagram"></i></a><a href="#" class="text-2xl hover:opacity-80"><i class="fa-brands fa-tiktok"></i></a><a href="#" class="text-2xl hover:opacity-80"><i class="fa-brands fa-youtube"></i></a></div></div>
+                </div>
+                <div class="border-t border-blue-800 mt-8 pt-6 text-center text-xs text-gray-400">&copy; 2025 WARTAKARTA.COM</div>
+            </div>
+        </footer>
+    </div>
+    
+    <div id="search-modal" class="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 bg-black bg-opacity-50 p-4 opacity-0 invisible">
+        <div class="modal-container bg-white w-full max-w-2xl rounded-xl shadow-xl transform -translate-y-10">
+            <div class="relative"><input type="text" id="search-input" placeholder="Ketik untuk mencari berita..." class="w-full border-2 border-transparent rounded-xl shadow-sm p-4 pr-12 text-lg focus:border-primary focus:ring-primary"><button class="absolute right-0 top-0 h-full px-5 text-gray-500 hover:text-primary"><i class="fa-solid fa-magnifying-glass text-xl"></i></button></div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileNav = document.getElementById('mobile-nav');
+            const searchButton = document.getElementById('search-button');
+            const searchModal = document.getElementById('search-modal');
+            const searchInput = document.getElementById('search-input');
+            mobileMenuBtn.addEventListener('click', () => { mobileNav.classList.toggle('hidden'); });
+            const toggleSearchModal = (show) => {
+                if (show) {
+                    searchModal.classList.remove('invisible');
+                    setTimeout(() => {
+                        searchModal.classList.add('is-visible');
+                        searchModal.querySelector('.modal-container').classList.remove('-translate-y-10');
+                        searchInput.focus();
+                    }, 10);
+                } else {
+                    searchModal.classList.remove('is-visible');
+                    searchModal.querySelector('.modal-container').classList.add('-translate-y-10');
+                    setTimeout(() => {
+                        searchModal.classList.add('invisible');
+                    }, 300);
+                }
+            };
+            searchButton.addEventListener('click', (e) => { e.stopPropagation(); toggleSearchModal(true); });
+            document.addEventListener('click', (e) => { if (searchModal.classList.contains('is-visible') && !searchModal.querySelector('.modal-container').contains(e.target) && !searchButton.contains(e.target)) { toggleSearchModal(false); } });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && searchModal.classList.contains('is-visible')) { toggleSearchModal(false); } });
+        });
+    </script>
+</body>
+</html>
+
