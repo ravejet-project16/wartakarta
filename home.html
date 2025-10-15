@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediaKarya+ Kecamatan Cimaung</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- SwiperJS for Carousel -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #0D47A1;
+            --accent-color: #FF9800;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        .text-shadow-strong { text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
+        .swiper-button-next, .swiper-button-prev { color: white !important; }
+        .swiper-pagination-bullet-active { background-color: #0D47A1 !important; }
+        html.dark .swiper-pagination-bullet-active { background-color: white !important; }
+        .ad-placeholder {
+            background-color: #E2E8F0; /* bg-gray-200 */
+            border: 1px dashed #94A3B8; /* border-gray-400 */
+        }
+        html.dark .ad-placeholder {
+            background-color: #374151; /* bg-gray-700 */
+            border-color: #6B7280; /* border-gray-500 */
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Enable class-based dark mode
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0D47A1',
+                        accent: '#FF9800',
+                        light: '#F7F9FC',
+                        dark: {
+                            800: '#1F2937', // For cards
+                            900: '#111827', // For body bg
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light dark:bg-dark-900 text-gray-800 dark:text-gray-300 transition-colors duration-300">
+
+    <!-- ===== HEADER / NAVBAR ===== -->
+    <header class="bg-white/80 dark:bg-dark-800/80 backdrop-blur-lg shadow-sm sticky top-0 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="home.html">
+                    <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/mediakarya.svg" alt="MediaKarya+ Logo" class="h-10 w-auto dark:invert">
+                </a>
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="home.html" class="font-bold text-primary dark:text-white border-b-2 border-accent pb-1">Beranda</a>
+                    <a href="kabarkarya.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Kabar Karya</a>
+                    <a href="directory.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Lapakita</a>
+                    <a href="explore.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Jarambah</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <button id="search-button" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white" aria-label="Cari"><i class="fa-solid fa-magnifying-glass text-lg"></i></button>
+                    <!-- [BARU] Tombol Ganti Tema -->
+                    <button id="theme-toggle-btn" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white" aria-label="Ganti tema">
+                        <i class="fa-solid fa-moon text-lg"></i>
+                        <i class="fa-solid fa-sun text-lg hidden"></i>
+                    </button>
+                    <a href="contact.html" class="hidden sm:block bg-accent text-white font-bold py-2 px-5 rounded-lg hover:bg-opacity-90 transition-all text-sm">Beritakan!</a>
+                    <button id="mobile-menu-btn" class="lg:hidden text-gray-800 dark:text-gray-300" aria-label="Menu"><i class="fa-solid fa-bars text-xl"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-nav" class="hidden lg:hidden bg-white dark:bg-dark-800 border-t border-gray-200 dark:border-gray-700 py-4 px-4">
+            <a href="home.html" class="block py-2 text-primary dark:text-white font-semibold">Beranda</a>
+            <a href="kabarkarya.html" class="block py-2 text-gray-600 dark:text-gray-400">Kabar Karya</a>
+            <a href="directory.html" class="block py-2 text-gray-600 dark:text-gray-400">Lapakita</a>
+            <a href="explore.html" class="block py-2 text-gray-600 dark:text-gray-400">Jarambah</a>
+        </div>
+    </header>
+
+    <!-- ===== KONTEN UTAMA ===== -->
+    <main class="container mx-auto px-4 py-8">
+
+        <!-- [IKLAN SPOT #1] Top Leaderboard -->
+        <section class="mb-8">
+            <div class="ad-placeholder rounded-lg text-center p-2 relative">
+                <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+                <img src="https://placehold.co/728x90/E2E8F0/4A5568?text=AD+LEADERBOARD+728x90" alt="Iklan Leaderboard" class="mx-auto">
+            </div>
+        </section>
+
+        <!-- TOP INFO BAR -->
+        <section class="mb-8">
+            <div class="bg-gradient-to-r from-blue-700 to-blue-500 text-white rounded-xl shadow-lg p-4 flex flex-col sm:flex-row justify-between items-center text-center sm:text-left">
+                <div>
+                    <div id="current-day-date" class="font-bold text-lg">Rabu, 15 Oktober 2025</div>
+                    <div id="live-clock" class="text-blue-200 font-mono">16:06:45 WIB</div>
+                </div>
+                <div class="flex items-center mt-3 sm:mt-0">
+                    <i class="fa-solid fa-cloud-sun text-3xl mr-4"></i>
+                    <div>
+                        <p class="font-bold">28&deg;C / Cerah Berawan</p>
+                        <p class="text-sm text-blue-200">Cimaung, Jawa Barat</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HERO SECTION -->
+        <section class="mb-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Main Carousel -->
+                <div class="lg:col-span-8">
+                    <div class="swiper hero-swiper h-[500px] rounded-xl shadow-lg">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide bg-cover bg-center" style="background-image: url('https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/jemgan.webp')"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-6 flex flex-col justify-end"><span class="bg-primary/80 text-white text-xs font-bold py-1 px-3 rounded-full self-start mb-2">Infrastruktur</span><h2 class="text-2xl font-bold text-white text-shadow-strong">Peresmian Jembatan Cimaung, Akses Ekonomi Warga Semakin Terbuka</h2></div></div>
+                            <div class="swiper-slide bg-cover bg-center" style="background-image: url('https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/sekolah.webp')"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-6 flex flex-col justify-end"><span class="bg-primary/80 text-white text-xs font-bold py-1 px-3 rounded-full self-start mb-2">Pendidikan</span><h2 class="text-2xl font-bold text-white text-shadow-strong">Sekolah Baru di Desa Jagabaya Siap Tampung Ratusan Siswa</h2></div></div>
+                            <div class="swiper-slide bg-cover bg-center" style="background-image: url('https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/panenkopi.jpg')"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-6 flex flex-col justify-end"><span class="bg-primary/80 text-white text-xs font-bold py-1 px-3 rounded-full self-start mb-2">Pertanian</span><h2 class="text-2xl font-bold text-white text-shadow-strong">Panen Raya Kopi Cimaung, Petani Optimis Ekspor Meningkat</h2></div></div>
+                        </div>
+                        <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+                    </div>
+                </div>
+                <!-- Side News -->
+                <div class="lg:col-span-4 flex flex-col space-y-4">
+                    <a href="#" class="group bg-white dark:bg-dark-800 rounded-xl shadow-md overflow-hidden flex items-center h-full hover:shadow-xl transition-shadow duration-300"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/umkm.jpg" class="h-full w-1/3 object-cover" alt="[Suasana festival UKM]"><div class="p-4"><p class="font-semibold text-gray-800 dark:text-gray-200 group-hover:text-primary dark:group-hover:text-white">Festival UKM Cimaung Tembus Ribuan Pengunjung</p></div></a>
+                    <a href="#" class="group bg-white dark:bg-dark-800 rounded-xl shadow-md overflow-hidden flex items-center h-full hover:shadow-xl transition-shadow duration-300"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/curugpanganten-min.jpg" class="h-full w-1/3 object-cover" alt="[Pemandangan Curug Cinulang]"><div class="p-4"><p class="font-semibold text-gray-800 dark:text-gray-200 group-hover:text-primary dark:group-hover:text-white">Potensi Curug Cinulang Sebagai Destinasi Unggulan</p></div></a>
+                    <a href="#" class="group bg-white dark:bg-dark-800 rounded-xl shadow-md overflow-hidden flex items-center h-full hover:shadow-xl transition-shadow duration-300"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/irigasi.jpg" class="h-full w-1/3 object-cover" alt="[Warga sedang memperbaiki irigasi]"><div class="p-4"><p class="font-semibold text-gray-800 dark:text-gray-200 group-hover:text-primary dark:group-hover:text-white">Warga Gotong Royong Perbaiki Saluran Irigasi Desa</p></div></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- [IKLAN SPOT #2] In-Feed Leaderboard -->
+        <section class="mb-12">
+            <div class="ad-placeholder rounded-lg text-center p-2 relative">
+                <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+                 <img src="https://placehold.co/970x250/E2E8F0/4A5568?text=AD+IN-FEED+970x250" alt="Iklan In-Feed" class="mx-auto hidden lg:block">
+                 <img src="https://placehold.co/300x250/E2E8F0/4A5568?text=AD+IN-FEED+300x250" alt="Iklan In-Feed" class="mx-auto lg:hidden">
+            </div>
+        </section>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Kolom Konten Utama (Kiri) -->
+            <div class="lg:col-span-8 space-y-12">
+                <!-- Berita Terbaru -->
+                <section>
+                    <div class="flex justify-between items-center mb-6"><h2 class="text-3xl font-bold text-primary dark:text-white">Berita Terbaru</h2><a href="kabarkarya.html" class="text-sm font-semibold text-primary dark:text-accent hover:underline">Lihat Semua &rarr;</a></div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Berita 1 -->
+                        <div class="bg-white dark:bg-dark-800 rounded-xl shadow-lg overflow-hidden group transform hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl flex flex-col"><div class="overflow-hidden"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/juara.jpg" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"></div><div class="p-5 flex flex-col flex-grow"><p class="text-xs font-bold text-primary dark:text-accent uppercase">Pendidikan</p><h3 class="font-bold text-lg text-gray-900 dark:text-white mt-1 mb-3">SMA Negeri 1 Cimaung Juara Lomba Cerdas Cermat</h3><div class="mt-auto"><div class="mb-3"><a href="#" class="inline-block bg-gray-100 dark:bg-gray-700 rounded-full px-3 py-1 text-xs font-semibold text-gray-600 dark:text-gray-300 mr-2 mb-2 hover:bg-primary hover:text-white dark:hover:bg-accent transition-colors">#Prestasi</a><a href="#" class="inline-block bg-gray-100 dark:bg-gray-700 rounded-full px-3 py-1 text-xs font-semibold text-gray-600 dark:text-gray-300 mr-2 mb-2 hover:bg-primary hover:text-white dark:hover:bg-accent transition-colors">#Sekolah</a></div><div class="text-xs text-gray-500 dark:text-gray-400 pt-2 border-t border-gray-200 dark:border-gray-700"><span class="mr-3"><i class="fa-regular fa-user mr-1"></i>Siti N.</span><span><i class="fa-regular fa-calendar mr-1"></i> 11 Okt 2025</span></div></div></div></div>
+                        <!-- Berita 2 -->
+                        <div class="bg-white dark:bg-dark-800 rounded-xl shadow-lg overflow-hidden group transform hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl flex flex-col"><div class="overflow-hidden"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/puskesmas.jpeg" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"></div><div class="p-5 flex flex-col flex-grow"><p class="text-xs font-bold text-primary dark:text-accent uppercase">Kesehatan</p><h3 class="font-bold text-lg text-gray-900 dark:text-white mt-1 mb-3">Puskesmas Cimaung Adakan Vaksinasi Gratis</h3><div class="mt-auto"><div class="mb-3"><a href="#" class="inline-block bg-gray-100 dark:bg-gray-700 rounded-full px-3 py-1 text-xs font-semibold text-gray-600 dark:text-gray-300 mr-2 mb-2 hover:bg-primary hover:text-white dark:hover:bg-accent transition-colors">#Kesehatan</a><a href="#" class="inline-block bg-gray-100 dark:bg-gray-700 rounded-full px-3 py-1 text-xs font-semibold text-gray-600 dark:text-gray-300 mr-2 mb-2 hover:bg-primary hover:text-white dark:hover:bg-accent transition-colors">#Vaksin</a></div><div class="text-xs text-gray-500 dark:text-gray-400 pt-2 border-t border-gray-200 dark:border-gray-700"><span class="mr-3"><i class="fa-regular fa-user mr-1"></i>Dr. Budi</span><span><i class="fa-regular fa-calendar mr-1"></i> 10 Okt 2025</span></div></div></div></div>
+                        <!-- Berita 3 -->
+                        <div class="bg-white dark:bg-dark-800 rounded-xl shadow-lg overflow-hidden group transform hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl flex flex-col"><div class="overflow-hidden"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/aksibersih.jpg" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"></div><div class="p-5 flex flex-col flex-grow"><p class="text-xs font-bold text-primary dark:text-accent uppercase">Lingkungan</p><h3 class="font-bold text-lg text-gray-900 dark:text-white mt-1 mb-3">Aksi Bersih Sungai Cimaung Libatkan Ratusan Relawan</h3><div class="mt-auto"><div class="mb-3"><a href="#" class="inline-block bg-gray-100 dark:bg-gray-700 rounded-full px-3 py-1 text-xs font-semibold text-gray-600 dark:text-gray-300 mr-2 mb-2 hover:bg-primary hover:text-white dark:hover:bg-accent transition-colors">#GoGreen</a></div><div class="text-xs text-gray-500 dark:text-gray-400 pt-2 border-t border-gray-200 dark:border-gray-700"><span class="mr-3"><i class="fa-regular fa-user mr-1"></i>Ujang K.</span><span><i class="fa-regular fa-calendar mr-1"></i> 9 Okt 2025</span></div></div></div></div>
+                        <!-- Berita 4 -->
+                        <div class="bg-white dark:bg-dark-800 rounded-xl shadow-lg overflow-hidden group transform hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl flex flex-col"><div class="overflow-hidden"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/tarkam.jpg" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"></div><div class="p-5 flex flex-col flex-grow"><p class="text-xs font-bold text-primary dark:text-accent uppercase">Olahraga</p><h3 class="font-bold text-lg text-gray-900 dark:text-white mt-1 mb-3">Turnamen Sepak Bola Antar Desa Resmi Dibuka</h3><div class="mt-auto"><div class="mb-3"><a href="#" class="inline-block bg-gray-100 dark:bg-gray-700 rounded-full px-3 py-1 text-xs font-semibold text-gray-600 dark:text-gray-300 mr-2 mb-2 hover:bg-primary hover:text-white dark:hover:bg-accent transition-colors">#Komunitas</a></div><div class="text-xs text-gray-500 dark:text-gray-400 pt-2 border-t border-gray-200 dark:border-gray-700"><span class="mr-3"><i class="fa-regular fa-user mr-1"></i>Asep S.</span><span><i class="fa-regular fa-calendar mr-1"></i> 8 Okt 2025</span></div></div></div></div>
+                        <!-- Berita 5 -->
+                        <div class="bg-white dark:bg-dark-800 rounded-xl shadow-lg overflow-hidden group transform hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl flex flex-col"><div class="overflow-hidden"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/panenkopi.jpg" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"></div><div class="p-5 flex flex-col flex-grow"><p class="text-xs font-bold text-primary dark:text-accent uppercase">Pertanian</p><h3 class="font-bold text-lg text-gray-900 dark:text-white mt-1 mb-3">Kualitas Kopi Cimaung Diakui di Tingkat Nasional</h3><div class="mt-auto"><div class="mb-3"><a href="#" class="inline-block bg-gray-100 dark:bg-gray-700 rounded-full px-3 py-1 text-xs font-semibold text-gray-600 dark:text-gray-300 mr-2 mb-2 hover:bg-primary hover:text-white dark:hover:bg-accent transition-colors">#Ekonomi</a></div><div class="text-xs text-gray-500 dark:text-gray-400 pt-2 border-t border-gray-200 dark:border-gray-700"><span class="mr-3"><i class="fa-regular fa-user mr-1"></i>Redaksi</span><span><i class="fa-regular fa-calendar mr-1"></i> 7 Okt 2025</span></div></div></div></div>
+
+                        <!-- IKLAN SPOT #3 In-Article -->
+                        <div class="ad-placeholder rounded-lg text-center p-2 relative flex items-center justify-center">
+                            <div>
+                                <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+                                <img src="https://placehold.co/300x250/E2E8F0/4A5568?text=AD+IN-ARTICLE+300x250" alt="Iklan In-Article" class="mx-auto">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Lapakita (UMKM) -->
+                <section>
+                    <div class="flex justify-between items-center mb-6"><h2 class="text-3xl font-bold text-primary dark:text-white">Lapakita</h2><a href="directory.html" class="text-sm font-semibold text-primary dark:text-accent hover:underline">Lihat Semua &rarr;</a></div>
+                    <div class="swiper umkm-swiper">
+                        <div class="swiper-wrapper pb-10">
+                            <div class="swiper-slide"><a href="#" class="block bg-white dark:bg-dark-800 rounded-xl shadow-lg overflow-hidden group transform hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/iklankopi.jpeg" class="w-full h-40 object-cover group-hover:opacity-90"><div class="p-4 text-center"><h4 class="font-bold dark:text-white">Kopi Gunung Cimaung</h4><p class="text-sm text-gray-500 dark:text-gray-400">Minuman</p></div></a></div>
+                            <div class="swiper-slide"><a href="#" class="block bg-white dark:bg-dark-800 rounded-xl shadow-lg overflow-hidden group transform hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/wayang.webp" class="w-full h-40 object-cover group-hover:opacity-90"><div class="p-4 text-center"><h4 class="font-bold dark:text-white">Sanggar Wayang Golek</h4><p class="text-sm text-gray-500 dark:text-gray-400">Kerajinan</p></div></a></div>
+                            <div class="swiper-slide"><a href="#" class="block bg-white dark:bg-dark-800 rounded-xl shadow-lg overflow-hidden group transform hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/liwetkomplit.webp" class="w-full h-40 object-cover group-hover:opacity-90"><div class="p-4 text-center"><h4 class="font-bold dark:text-white">Nasi Liwet Ibu Eha</h4><p class="text-sm text-gray-500 dark:text-gray-400">Kuliner</p></div></a></div>
+                            <div class="swiper-slide"><a href="#" class="block bg-white dark:bg-dark-800 rounded-xl shadow-lg overflow-hidden group transform hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/gula.jpeg" class="w-full h-40 object-cover group-hover:opacity-90"><div class="p-4 text-center"><h4 class="font-bold dark:text-white">Gula Aren Cimaung</h4><p class="text-sm text-gray-500 dark:text-gray-400">Produk Pertanian</p></div></a></div>
+                        </div>
+                         <div class="swiper-pagination"></div>
+                    </div>
+                </section>
+                
+                 <!-- Jarambah (Wisata Visual) -->
+                <section>
+                    <div class="flex justify-between items-center mb-6"><h2 class="text-3xl font-bold text-primary dark:text-white">Jarambah</h2><a href="explore.html" class="text-sm font-semibold text-primary dark:text-accent hover:underline">Lihat Semua &rarr;</a></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <a href="#" class="relative rounded-xl overflow-hidden group h-96"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/drone.webp" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-6 flex flex-col justify-end"><i class="fa-solid fa-circle-play text-white text-3xl mb-2"></i><h3 class="text-2xl font-bold text-white text-shadow-strong">Menyusuri Keindahan Cimaung dari Udara</h3></div></a>
+                        <div class="space-y-6">
+                            <a href="#" class="relative rounded-xl overflow-hidden group block h-[180px]"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/lomba.webp" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex flex-col justify-end"><i class="fa-solid fa-circle-play text-white text-2xl mb-1"></i><h4 class="text-lg font-bold text-white text-shadow-strong">Keseruan Lomba 17-an</h4></div></a>
+                             <a href="#" class="relative rounded-xl overflow-hidden group block h-[180px]"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/kedaisawah.jpeg" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex flex-col justify-end"><i class="fa-solid fa-circle-play text-white text-2xl mb-1"></i><h4 class="text-lg font-bold text-white text-shadow-strong">Good Spot: Kedai Kopi di Tengah Sawah</h4></div></a>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Produk Terbaru -->
+                <section>
+                    <div class="flex justify-between items-center mb-6"><h2 class="text-3xl font-bold text-primary dark:text-white">Produk Terbaru di Lapakita</h2><a href="directory.html" class="text-sm font-semibold text-primary dark:text-accent hover:underline">Lihat Lainnya &rarr;</a></div>
+                    <div class="swiper produk-baru-swiper">
+                        <div class="swiper-wrapper pb-10">
+                            <div class="swiper-slide"><a href="#" class="block bg-white dark:bg-dark-800 rounded-xl shadow-lg overflow-hidden group transform hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl"><img src="https://placehold.co/400x300/F44336/FFFFFF?text=Keripik+Pedas" class="w-full h-40 object-cover group-hover:opacity-90"><div class="p-4 text-center"><h4 class="font-bold dark:text-white">Keripik Lada Anyar</h4><p class="text-sm text-gray-500 dark:text-gray-400">Makanan Ringan</p></div></a></div>
+                            <div class="swiper-slide"><a href="#" class="block bg-white dark:bg-dark-800 rounded-xl shadow-lg overflow-hidden group transform hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl"><img src="https://placehold.co/400x300/4CAF50/FFFFFF?text=Madu+Hutan" class="w-full h-40 object-cover group-hover:opacity-90"><div class="p-4 text-center"><h4 class="font-bold dark:text-white">Madu Murni Gunung Puntang</h4><p class="text-sm text-gray-500 dark:text-gray-400">Kesehatan</p></div></a></div>
+                            <div class="swiper-slide"><a href="#" class="block bg-white dark:bg-dark-800 rounded-xl shadow-lg overflow-hidden group transform hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl"><img src="https://placehold.co/400x300/9C27B0/FFFFFF?text=Batik+Cimaung" class="w-full h-40 object-cover group-hover:opacity-90"><div class="p-4 text-center"><h4 class="font-bold dark:text-white">Batik Tulis Motif Kopi</h4><p class="text-sm text-gray-500 dark:text-gray-400">Fashion</p></div></a></div>
+                            <div class="swiper-slide"><a href="#" class="block bg-white dark:bg-dark-800 rounded-xl shadow-lg overflow-hidden group transform hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl"><img src="https://placehold.co/400x300/795548/FFFFFF?text=Tas+Kulit" class="w-full h-40 object-cover group-hover:opacity-90"><div class="p-4 text-center"><h4 class="font-bold dark:text-white">Tas Kulit Domba Asli</h4><p class="text-sm text-gray-500 dark:text-gray-400">Aksesoris</p></div></a></div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </section>
+                
+                <!-- [BARU] Seksi Ajakan Sponsorship -->
+                <section>
+                    <div class="relative rounded-xl shadow-lg overflow-hidden bg-cover bg-center p-8 text-center text-white" style="background-image: linear-gradient(rgba(13, 71, 161, 0.85), rgba(13, 71, 161, 0.85)), url('https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/sponsorship.jpeg');">
+                        <h2 class="text-3xl font-bold">Jadi Sponsor & Dukung Komunitas</h2>
+                        <p class="mt-2 max-w-2xl mx-auto opacity-90">Jadilah bagian dari perjalanan kami dalam mengangkat potensi Cimaung. Kemitraan Anda adalah energi bagi kami untuk terus berkarya.</p>
+                        <a href="advertise.html" class="mt-6 inline-block bg-accent text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-all">
+                            Lihat Peluang Sponsorship
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Wisata Pilihan -->
+                <section>
+                    <div class="flex justify-between items-center mb-6"><h2 class="text-3xl font-bold text-primary dark:text-white">Destinasi Pilihan</h2><a href="explore.html" class="text-sm font-semibold text-primary dark:text-accent hover:underline">Jelajahi Semua &rarr;</a></div>
+                    <div class="swiper wisata-pilihan-swiper">
+                        <div class="swiper-wrapper pb-10">
+                            <div class="swiper-slide"><a href="#" class="block relative rounded-xl shadow-lg overflow-hidden group h-64"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/situpatenggang.webp" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex flex-col justify-end"><h4 class="font-bold text-white text-lg text-shadow-strong">Situ Patenggang</h4></div></a></div>
+                            <div class="swiper-slide"><a href="#" class="block relative rounded-xl shadow-lg overflow-hidden group h-64"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/kawah.jpeg" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex flex-col justify-end"><h4 class="font-bold text-white text-lg text-shadow-strong">Kawah Putih</h4></div></a></div>
+                            <div class="swiper-slide"><a href="#" class="block relative rounded-xl shadow-lg overflow-hidden group h-64"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/upas-min.jpg" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex flex-col justify-end"><h4 class="font-bold text-white text-lg text-shadow-strong">Ranca Upas</h4></div></a></div>
+                            <div class="swiper-slide"><a href="#" class="block relative rounded-xl shadow-lg overflow-hidden group h-64"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/glamping-min.jpg" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex flex-col justify-end"><h4 class="font-bold text-white text-lg text-shadow-strong">Glamping Lakeside</h4></div></a></div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </section>
+                
+                <!-- Seksi Ajakan Iklan -->
+                <section>
+                    <div class="bg-gradient-to-r from-primary to-blue-600 dark:from-accent dark:to-orange-500 text-white rounded-xl shadow-lg p-8 flex flex-col md:flex-row items-center justify-between">
+                        <div class="text-center md:text-left mb-6 md:mb-0">
+                            <h2 class="text-3xl font-bold">Jangkau Audiens Lokal Anda</h2>
+                            <p class="mt-2 opacity-90 max-w-xl">Promosikan bisnis, produk, atau acara Anda di platform kami dan terhubung langsung dengan masyarakat Cimaung.</p>
+                        </div>
+                        <a href="advertise.html" class="bg-white text-primary dark:text-accent font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-all flex-shrink-0">
+                            Pasang Iklan Sekarang
+                        </a>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Kolom Sidebar (Kanan) -->
+            <aside class="lg:col-span-4">
+                <div class="sticky top-28 space-y-8">
+
+                    <!-- [IKLAN SPOT #4] Sidebar Top -->
+                    <div class="ad-placeholder rounded-lg text-center p-2 relative">
+                        <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+                        <img src="https://placehold.co/300x250/E2E8F0/4A5568?text=AD+SIDEBAR+300x250" alt="Iklan Sidebar" class="mx-auto">
+                    </div>
+
+                    <div class="bg-white dark:bg-dark-800 p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-bold text-primary dark:text-white border-b border-gray-200 dark:border-gray-700 pb-3 mb-4">Paling Populer</h3>
+                        <div class="space-y-4">
+                            <a href="#" class="group flex items-center"><span class="text-3xl font-extrabold text-gray-200 dark:text-gray-600 mr-4">1</span><span class="font-semibold text-gray-700 dark:text-gray-300 group-hover:text-primary dark:group-hover:text-white">Peresmian Jembatan Cimaung...</span></a>
+                            <a href="#" class="group flex items-center"><span class="text-3xl font-extrabold text-gray-200 dark:text-gray-600 mr-4">2</span><span class="font-semibold text-gray-700 dark:text-gray-300 group-hover:text-primary dark:group-hover:text-white">Potensi Curug Cinulang Sebagai...</span></a>
+                            <a href="#" class="group flex items-center"><span class="text-3xl font-extrabold text-gray-200 dark:text-gray-600 mr-4">3</span><span class="font-semibold text-gray-700 dark:text-gray-300 group-hover:text-primary dark:group-hover:text-white">Festival UKM Cimaung Tembus...</span></a>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-dark-800 p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-bold text-primary dark:text-white border-b border-gray-200 dark:border-gray-700 pb-3 mb-4">Agenda Terdekat</h3>
+                        <div class="space-y-4">
+                             <div class="flex items-center"><div class="bg-primary dark:bg-accent text-white rounded-lg text-center p-2 mr-4 w-16 flex-shrink-0"><span class="text-2xl font-bold block">18</span><span class="text-xs uppercase">OKT</span></div><div><a href="#" class="font-semibold dark:text-white hover:text-primary dark:hover:text-accent">Pentas Seni & Bazar UKM Desa</a><p class="text-sm text-gray-500 dark:text-gray-400"><i class="fa-solid fa-location-dot mr-1"></i> Lapangan Desa</p></div></div>
+                             <div class="flex items-center"><div class="bg-primary dark:bg-accent text-white rounded-lg text-center p-2 mr-4 w-16 flex-shrink-0"><span class="text-2xl font-bold block">25</span><span class="text-xs uppercase">OKT</span></div><div><a href="#" class="font-semibold dark:text-white hover:text-primary dark:hover:text-accent">Kerja Bakti Massal Musim Hujan</a><p class="text-sm text-gray-500 dark:text-gray-400"><i class="fa-solid fa-location-dot mr-1"></i> Balai Warga RW 05</p></div></div>
+                        </div>
+                    </div>
+
+                    <!-- [IKLAN SPOT #5] Sidebar Bottom -->
+                     <div class="ad-placeholder rounded-lg text-center p-2 relative">
+                        <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+                        <img src="https://placehold.co/300x600/E2E8F0/4A5568?text=AD+SIDEBAR+300x600" alt="Iklan Sidebar" class="mx-auto">
+                    </div>
+
+                    <div class="bg-gradient-to-br from-accent to-orange-400 text-white p-6 rounded-xl shadow-lg text-center"><i class="fa-solid fa-bullhorn text-4xl mb-3"></i><h3 class="font-bold text-2xl">Punya Kabar?</h3><p class="my-3">Jadilah bagian dari kami dengan memberitakan apa yang terjadi di sekitar Anda.</p><a href="contact.html" class="bg-white text-accent font-bold py-2 px-5 rounded-lg hover:bg-opacity-90 transition-all">Beritakan Sekarang!</a></div>
+                </div>
+            </aside>
+        </div>
+
+    </main>
+    
+    <!-- [IKLAN SPOT #6] Footer Banner -->
+    <div class="container mx-auto px-4 mt-12">
+        <section>
+            <div class="ad-placeholder rounded-lg text-center p-2 relative">
+                <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+                <img src="https://placehold.co/970x90/E2E8F0/4A5568?text=AD+FOOTER+BANNER" alt="Iklan Footer" class="mx-auto">
+            </div>
+        </section>
+    </div>
+
+
+    <!-- ===== FOOTER UNIVERSAL ===== -->
+    <footer class="bg-gray-800 text-white mt-8">
+        <div class="container mx-auto px-4 py-12">
+            <div class="text-center mb-8">
+                <h4 class="font-bold text-gray-400 uppercase tracking-wider">Didukung Oleh</h4>
+                <div class="flex justify-center items-center gap-8 mt-4 grayscale opacity-60">
+                     <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/sponsor1.svg" alt="Logo Sponsor 1" class="h-10">
+                     <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/sponsor2.svg" alt="Logo Sponsor 2" class="h-10">
+                     <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/sponsor3.svg" alt="Logo Sponsor 3" class="h-10">
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/mediakarya.svg" alt="MediaKarya+ Logo" class="h-10 w-auto brightness-0 invert mb-4"><p class="text-sm text-gray-400">Media digital independen untuk potensi, karya, dan kabar terbaru dari Kecamatan Cimaung.</p></div>
+                <div><h4 class="font-bold">Navigasi</h4><ul class="mt-4 space-y-2 text-sm text-gray-300"><li><a href="kabarkarya.html" class="hover:underline">Kabar Karya</a></li><li><a href="directory.html" class="hover:underline">Lapakita</a></li><li><a href="explore.html" class="hover:underline">Jarambah</a></li></ul></div>
+                <div><h4 class="font-bold">Tentang</h4><ul class="mt-4 space-y-2 text-sm text-gray-300"><li><a href="about.html" class="hover:underline">Tim Kami</a></li><li><a href="pedoman-media.html" class="hover:underline">Pedoman Media</a></li><li><a href="contact.html" class="hover:underline">Hubungi Kami</a></li></ul></div>
+                <div><h4 class="font-bold">Ikuti Kami</h4><div class="flex space-x-4 mt-4"><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-instagram"></i></a><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-tiktok"></i></a><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-youtube"></i></a><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-facebook"></i></a></div></div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-xs text-gray-500">&copy; 2025 Media Karya Kecamatan Cimaung. All rights reserved.</div>
+        </div>
+    </footer>
+    
+    <!-- Search Modal -->
+    <div id="search-modal" class="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 bg-black bg-opacity-70 p-4 opacity-0 invisible transition-opacity duration-300">
+        <div class="modal-container bg-white dark:bg-dark-800 w-full max-w-2xl rounded-xl shadow-xl transform -translate-y-10 transition-transform duration-300">
+            <div class="relative"><input type="text" id="search-input" placeholder="Ketik untuk mencari berita..." class="w-full bg-transparent border-2 border-transparent rounded-xl p-4 pr-12 text-lg focus:border-primary focus:ring-primary"><button class="absolute right-0 top-0 h-full px-5 text-gray-500 hover:text-primary"><i class="fa-solid fa-magnifying-glass text-xl"></i></button></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Live Clock & Date ---
+            const dayDateEl = document.getElementById('current-day-date');
+            const liveClockEl = document.getElementById('live-clock');
+            function updateClock() {
+                const now = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                if (dayDateEl) dayDateEl.textContent = now.toLocaleDateString('id-ID', options);
+                if (liveClockEl) liveClockEl.textContent = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' WIB';
+            }
+            updateClock();
+            setInterval(updateClock, 1000);
+
+            // --- Hero Carousel ---
+            new Swiper('.hero-swiper', {
+                loop: true,
+                autoplay: { delay: 4000, disableOnInteraction: false },
+                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                pagination: { el: '.swiper-pagination', clickable: true },
+            });
+
+            // --- Sliders Section ---
+            const sliderOptions = {
+                slidesPerView: 2,
+                spaceBetween: 16,
+                pagination: { el: '.swiper-pagination', clickable: true },
+                breakpoints: {
+                    640: { slidesPerView: 3, spaceBetween: 20 },
+                    1024: { slidesPerView: 4, spaceBetween: 24 },
+                }
+            };
+            new Swiper('.umkm-swiper', sliderOptions);
+            new Swiper('.produk-baru-swiper', sliderOptions);
+            const wisataSliderOptions = { ...sliderOptions, breakpoints: { 640: { slidesPerView: 2, spaceBetween: 20 }, 1024: { slidesPerView: 3, spaceBetween: 24 }}};
+            new Swiper('.wisata-pilihan-swiper', wisataSliderOptions);
+
+            // --- Mobile Menu & Search Modal ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileNav = document.getElementById('mobile-nav');
+            const searchButton = document.getElementById('search-button');
+            const searchModal = document.getElementById('search-modal');
+            const searchInput = document.getElementById('search-input');
+            mobileMenuBtn.addEventListener('click', () => mobileNav.classList.toggle('hidden'));
+            const toggleSearchModal = (show) => {
+                const container = searchModal.querySelector('.modal-container');
+                if (show) {
+                    searchModal.classList.remove('invisible', 'opacity-0');
+                    container.classList.remove('-translate-y-10');
+                    searchInput.focus();
+                } else {
+                    searchModal.classList.add('opacity-0');
+                    container.classList.add('-translate-y-10');
+                    setTimeout(() => searchModal.classList.add('invisible'), 300);
+                }
+            };
+            searchButton.addEventListener('click', (e) => { e.stopPropagation(); toggleSearchModal(true); });
+            document.addEventListener('click', (e) => { if (!searchModal.classList.contains('invisible') && !searchModal.querySelector('.modal-container').contains(e.target)) toggleSearchModal(false); });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape') toggleSearchModal(false); });
+
+            // --- Dark Mode Toggle ---
+            const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            const sunIcon = themeToggleBtn.querySelector('.fa-sun');
+            const moonIcon = themeToggleBtn.querySelector('.fa-moon');
+            const applyTheme = (theme) => {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    sunIcon.classList.remove('hidden');
+                    moonIcon.classList.add('hidden');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    sunIcon.classList.add('hidden');
+                    moonIcon.classList.remove('hidden');
+                }
+            };
+            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            applyTheme(savedTheme);
+            themeToggleBtn.addEventListener('click', () => {
+                const newTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+                localStorage.setItem('theme', newTheme);
+                applyTheme(newTheme);
+            });
+        });
+    </script>
+</body>
+</html>
+
+

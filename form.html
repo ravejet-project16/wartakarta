@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Redaksi Berita - MediaKarya+</title>
+
+    <meta property="og:title" content="Formulir Redaksi MediaKarya+" />
+    <meta property="og:description" content="Alat internal untuk membuat dan mengekspor draf berita MediaKarya+." />
+    <meta property="og:image" content="https://placehold.co/1200x630/0D47A1/FFFFFF?text=MediaKarya%2B&font=poppins" />
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Quill Editor -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+    <!-- PDF Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        #editor { height: 350px; font-size: 16px; }
+        .ql-toolbar { border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem; }
+        .ql-container { border-bottom-left-radius: 0.5rem; border-bottom-right-radius: 0.5rem; }
+        #export-content { display: none; width: 8.5in; min-height: 11in; padding: 0.75in; font-family: 'Inter', sans-serif; color: #212121; background-color: white; box-sizing: border-box; }
+        #export-content .pdf-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0D47A1; padding-bottom: 1rem; margin-bottom: 2rem; }
+        #export-content h1 { font-family: 'Poppins', sans-serif; font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        #export-content .meta { font-size: 0.9rem; color: #757575; margin-bottom: 1.5rem; border-left: 3px solid #FF9800; padding-left: 1rem; }
+        #export-content img { max-width: 100%; border-radius: 8px; margin-bottom: 0.5rem; }
+        #export-content .caption { font-size: 0.8rem; text-align: center; font-style: italic; margin-bottom: 2rem; }
+        #export-content .content-body { font-size: 11pt; line-height: 1.6; text-align: justify; }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0D47A1',
+                        accent: '#FF9800',
+                        light: '#F7F9FC',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light antialiased">
+
+    <div class="container mx-auto px-4 py-10">
+        <main class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+            <div class="text-center mb-10">
+                <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/mediakarya.svg" alt="MediaKarya+ Logo" class="h-12 w-auto mx-auto mb-4">
+                <h1 class="text-4xl font-bold text-gray-900">Formulir Redaksi Berita</h1>
+                <p class="text-md text-gray-600 mt-2">Alat internal untuk membuat draf berita.</p>
+            </div>
+
+            <form id="news-form" class="space-y-8">
+                <div>
+                    <label for="judul" class="block text-lg font-semibold mb-2">Judul Berita</label>
+                    <input type="text" id="judul" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary" placeholder="Contoh: Warga Cimaung Antusias Sambut Festival Budaya" required>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div><label for="penulis" class="block text-lg font-semibold mb-2">Nama Penulis</label><input type="text" id="penulis" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary" placeholder="Nama lengkap" required></div>
+                    <div><label for="tanggal-peliputan" class="block text-lg font-semibold mb-2">Tanggal Peliputan</label><input type="date" id="tanggal-peliputan" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary" required></div>
+                </div>
+                <div>
+                    <label for="kategori" class="block text-lg font-semibold mb-2">Kategori</label>
+                    <select id="kategori" class="w-full p-3 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-primary">
+                        <option>Pilih Kategori...</option>
+                        <option>Kabar Karya</option>
+                        <option>Lapakita</option>
+                        <option>Jarambah</option>
+                        <option>Pendidikan</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-lg font-semibold mb-2">Isi Berita</label>
+                    <div id="editor"></div>
+                </div>
+                <div>
+                    <label class="block text-lg font-semibold mb-2">Gambar Utama</label>
+                    <input type="file" id="gambar-utama" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-blue-50 file:text-primary hover:file:bg-blue-100">
+                    <p id="file-name" class="text-sm text-gray-500 mt-2"></p>
+                </div>
+                <div>
+                    <label for="caption" class="block text-lg font-semibold mb-2">Keterangan Gambar</label>
+                    <input type="text" id="caption" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary" placeholder="Contoh: Suasana saat acara berlangsung.">
+                </div>
+                <div class="flex items-center justify-end space-x-4 pt-6 border-t">
+                    <button type="reset" id="reset-btn" class="px-8 py-3 bg-gray-200 text-gray-800 font-bold rounded-lg hover:bg-gray-300 transition-colors">Reset</button>
+                    <button type="button" id="export-pdf-btn" class="px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-opacity-90 transition-all shadow-md hover:shadow-lg">Ekspor ke PDF</button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <!-- Hidden element for PDF export -->
+    <div id="export-content"></div>
+
+    <!-- Quill & PDF Export Script -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script>
+        window.jsPDF = window.jspdf.jsPDF;
+        var quill = new Quill('#editor', { theme: 'snow' });
+        
+        const fileInput = document.getElementById('gambar-utama');
+        const fileNameDisplay = document.getElementById('file-name');
+        fileInput.onchange = () => { fileNameDisplay.textContent = fileInput.files.length > 0 ? `File: ${fileInput.files[0].name}` : ''; };
+        document.getElementById('reset-btn').addEventListener('click', () => { quill.setContents([]); fileNameDisplay.textContent = ''; });
+        document.getElementById('export-pdf-btn').addEventListener('click', () => {
+            const form = document.getElementById('news-form');
+            const title = form.judul.value || "Tanpa Judul";
+            const imageFile = form['gambar-utama'].files[0];
+            const generatePdf = (imageDataUrl = '') => {
+                const exportContent = document.getElementById('export-content');
+                exportContent.innerHTML = `
+                    <div class="pdf-header"><div style="font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #0D47A1;">MediaKarya+</div><div style="text-align: right;">DRAF BERITA<br><span style="font-size: 0.8rem; color: #9E9E9E;">Dibuat: ${new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span></div></div>
+                    <h1>${title}</h1>
+                    <div class="meta">Oleh: <strong>${form.penulis.value || 'N/A'}</strong><br>Kategori: <strong>${form.kategori.value || 'N/A'}</strong><br>Tanggal Peliputan: <strong>${form['tanggal-peliputan'].value || 'N/A'}</strong></div>
+                    ${imageDataUrl ? `<img src="${imageDataUrl}" alt="Gambar Utama"><p class="caption">${form.caption.value || ''}</p>` : ''}
+                    <div class="content-body">${quill.root.innerHTML}</div>`;
+                exportContent.style.display = 'block';
+                html2canvas(exportContent, { scale: 2, useCORS: true }).then(canvas => {
+                    const pdf = new jsPDF({ orientation: 'portrait', unit: 'in', format: 'a4' });
+                    pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, pdf.internal.pageSize.getWidth(), (canvas.height * pdf.internal.pageSize.getWidth()) / canvas.width);
+                    pdf.save(`${title.replace(/ /g, '_').toLowerCase()}_draft.pdf`);
+                    exportContent.style.display = 'none';
+                });
+            };
+            if (imageFile) { const reader = new FileReader(); reader.onload = e => generatePdf(e.target.result); reader.readAsDataURL(imageFile); } 
+            else { generatePdf(); }
+        });
+    </script>
+</body>
+</html>

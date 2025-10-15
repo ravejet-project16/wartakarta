@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Datang di MediaKarya+ Cimaung</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        .text-shadow-strong { text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
+        .timeline-card { transition: all 0.3s ease; }
+        .timeline-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px -5px rgb(0 0 0 / 0.1); }
+        html.dark .timeline-card:hover { box-shadow: 0 10px 20px -5px rgb(0 0 0 / 0.4); }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0D47A1',
+                        accent: '#FF9800',
+                        light: '#F7F9FC',
+                        dark: {
+                            800: '#1F2937',
+                            900: '#111827',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light dark:bg-dark-900 text-gray-800 dark:text-gray-300 transition-colors duration-300">
+
+    <!-- ===== HEADER UNIVERSAL ===== -->
+    <header class="bg-white/80 dark:bg-dark-800/80 backdrop-blur-lg shadow-sm sticky top-0 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="home.html">
+                    <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/mediakarya.svg" alt="MediaKarya+ Logo" class="h-10 w-auto dark:invert">
+                </a>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle-btn" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white" aria-label="Ganti tema">
+                        <i class="fa-solid fa-moon text-lg"></i>
+                        <i class="fa-solid fa-sun text-lg hidden"></i>
+                    </button>
+                    <a href="home.html" class="bg-primary text-white font-bold py-2 px-5 rounded-lg hover:bg-opacity-90 transition-all text-sm">Masuk ke Portal</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- KONTEN UTAMA TIMELINE -->
+    <main class="container mx-auto px-4 py-16">
+        <div class="text-center mb-20">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white">Denyut Nadi Digital Cimaung</h1>
+            <p class="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Selamat datang di MediaKarya+. Kami adalah panggung untuk setiap cerita, potensi, dan karya dari seluruh penjuru Kecamatan Cimaung.</p>
+        </div>
+
+        <div class="relative max-w-4xl mx-auto">
+            <!-- Garis Tengah Timeline -->
+            <div class="absolute left-1/2 -translate-x-1/2 h-full w-0.5 bg-gray-300 dark:bg-gray-700 top-20"></div>
+
+            <div class="relative mb-20 flex justify-center w-full">
+                <div class="z-10 bg-white dark:bg-dark-800 rounded-full shadow-xl w-40 h-40 flex items-center justify-center p-6 timeline-card">
+                    <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/mediakarya.svg" alt="MediaKarya+ Logo" class="w-full h-auto dark:invert">
+                </div>
+            </div>
+
+            <!-- Item 1 -->
+            <div class="relative mb-20 flex justify-between items-center w-full">
+                <div class="order-1 w-5/12"></div>
+                <div class="z-10 flex items-center order-1 bg-primary shadow-xl w-12 h-12 rounded-full"><h1 class="mx-auto font-semibold text-lg text-white"><i class="fa-solid fa-rocket"></i></h1></div>
+                <div class="order-1 bg-white dark:bg-dark-800 rounded-xl shadow-md w-5/12 px-8 py-6 timeline-card">
+                    <h3 class="font-bold text-xl text-primary dark:text-accent">Awal Mula Perjalanan</h3>
+                    <p class="text-base leading-relaxed mt-2">MediaKarya+ lahir dari keyakinan bahwa setiap komunitas punya cerita. Misi kami adalah menjadi panggung digital bagi UMKM dan potensi lokal untuk bersinar.</p>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="relative mb-20 flex justify-between flex-row-reverse items-center w-full">
+                <div class="order-1 w-5/12"></div>
+                <div class="z-10 flex items-center order-1 bg-accent shadow-xl w-12 h-12 rounded-full"><h1 class="mx-auto text-white text-lg"><i class="fa-solid fa-newspaper"></i></h1></div>
+                <div class="order-1 bg-white dark:bg-dark-800 rounded-xl shadow-md w-5/12 px-8 py-6 timeline-card">
+                    <h3 class="font-bold text-xl text-accent">Kabar Karya Terkini</h3>
+                    <p class="text-base leading-relaxed mt-2">Dapatkan berita dan informasi terbaru seputar pembangunan, acara komunitas, pendidikan, dan kesehatan langsung dari Cimaung.</p>
+                    <a href="kabarkarya.html" class="text-primary dark:text-accent font-semibold mt-3 inline-block hover:underline">Lihat Semua Berita &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="relative mb-20 flex justify-between items-center w-full">
+                <div class="order-1 w-5/12"></div>
+                <div class="z-10 flex items-center order-1 bg-primary shadow-xl w-12 h-12 rounded-full"><h1 class="mx-auto font-semibold text-lg text-white"><i class="fa-solid fa-store"></i></h1></div>
+                <div class="order-1 bg-white dark:bg-dark-800 rounded-xl shadow-md w-5/12 px-8 py-6 timeline-card">
+                    <h3 class="font-bold text-xl text-primary dark:text-accent">Temukan di Lapakita</h3>
+                    <p class="text-base leading-relaxed mt-2">Jelajahi direktori UMKM dan usaha lokal. Dari kedai kopi tersembunyi hingga pengrajin lokal, dukung ekonomi daerah kita.</p>
+                    <a href="directory.html" class="text-primary dark:text-accent font-semibold mt-3 inline-block hover:underline">Buka Direktori Lapakita &rarr;</a>
+                </div>
+            </div>
+            
+            <!-- Item 4 -->
+            <div class="relative flex justify-between flex-row-reverse items-center w-full">
+                <div class="order-1 w-5/12"></div>
+                <div class="z-10 flex items-center order-1 bg-accent shadow-xl w-12 h-12 rounded-full"><h1 class="mx-auto text-white text-lg"><i class="fa-solid fa-map-signs"></i></h1></div>
+                <div class="order-1 bg-white dark:bg-dark-800 rounded-xl shadow-md w-5/12 px-8 py-6 timeline-card">
+                    <h3 class="font-bold text-xl text-accent">Ayo Jarambah!</h3>
+                    <p class="text-base leading-relaxed mt-2">Lihat pesona wisata Cimaung, dari kebun teh yang menenangkan hingga air terjun yang menyegarkan. Rencanakan petualanganmu sekarang!</p>
+                    <a href="explore.html" class="text-accent font-semibold mt-3 inline-block hover:underline">Jelajahi Destinasi &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER UNIVERSAL ===== -->
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-4 py-12 border-t border-gray-700">
+            <div class="text-center text-xs text-gray-500">&copy; 2025 Media Karya Kecamatan Cimaung. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Universal Dark Mode Script
+        const themeToggleBtn = document.getElementById('theme-toggle-btn');
+        const sunIcon = themeToggleBtn.querySelector('.fa-sun');
+        const moonIcon = themeToggleBtn.querySelector('.fa-moon');
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                document.documentElement.classList.remove('dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        };
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        applyTheme(savedTheme);
+        themeToggleBtn.addEventListener('click', () => {
+            const newTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+            localStorage.setItem('theme', newTheme);
+            applyTheme(newTheme);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kabar Karya - MediaKarya+</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        .filter-btn.active { background-color: #0D47A1; color: white; }
+        html.dark .filter-btn.active { background-color: #FF9800; }
+        .ad-placeholder {
+            background-color: #E2E8F0;
+            border: 1px dashed #94A3B8;
+        }
+        html.dark .ad-placeholder {
+            background-color: #374151;
+            border-color: #6B7280;
+        }
+        .skeleton-anim {
+            background: linear-gradient(90deg, #e2e8f0 25%, #f7f9fc 50%, #e2e8f0 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite linear;
+        }
+        html.dark .skeleton-anim {
+             background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+             background-size: 200% 100%;
+        }
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .text-shadow-strong { text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0D47A1',
+                        accent: '#FF9800',
+                        light: '#F7F9FC',
+                        dark: {
+                            800: '#1F2937',
+                            900: '#111827',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light dark:bg-dark-900 text-gray-800 dark:text-gray-300 transition-colors duration-300">
+    
+    <!-- ===== HEADER / NAVBAR ===== -->
+    <header class="bg-white/80 dark:bg-dark-800/80 backdrop-blur-lg shadow-sm sticky top-0 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="home.html">
+                    <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/mediakarya.svg" alt="MediaKarya+ Logo" class="h-10 w-auto dark:invert">
+                </a>
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="home.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Beranda</a>
+                    <a href="kabarkarya.html" class="font-bold text-primary dark:text-white border-b-2 border-accent pb-1">Kabar Karya</a>
+                    <a href="directory.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Lapakita</a>
+                    <a href="explore.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Jarambah</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <button id="search-button" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white" aria-label="Cari"><i class="fa-solid fa-magnifying-glass text-lg"></i></button>
+                    <button id="theme-toggle-btn" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white" aria-label="Ganti tema">
+                        <i class="fa-solid fa-moon text-lg"></i>
+                        <i class="fa-solid fa-sun text-lg hidden"></i>
+                    </button>
+                    <a href="contact.html" class="hidden sm:block bg-accent text-white font-bold py-2 px-5 rounded-lg hover:bg-opacity-90 transition-all text-sm">Beritakan!</a>
+                    <button id="mobile-menu-btn" class="lg:hidden text-gray-800 dark:text-gray-300" aria-label="Menu"><i class="fa-solid fa-bars text-xl"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-nav" class="hidden lg:hidden bg-white dark:bg-dark-800 border-t border-gray-200 dark:border-gray-700 py-4 px-4">
+            <a href="home.html" class="block py-2 text-gray-600 dark:text-gray-400">Beranda</a>
+            <a href="kabarkarya.html" class="block py-2 text-primary dark:text-white font-semibold">Kabar Karya</a>
+            <a href="directory.html" class="block py-2 text-gray-600 dark:text-gray-400">Lapakita</a>
+            <a href="explore.html" class="block py-2 text-gray-600 dark:text-gray-400">Jarambah</a>
+        </div>
+    </header>
+
+    <!-- PAGE HEADER -->
+    <section class="bg-white dark:bg-dark-800 border-b border-gray-200 dark:border-gray-700 py-12">
+        <div class="container mx-auto px-4">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-2"><a href="home.html" class="text-primary dark:text-accent hover:underline">Beranda</a> / <span>Kabar Karya</span></p>
+            <h1 class="text-5xl font-extrabold text-gray-900 dark:text-white">Kabar Karya</h1>
+            <p class="mt-2 text-lg text-gray-600 dark:text-gray-300 max-w-3xl">Jelajahi semua berita, informasi, dan cerita inspiratif terkini dari seluruh penjuru Kecamatan Cimaung.</p>
+        </div>
+    </section>
+    
+    <!-- KONTEN UTAMA -->
+    <main class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Kolom Konten Utama (Kiri) -->
+            <div class="lg:col-span-8">
+                <!-- Topik Trending -->
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Topik Trending</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <a href="#" class="relative rounded-lg overflow-hidden h-32 block group"><div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-110" style="background-image: url('https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/jemgan.webp');"></div><div class="absolute inset-0 bg-black/50 flex items-center justify-center p-2 text-center"><h3 class="font-bold text-white text-shadow-strong">Infrastruktur</h3></div></a>
+                        <a href="#" class="relative rounded-lg overflow-hidden h-32 block group"><div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-110" style="background-image: url('https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/umkm.jpg');"></div><div class="absolute inset-0 bg-black/50 flex items-center justify-center p-2 text-center"><h3 class="font-bold text-white text-shadow-strong">UMKM Lokal</h3></div></a>
+                        <a href="#" class="relative rounded-lg overflow-hidden h-32 block group"><div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-110" style="background-image: url('https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/curugpanganten-min.jpg');"></div><div class="absolute inset-0 bg-black/50 flex items-center justify-center p-2 text-center"><h3 class="font-bold text-white text-shadow-strong">Wisata Alam</h3></div></a>
+                        <a href="#" class="relative rounded-lg overflow-hidden h-32 block group"><div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-110" style="background-image: url('https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/juara.jpg');"></div><div class="absolute inset-0 bg-black/50 flex items-center justify-center p-2 text-center"><h3 class="font-bold text-white text-shadow-strong">Pendidikan</h3></div></a>
+                    </div>
+                </section>
+
+                <!-- Iklan Leaderboard -->
+                <div class="ad-placeholder rounded-lg text-center p-2 relative mb-8">
+                    <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+                    <img src="https://placehold.co/728x90/E2E8F0/4A5568?text=AD+LEADERBOARD+728x90" alt="Iklan Leaderboard" class="mx-auto">
+                </div>
+
+                <!-- Search Bar Section -->
+                <section class="mb-8">
+                    <form id="search-form" class="relative">
+                        <input type="text" id="search-input" placeholder="Cari berita berdasarkan judul..." class="w-full pl-5 pr-12 py-3 border border-gray-300 dark:border-gray-600 rounded-full bg-white dark:bg-dark-800 focus:ring-2 focus:ring-primary dark:focus:ring-accent focus:border-transparent transition-shadow">
+                        <button type="submit" class="absolute inset-y-0 right-0 flex items-center justify-center w-12 text-gray-500 hover:text-primary dark:hover:text-accent">
+                            <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                        </button>
+                    </form>
+                </section>
+
+                <!-- Filter Kategori -->
+                <div id="news-filter-buttons" class="flex flex-wrap gap-3 mb-8">
+                    <!-- Buttons populated by JS -->
+                </div>
+                <!-- Daftar Berita -->
+                <div id="news-list-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Items populated by JS -->
+                </div>
+
+                <!-- Pagination -->
+                <nav aria-label="Page navigation" class="mt-12 flex justify-center">
+                   <div class="flex items-center space-x-2">
+                        <a href="#" class="px-4 py-2 text-gray-500 dark:text-gray-400 bg-white dark:bg-dark-800 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fa-solid fa-chevron-left"></i></a>
+                        <a href="#" class="px-4 py-2 text-white bg-primary dark:bg-accent rounded-md">1</a>
+                        <a href="#" class="px-4 py-2 text-gray-700 dark:text-gray-300 bg-white dark:bg-dark-800 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">2</a>
+                        <a href="#" class="px-4 py-2 text-gray-700 dark:text-gray-300 bg-white dark:bg-dark-800 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">3</a>
+                        <a href="#" class="px-4 py-2 text-gray-700 dark:text-gray-300 bg-white dark:bg-dark-800 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </nav>
+                
+                <!-- Jelajah Visual -->
+                <section class="mt-16">
+                    <div class="flex justify-between items-center mb-6"><h2 class="text-2xl font-bold text-gray-900 dark:text-white">Jelajah Visual</h2><a href="explore.html" class="text-sm font-semibold text-primary dark:text-accent hover:underline">Lihat Semua Video &rarr;</a></div>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <a href="#" class="relative rounded-xl overflow-hidden group h-80"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/drone.webp" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-6 flex flex-col justify-end"><i class="fa-solid fa-circle-play text-white text-3xl mb-2"></i><h3 class="text-2xl font-bold text-white text-shadow-strong">Menyusuri Cimaung dari Udara</h3></div></a>
+                        <div class="space-y-6">
+                            <a href="#" class="relative rounded-xl overflow-hidden group block h-[152px]"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/lomba.webp" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex flex-col justify-end"><i class="fa-solid fa-circle-play text-white text-2xl mb-1"></i><h4 class="text-lg font-bold text-white text-shadow-strong">Keseruan Lomba 17-an</h4></div></a>
+                             <a href="#" class="relative rounded-xl overflow-hidden group block h-[152px]"><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/kedaisawah.jpeg" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex flex-col justify-end"><i class="fa-solid fa-circle-play text-white text-2xl mb-1"></i><h4 class="text-lg font-bold text-white text-shadow-strong">Good Spot: Kedai di Tengah Sawah</h4></div></a>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            <!-- Kolom Sidebar (Kanan) -->
+            <aside class="lg:col-span-4">
+                 <div class="sticky top-28 space-y-8">
+                    <!-- Iklan Sidebar -->
+                    <div class="ad-placeholder rounded-lg text-center p-2 relative">
+                        <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+                        <img src="https://placehold.co/300x250/E2E8F0/4A5568?text=AD+SIDEBAR+300x250" alt="Iklan Sidebar" class="mx-auto">
+                    </div>
+                    <!-- Paling Populer -->
+                    <div class="bg-white dark:bg-dark-800 p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-bold text-primary dark:text-white border-b border-gray-200 dark:border-gray-700 pb-3 mb-4">Paling Populer</h3>
+                        <div class="space-y-4">
+                            <a href="#" class="group flex items-center"><span class="text-3xl font-extrabold text-gray-200 dark:text-gray-600 mr-4">1</span><span class="font-semibold text-gray-700 dark:text-gray-300 group-hover:text-primary dark:group-hover:text-white truncate">SMA Negeri 1 Cimaung Juara...</span></a>
+                            <a href="#" class="group flex items-center"><span class="text-3xl font-extrabold text-gray-200 dark:text-gray-600 mr-4">2</span><span class="font-semibold text-gray-700 dark:text-gray-300 group-hover:text-primary dark:group-hover:text-white truncate">Puskesmas Cimaung Adakan...</span></a>
+                            <a href="#" class="group flex items-center"><span class="text-3xl font-extrabold text-gray-200 dark:text-gray-600 mr-4">3</span><span class="font-semibold text-gray-700 dark:text-gray-300 group-hover:text-primary dark:group-hover:text-white truncate">Aksi Bersih Sungai Cimaung...</span></a>
+                            <a href="#" class="group flex items-center"><span class="text-3xl font-extrabold text-gray-200 dark:text-gray-600 mr-4">4</span><span class="font-semibold text-gray-700 dark:text-gray-300 group-hover:text-primary dark:group-hover:text-white truncate">Turnamen Sepak Bola Antar Desa...</span></a>
+                        </div>
+                    </div>
+                     <!-- Topik Populer -->
+                     <div class="bg-white dark:bg-dark-800 p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-bold text-primary dark:text-white border-b border-gray-200 dark:border-gray-700 pb-3 mb-4">Topik Populer</h3>
+                         <div class="flex flex-wrap gap-2">
+                             <a href="#" class="tag bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm px-3 py-1 rounded-full hover:bg-primary hover:text-white dark:hover:bg-accent transition-colors">#Prestasi</a>
+                             <a href="#" class="tag bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm px-3 py-1 rounded-full hover:bg-primary hover:text-white dark:hover:bg-accent transition-colors">#Kesehatan</a>
+                             <a href="#" class="tag bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm px-3 py-1 rounded-full hover:bg-primary hover:text-white dark:hover:bg-accent transition-colors">#GoGreen</a>
+                             <a href="#" class="tag bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm px-3 py-1 rounded-full hover:bg-primary hover:text-white dark:hover:bg-accent transition-colors">#Komunitas</a>
+                             <a href="#" class="tag bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm px-3 py-1 rounded-full hover:bg-primary hover:text-white dark:hover:bg-accent transition-colors">#Ekonomi</a>
+                             <a href="#" class="tag bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm px-3 py-1 rounded-full hover:bg-primary hover:text-white dark:hover:bg-accent transition-colors">#Sosial</a>
+                             <a href="#" class="tag bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm px-3 py-1 rounded-full hover:bg-primary hover:text-white dark:hover:bg-accent transition-colors">#Kuliner</a>
+                         </div>
+                    </div>
+                    <!-- Iklan Sidebar Vertikal -->
+                    <div class="ad-placeholder rounded-lg text-center p-2 relative">
+                        <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+                        <img src="https://placehold.co/300x600/E2E8F0/4A5568?text=AD+VERTICAL" alt="Iklan Sidebar Vertikal" class="mx-auto">
+                    </div>
+                 </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER UNIVERSAL ===== -->
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-4 py-12">
+             <div class="border-t border-gray-700 pt-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/mediakarya.svg" alt="MediaKarya+ Logo" class="h-10 w-auto brightness-0 invert mb-4"><p class="text-sm text-gray-400">Media digital independen untuk potensi, karya, dan kabar terbaru dari Kecamatan Cimaung.</p></div>
+                <div><h4 class="font-bold">Navigasi</h4><ul class="mt-4 space-y-2 text-sm text-gray-300"><li><a href="kabarkarya.html" class="hover:underline">Kabar Karya</a></li><li><a href="directory.html" class="hover:underline">Lapakita</a></li><li><a href="explore.html" class="hover:underline">Jarambah</a></li></ul></div>
+                <div><h4 class="font-bold">Tentang</h4><ul class="mt-4 space-y-2 text-sm text-gray-300"><li><a href="about.html" class="hover:underline">Tim Kami</a></li><li><a href="pedoman-media.html" class="hover:underline">Pedoman Media</a></li><li><a href="contact.html" class="hover:underline">Hubungi Kami</a></li></ul></div>
+                <div><h4 class="font-bold">Ikuti Kami</h4><div class="flex space-x-4 mt-4"><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-instagram"></i></a><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-tiktok"></i></a><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-youtube"></i></a><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-facebook"></i></a></div></div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-xs text-gray-500">&copy; 2025 Media Karya Kecamatan Cimaung. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 bg-black bg-opacity-70 p-4 opacity-0 invisible transition-opacity duration-300">
+        <div class="modal-container bg-white dark:bg-dark-800 w-full max-w-2xl rounded-xl shadow-xl transform -translate-y-10 transition-transform duration-300">
+            <div class="relative"><input type="text" id="global-search-input" placeholder="Ketik untuk mencari berita..." class="w-full bg-transparent border-2 border-transparent rounded-xl p-4 pr-12 text-lg focus:border-primary focus:ring-primary"><button class="absolute right-0 top-0 h-full px-5 text-gray-500 hover:text-primary"><i class="fa-solid fa-magnifying-glass text-xl"></i></button></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Universal Scripts (Dark Mode, Search, Mobile Menu) ---
+            const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            const sunIcon = themeToggleBtn.querySelector('.fa-sun');
+            const moonIcon = themeToggleBtn.querySelector('.fa-moon');
+            const applyTheme = (theme) => {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    sunIcon.classList.remove('hidden');
+                    moonIcon.classList.add('hidden');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    sunIcon.classList.add('hidden');
+                    moonIcon.classList.remove('hidden');
+                }
+            };
+            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            applyTheme(savedTheme);
+            themeToggleBtn.addEventListener('click', () => {
+                const newTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+                localStorage.setItem('theme', newTheme);
+                applyTheme(newTheme);
+            });
+
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileNav = document.getElementById('mobile-nav');
+            mobileMenuBtn.addEventListener('click', () => mobileNav.classList.toggle('hidden'));
+            
+            // --- Page-Specific Functions ---
+            const newsData = [
+                {img: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/juara.jpg', category: 'Pendidikan', title: 'SMA Negeri 1 Cimaung Juara Lomba Cerdas Cermat', author: 'Siti N.', timestamp: '11 Okt 2025', tags: ['#Prestasi', '#Sekolah']},
+                {img: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/puskesmas.jpeg', category: 'Kesehatan', title: 'Puskesmas Cimaung Adakan Vaksinasi Gratis', author: 'Dr. Budi', timestamp: '10 Okt 2025', tags: ['#Kesehatan', '#Vaksin']},
+                {img: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/aksibersih.jpg', category: 'Lingkungan', title: 'Aksi Bersih Sungai Cimaung Libatkan Ratusan Relawan', author: 'Ujang K.', timestamp: '9 Okt 2025', tags: ['#GoGreen']},
+                {img: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/tarkam.jpg', category: 'Olahraga', title: 'Turnamen Sepak Bola Antar Desa Resmi Dibuka', author: 'Asep S.', timestamp: '8 Okt 2025', tags: ['#Komunitas']},
+                {img: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/panenkopi.jpg', category: 'Pertanian', title: 'Kualitas Kopi Cimaung Diakui di Tingkat Nasional', author: 'Redaksi', timestamp: '7 Okt 2025', tags: ['#Ekonomi']},
+                {img: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/irigasi.jpg', category: 'Sosial', title: 'Warga Gotong Royong Perbaiki Saluran Irigasi', author: 'Redaksi', timestamp: '6 Okt 2025', tags: ['#Komunitas', '#Sosial']},
+                {img: 'https://placehold.co/600x400/0D47A1/FFFFFF?text=Info+Grafis', category: 'Info Grafis', title: 'Data Populasi Kecamatan Cimaung 2025', author: 'Tim Data', timestamp: '5 Okt 2025', tags: ['#Data', '#Demografi']},
+                {img: 'https://placehold.co/600x400/FF9800/FFFFFF?text=Kuliner+Baru', category: 'Kuliner', title: 'Kedai Bakso Aci Baru Buka di Pusat Desa', author: 'Kuliner+', timestamp: '4 Okt 2025', tags: ['#Kuliner', '#Baru']}
+            ];
+            
+            const newsContainer = document.getElementById('news-list-container');
+            const filterContainer = document.getElementById('news-filter-buttons');
+            const searchForm = document.getElementById('search-form');
+            const searchInput = document.getElementById('search-input');
+            
+            function renderSkeletons(count = 8) {
+                newsContainer.innerHTML = '';
+                for (let i = 0; i < count; i++) {
+                    const skeleton = `
+                        <div class="bg-white dark:bg-dark-800 rounded-xl shadow-lg p-5 space-y-4">
+                            <div class="h-48 rounded skeleton-anim"></div>
+                            <div class="h-4 w-1/3 rounded skeleton-anim"></div>
+                            <div class="h-6 w-full rounded skeleton-anim"></div>
+                            <div class="h-4 w-2/3 rounded skeleton-anim"></div>
+                        </div>`;
+                    newsContainer.innerHTML += skeleton;
+                }
+            }
+            
+            function renderItems(data) {
+                newsContainer.innerHTML = '';
+                 if (data.length === 0) {
+                    newsContainer.innerHTML = `<div class="md:col-span-2 text-center py-10 text-gray-500">
+                        <i class="fa-solid fa-search fa-3x mb-4"></i>
+                        <h3 class="font-bold text-xl">Berita tidak ditemukan</h3>
+                        <p>Coba gunakan kata kunci atau filter yang lain.</p>
+                    </div>`;
+                    return;
+                }
+                data.forEach((item, index) => {
+                    const tagsHTML = item.tags.map(tag => `<a href="#" class="inline-block bg-gray-100 dark:bg-gray-700 rounded-full px-3 py-1 text-xs font-semibold text-gray-600 dark:text-gray-300 mr-2 mb-2 hover:bg-primary hover:text-white dark:hover:bg-accent transition-colors">${tag}</a>`).join('');
+                    const itemHTML = `
+                        <div class="bg-white dark:bg-dark-800 rounded-xl shadow-lg overflow-hidden group transform hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl flex flex-col">
+                            <div class="overflow-hidden"><img src="${item.img}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                            <div class="p-5 flex flex-col flex-grow">
+                                <p class="text-xs font-bold text-primary dark:text-accent uppercase">${item.category}</p>
+                                <h3 class="font-bold text-lg text-gray-900 dark:text-white mt-1 mb-3 flex-grow">${item.title}</h3>
+                                <div class="mt-auto">
+                                    <div class="mb-3">${tagsHTML}</div>
+                                    <div class="text-xs text-gray-500 dark:text-gray-400 pt-2 border-t border-gray-200 dark:border-gray-700">
+                                        <span class="mr-3"><i class="fa-regular fa-user mr-1"></i>${item.author}</span>
+                                        <span><i class="fa-regular fa-calendar mr-1"></i>${item.timestamp}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                    newsContainer.innerHTML += itemHTML;
+                    if (index === 3 && data.length > 4) {
+                         newsContainer.innerHTML += `
+                            <div class="md:col-span-2 ad-placeholder rounded-lg text-center p-2 relative flex items-center justify-center">
+                                <div>
+                                    <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+                                    <img src="https://placehold.co/500x300/E2E8F0/4A5568?text=AD+IN-ARTICLE" alt="Iklan In-Article" class="mx-auto w-full object-cover rounded-md">
+                                </div>
+                            </div>`;
+                    }
+                });
+            }
+
+            const categories = ['Semua', ...new Set(newsData.map(item => item.category))];
+            categories.forEach(category => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn font-semibold text-sm px-4 py-2 rounded-full transition-colors bg-white dark:bg-dark-800 hover:bg-gray-100 dark:hover:bg-gray-700';
+                if (category === 'Semua') btn.classList.add('active');
+                btn.textContent = category;
+                btn.dataset.category = category;
+                filterContainer.appendChild(btn);
+            });
+            
+            function handleFilter() {
+                const activeFilter = filterContainer.querySelector('.active').dataset.category;
+                const searchQuery = searchInput.value.toLowerCase();
+                
+                let filteredData = newsData;
+
+                if (activeFilter !== 'Semua') {
+                    filteredData = filteredData.filter(item => item.category === activeFilter);
+                }
+
+                if (searchQuery) {
+                    filteredData = filteredData.filter(item => item.title.toLowerCase().includes(searchQuery));
+                }
+                
+                renderItems(filteredData);
+            }
+
+            filterContainer.addEventListener('click', function(e) {
+                if(e.target.classList.contains('filter-btn')) {
+                    filterContainer.querySelector('.active').classList.remove('active');
+                    e.target.classList.add('active');
+                    handleFilter();
+                }
+            });
+
+            searchForm.addEventListener('submit', e => e.preventDefault());
+            searchInput.addEventListener('input', handleFilter);
+
+            // Initial render
+            renderSkeletons();
+            setTimeout(() => renderItems(newsData), 1000); 
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarambah - Jelajahi Destinasi Wisata Cimaung</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- SwiperJS for Carousel -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        .filter-btn.active { background-color: #0D47A1; color: white; }
+        html.dark .filter-btn.active { background-color: #FF9800; }
+        .ad-placeholder {
+            background-color: #E2E8F0;
+            border: 1px dashed #94A3B8;
+        }
+        html.dark .ad-placeholder {
+            background-color: #374151;
+            border-color: #6B7280;
+        }
+        .swiper-pagination-bullet-active { background-color: #0D47A1 !important; }
+        html.dark .swiper-pagination-bullet-active { background-color: #FF9800 !important; }
+        .text-shadow-strong { text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
+        
+        /* Modal Styles */
+        #destination-modal-content::-webkit-scrollbar { width: 8px; }
+        #destination-modal-content::-webkit-scrollbar-thumb { background-color: #94a3b8; border-radius: 10px; }
+        html.dark #destination-modal-content::-webkit-scrollbar-thumb { background-color: #4b5563; }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0D47A1',
+                        accent: '#FF9800',
+                        light: '#F7F9FC',
+                        dark: {
+                            800: '#1F2937',
+                            900: '#111827',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light dark:bg-dark-900 text-gray-800 dark:text-gray-300 transition-colors duration-300">
+    
+    <!-- ===== HEADER / NAVBAR ===== -->
+    <header class="bg-white/80 dark:bg-dark-800/80 backdrop-blur-lg shadow-sm sticky top-0 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="home.html">
+                    <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/mediakarya.svg" alt="MediaKarya+ Logo" class="h-10 w-auto dark:invert">
+                </a>
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="home.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Beranda</a>
+                    <a href="kabarkarya.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Kabar Karya</a>
+                    <a href="directory.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Lapakita</a>
+                    <a href="explore.html" class="font-bold text-primary dark:text-white border-b-2 border-accent pb-1">Jarambah</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <button id="search-button" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white" aria-label="Cari"><i class="fa-solid fa-magnifying-glass text-lg"></i></button>
+                    <button id="theme-toggle-btn" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white" aria-label="Ganti tema">
+                        <i class="fa-solid fa-moon text-lg"></i>
+                        <i class="fa-solid fa-sun text-lg hidden"></i>
+                    </button>
+                    <a href="contact.html" class="hidden sm:block bg-accent text-white font-bold py-2 px-5 rounded-lg hover:bg-opacity-90 transition-all text-sm">Beritakan!</a>
+                    <button id="mobile-menu-btn" class="lg:hidden text-gray-800 dark:text-gray-300" aria-label="Menu"><i class="fa-solid fa-bars text-xl"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-nav" class="hidden lg:hidden bg-white dark:bg-dark-800 border-t border-gray-200 dark:border-gray-700 py-4 px-4">
+            <a href="home.html" class="block py-2 text-gray-600 dark:text-gray-400">Beranda</a>
+            <a href="kabarkarya.html" class="block py-2 text-gray-600 dark:text-gray-400">Kabar Karya</a>
+            <a href="directory.html" class="block py-2 text-gray-600 dark:text-gray-400">Lapakita</a>
+            <a href="explore.html" class="block py-2 text-primary dark:text-white font-semibold">Jarambah</a>
+        </div>
+    </header>
+
+    <!-- PAGE HEADER -->
+    <section class="relative h-[60vh] bg-cover bg-center text-white flex items-end p-8" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.1)), url('https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/kebunteh.webp');">
+        <div class="container mx-auto">
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight text-shadow-strong">Jarambah Cimaung</h1>
+            <p class="mt-2 text-lg md:text-xl max-w-2xl text-shadow-strong">Temukan pesona tersembunyi, dari hijaunya kebun teh hingga sejuknya air terjun. Mulai petualanganmu di sini.</p>
+        </div>
+    </section>
+    
+    <!-- KONTEN UTAMA -->
+    <main class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Kolom Konten Utama (Kiri) -->
+            <div class="lg:col-span-8">
+                <!-- Destinasi Unggulan -->
+                <section class="mb-12">
+                     <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Destinasi Unggulan</h2>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <a href="#" data-index="0" class="destination-item-link group relative rounded-xl overflow-hidden shadow-lg block h-96">
+                            <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/situpatenggang.webp" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-6 flex flex-col justify-end">
+                                <h3 class="text-2xl font-bold text-white text-shadow-strong">Situ Patenggang</h3>
+                                <p class="text-sm text-gray-200 mt-1">Danau Legendaris & Perahu Cinta</p>
+                            </div>
+                        </a>
+                        <div class="space-y-6">
+                            <a href="#" data-index="1" class="destination-item-link group relative rounded-xl overflow-hidden shadow-lg block h-[180px]">
+                                <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/kawah.jpeg" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent p-4 flex flex-col justify-end">
+                                    <h4 class="text-xl font-bold text-white text-shadow-strong">Kawah Putih</h4>
+                                </div>
+                            </a>
+                            <a href="#" data-index="2" class="destination-item-link group relative rounded-xl overflow-hidden shadow-lg block h-[180px]">
+                                <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/upas-min.jpg" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent p-4 flex flex-col justify-end">
+                                    <h4 class="text-xl font-bold text-white text-shadow-strong">Ranca Upas</h4>
+                                </div>
+                            </a>
+                        </div>
+                     </div>
+                </section>
+
+                <!-- Iklan Leaderboard -->
+                <div class="ad-placeholder rounded-lg text-center p-2 relative my-12">
+                    <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+                    <img src="https://placehold.co/728x90/E2E8F0/4A5568?text=AD+LEADERBOARD+728x90" alt="Iklan Leaderboard" class="mx-auto">
+                </div>
+
+                <!-- Direktori Utama -->
+                <section>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">Jelajahi Semua Destinasi</h2>
+                    <!-- Search & Filter -->
+                    <div class="flex flex-col md:flex-row gap-4 mb-8">
+                        <div class="relative flex-grow">
+                            <input type="text" id="search-input" placeholder="Cari nama destinasi wisata..." class="w-full pl-5 pr-12 py-3 border border-gray-300 dark:border-gray-600 rounded-full bg-white dark:bg-dark-800 focus:ring-2 focus:ring-primary dark:focus:ring-accent focus:border-transparent transition-shadow">
+                            <i class="fa-solid fa-magnifying-glass text-lg absolute top-1/2 right-5 -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                        <div id="filter-buttons" class="flex-shrink-0 flex gap-2 overflow-x-auto pb-2">
+                            <!-- Filter buttons will be injected here -->
+                        </div>
+                    </div>
+
+                    <!-- Daftar Destinasi -->
+                    <div id="destination-list" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                        <!-- Destination items will be injected here -->
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <nav aria-label="Page navigation" class="mt-12 flex justify-center">
+                       <div class="flex items-center space-x-2">
+                            <a href="#" class="px-4 py-2 text-gray-500 dark:text-gray-400 bg-white dark:bg-dark-800 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fa-solid fa-chevron-left"></i></a>
+                            <a href="#" class="px-4 py-2 text-white bg-primary dark:bg-accent rounded-md">1</a>
+                            <a href="#" class="px-4 py-2 text-gray-700 dark:text-gray-300 bg-white dark:bg-dark-800 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">2</a>
+                            <a href="#" class="px-4 py-2 text-gray-700 dark:text-gray-300 bg-white dark:bg-dark-800 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">3</a>
+                            <a href="#" class="px-4 py-2 text-gray-700 dark:text-gray-300 bg-white dark:bg-dark-800 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"><i class="fa-solid fa-chevron-right"></i></a>
+                        </div>
+                    </nav>
+                </section>
+            </div>
+            
+            <!-- Kolom Sidebar (Kanan) -->
+            <aside class="lg:col-span-4">
+                 <div class="sticky top-28 space-y-8">
+                    <!-- Ajakan Kontribusi -->
+                    <div class="bg-gradient-to-br from-green-600 to-teal-500 text-white p-6 rounded-xl shadow-lg text-center">
+                        <i class="fa-solid fa-map-signs text-4xl mb-3"></i>
+                        <h3 class="font-bold text-2xl">Punya Info Spot Tersembunyi?</h3>
+                        <p class="my-3">Bagikan info destinasi wisata favoritmu yang belum banyak diketahui orang. Jadilah pemandu lokal!</p>
+                        <a href="contact.html" class="bg-white text-green-600 font-bold py-2 px-5 rounded-lg hover:bg-opacity-90 transition-all">Bagikan Info Spot</a>
+                    </div>
+                    <!-- Iklan Sidebar -->
+                    <div class="ad-placeholder rounded-lg text-center p-2 relative">
+                        <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+                        <img src="https://placehold.co/300x250/E2E8F0/4A5568?text=AD+SIDEBAR" alt="Iklan Sidebar" class="mx-auto">
+                    </div>
+                    <!-- Paling Dicari -->
+                    <div class="bg-white dark:bg-dark-800 p-6 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-bold text-primary dark:text-white border-b border-gray-200 dark:border-gray-700 pb-3 mb-4">Paling Dicari</h3>
+                        <div class="space-y-4">
+                            <a href="#" class="group flex items-center"><span class="text-3xl font-extrabold text-gray-200 dark:text-gray-600 mr-4">1</span><span class="font-semibold text-gray-700 dark:text-gray-300 group-hover:text-primary dark:group-hover:text-white truncate">Situ Patenggang</span></a>
+                            <a href="#" class="group flex items-center"><span class="text-3xl font-extrabold text-gray-200 dark:text-gray-600 mr-4">2</span><span class="font-semibold text-gray-700 dark:text-gray-300 group-hover:text-primary dark:group-hover:text-white truncate">Ranca Upas</span></a>
+                            <a href="#" class="group flex items-center"><span class="text-3xl font-extrabold text-gray-200 dark:text-gray-600 mr-4">3</span><span class="font-semibold text-gray-700 dark:text-gray-300 group-hover:text-primary dark:group-hover:text-white truncate">Glamping Lakeside</span></a>
+                        </div>
+                    </div>
+                 </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Sponsor & Footer -->
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-4 py-12">
+             <div class="border-t border-gray-700 pt-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/mediakarya.svg" alt="MediaKarya+ Logo" class="h-10 w-auto brightness-0 invert mb-4"><p class="text-sm text-gray-400">Media digital independen untuk potensi, karya, dan kabar terbaru dari Kecamatan Cimaung.</p></div>
+                <div><h4 class="font-bold">Navigasi</h4><ul class="mt-4 space-y-2 text-sm text-gray-300"><li><a href="kabarkarya.html" class="hover:underline">Kabar Karya</a></li><li><a href="directory.html" class="hover:underline">Lapakita</a></li><li><a href="explore.html" class="hover:underline">Jarambah</a></li></ul></div>
+                <div><h4 class="font-bold">Tentang</h4><ul class="mt-4 space-y-2 text-sm text-gray-300"><li><a href="about.html" class="hover:underline">Tim Kami</a></li><li><a href="pedoman-media.html" class="hover:underline">Pedoman Media</a></li><li><a href="contact.html" class="hover:underline">Hubungi Kami</a></li></ul></div>
+                <div><h4 class="font-bold">Ikuti Kami</h4><div class="flex space-x-4 mt-4"><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-instagram"></i></a><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-tiktok"></i></a><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-youtube"></i></a><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-facebook"></i></a></div></div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-xs text-gray-500">&copy; 2025 Media Karya Kecamatan Cimaung. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Global Search Modal -->
+    <div id="search-modal" class="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 bg-black bg-opacity-70 p-4 opacity-0 invisible transition-opacity duration-300">
+        <div class="modal-container bg-white dark:bg-dark-800 w-full max-w-2xl rounded-xl shadow-xl transform -translate-y-10 transition-transform duration-300">
+            <div class="relative"><input type="text" id="global-search-input" placeholder="Ketik untuk mencari..." class="w-full bg-transparent border-2 border-transparent rounded-xl p-4 pr-12 text-lg focus:border-primary focus:ring-primary"><button class="absolute right-0 top-0 h-full px-5 text-gray-500 hover:text-primary"><i class="fa-solid fa-magnifying-glass text-xl"></i></button></div>
+        </div>
+    </div>
+
+    <!-- Destination Detail Modal -->
+    <div id="destination-modal" class="fixed inset-0 z-50 p-4 hidden items-center justify-center bg-black/70 backdrop-blur-sm">
+        <div class="relative w-full max-w-5xl max-h-[90vh] bg-white dark:bg-dark-800 rounded-2xl shadow-xl flex flex-col">
+            <div class="absolute top-0 right-0 pt-4 pr-4 z-20"><button id="modal-close-btn" class="w-10 h-10 rounded-full bg-black/30 text-white hover:bg-black/50 transition-colors"><i class="fa-solid fa-xmark text-lg"></i></button></div>
+            <div id="destination-modal-content" class="flex-grow overflow-y-auto rounded-2xl"> <!-- Content injected here --> </div>
+            <button id="modal-prev-btn" class="absolute top-1/2 left-4 -translate-y-1/2 w-12 h-12 rounded-full bg-black/30 text-white hover:bg-black/50 transition-colors hidden md:flex items-center justify-center z-20"><i class="fa-solid fa-chevron-left text-xl"></i></button>
+            <button id="modal-next-btn" class="absolute top-1/2 right-4 -translate-y-1/2 w-12 h-12 rounded-full bg-black/30 text-white hover:bg-black/50 transition-colors hidden md:flex items-center justify-center z-20"><i class="fa-solid fa-chevron-right text-xl"></i></button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Universal Scripts (Dark Mode, Search Modal, Mobile Menu) ---
+            const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            const sunIcon = themeToggleBtn.querySelector('.fa-sun');
+            const moonIcon = themeToggleBtn.querySelector('.fa-moon');
+            const applyTheme = (theme) => {
+                if (theme === 'dark') { document.documentElement.classList.add('dark'); sunIcon.classList.remove('hidden'); moonIcon.classList.add('hidden'); } 
+                else { document.documentElement.classList.remove('dark'); sunIcon.classList.add('hidden'); moonIcon.classList.remove('hidden'); }
+            };
+            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            applyTheme(savedTheme);
+            themeToggleBtn.addEventListener('click', () => {
+                const newTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+                localStorage.setItem('theme', newTheme);
+                applyTheme(newTheme);
+            });
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileNav = document.getElementById('mobile-nav');
+            mobileMenuBtn.addEventListener('click', () => mobileNav.classList.toggle('hidden'));
+            
+            // --- Page-Specific Functions ---
+            const exploreData = [
+                { id: 0, name: 'Situ Patenggang', category: 'Wisata Alam', images: ['https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/situpatenggang.webp', 'https://placehold.co/800x600/00BCD4/FFFFFF?text=Batu+Cinta', 'https://placehold.co/800x600/00BCD4/FFFFFF?text=Perahu'], rating: 4.7, description: 'Nikmati ketenangan danau dengan perahu sambil mendengar legenda Batu Cinta yang abadi. Udara sejuk dan pemandangan kebun teh di sekelilingnya menambah pesona tempat ini.', ticketPrice: 'Rp 25.000 / orang', openHours: '08:00 - 17:00 WIB', contact: '081211112222', gmapsUrl: 'https://maps.app.goo.gl/map-link-1', mapEmbedUrl: 'https://maps.google.com/maps?q=situ+patenggang&hl=id&z=15&output=embed', reviews: [{name: 'Rina', stars: 5, comment: 'Tempatnya syahdu, cocok buat healing.'}] },
+                { id: 1, name: 'Kawah Putih', category: 'Wisata Alam', images: ['https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/kawah.jpeg', 'https://placehold.co/800x600/9C27B0/FFFFFF?text=Dermaga', 'https://placehold.co/800x600/9C27B0/FFFFFF?text=Pemandangan'], rating: 4.8, description: 'Danau kawah vulkanik dengan warna air putih kehijauan yang bisa berubah-ubah. Pemandangan eksotis dan sureal menjadikannya spot foto favorit.', ticketPrice: 'Rp 30.000 / orang', openHours: '07:00 - 17:00 WIB', contact: '081233334444', gmapsUrl: 'https://maps.app.goo.gl/map-link-2', mapEmbedUrl: 'https://maps.google.com/maps?q=kawah+putih&hl=id&z=15&output=embed', reviews: [{name: 'Agus', stars: 5, comment: 'Luar biasa indah, seperti di negeri dongeng!'}] },
+                { id: 2, name: 'Ranca Upas', category: 'Camping', images: ['https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/upas-min.jpg', 'https://placehold.co/800x600/FF9800/FFFFFF?text=Rusa', 'https://placehold.co/800x600/FF9800/FFFFFF?text=Tenda'], rating: 4.6, description: 'Kemping di tengah alam sejuk sambil berinteraksi langsung dengan rusa-rusa jinak. Tersedia juga pemandian air panas alami.', ticketPrice: 'Rp 22.000 (camping beda lagi)', openHours: '24 Jam', contact: '081255556666', gmapsUrl: 'https://maps.app.goo.gl/map-link-3', mapEmbedUrl: 'https://maps.google.com/maps?q=ranca+upas&hl=id&z=15&output=embed', reviews: [{name: 'Dian', stars: 4, comment: 'Anak-anak suka sekali kasih makan rusa.'}] },
+                { id: 3, name: 'Glamping Lakeside', category: 'Akomodasi', images: ['https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/glamping-min.jpg', 'https://placehold.co/800x600/607D8B/FFFFFF?text=Interior', 'https://placehold.co/800x600/607D8B/FFFFFF?text=Resto+Kapal'], rating: 4.9, description: 'Menginap di tenda mewah dengan pemandangan langsung ke Situ Patenggang. Jangan lewatkan ikon utamanya, restoran berbentuk kapal pinisi.', ticketPrice: 'Mulai dari Rp 1.5jt / malam', openHours: '24 Jam', contact: '081277778888', gmapsUrl: 'https://maps.app.goo.gl/map-link-4', mapEmbedUrl: 'https://maps.google.com/maps?q=glamping+lakeside+rancabali&hl=id&z=15&output=embed', reviews: [{name: 'Faisal', stars: 5, comment: 'Pengalaman menginap yang tak terlupakan.'}] },
+                { id: 4, name: 'Curug Cinulang', category: 'Wisata Alam', images: ['https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/curugpanganten-min.jpg', 'https://placehold.co/800x600/4CAF50/FFFFFF?text=Air+Terjun', 'https://placehold.co/800x600/4CAF50/FFFFFF?text=Sungai'], rating: 4.5, description: 'Air terjun kembar yang memiliki legenda tersendiri. Nikmati kesegaran air pegunungan dan suara gemuruh air yang menenangkan.', ticketPrice: 'Rp 10.000 / orang', openHours: '08:00 - 16:00 WIB', contact: '081299990000', gmapsUrl: 'https://maps.app.goo.gl/map-link-5', mapEmbedUrl: 'https://maps.google.com/maps?q=curug+cinulang&hl=id&z=15&output=embed', reviews: [{name: 'Wati', stars: 4, comment: 'Trekkingnya lumayan, tapi terbayar dengan pemandangan.'}] },
+            ];
+            
+            const destinationContainer = document.getElementById('destination-list');
+            const filterContainer = document.getElementById('filter-buttons');
+            const searchInput = document.getElementById('search-input');
+            const modal = document.getElementById('destination-modal');
+            const modalContent = document.getElementById('destination-modal-content');
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+            const modalNextBtn = document.getElementById('modal-next-btn');
+            const modalPrevBtn = document.getElementById('modal-prev-btn');
+
+            let currentDestinationId = 0;
+
+            function renderDestinationItems(data) {
+                destinationContainer.innerHTML = '';
+                if (data.length === 0) {
+                    destinationContainer.innerHTML = `<div class="sm:col-span-2 xl:col-span-3 text-center py-10 text-gray-500 dark:text-gray-400"> <i class="fa-solid fa-map-location-dot fa-3x mb-4"></i> <h3 class="font-bold text-xl">Destinasi tidak ditemukan</h3> <p>Coba gunakan kata kunci atau filter yang lain.</p> </div>`;
+                    return;
+                }
+                data.forEach(item => {
+                    const itemHtml = `
+                        <a href="#" data-index="${item.id}" class="destination-item-link block bg-white dark:bg-dark-800 rounded-xl overflow-hidden shadow-lg group transform hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl">
+                            <div class="relative"> <img src="${item.images[0]}" class="w-full h-48 object-cover group-hover:opacity-90" alt="${item.name}"> </div>
+                            <div class="p-5"> <h4 class="font-bold text-lg truncate text-gray-900 dark:text-white">${item.name}</h4> <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">${item.category}</p> <div class="flex items-center mt-2"> <i class="fa-solid fa-star text-yellow-400"></i> <span class="text-sm font-bold ml-1 text-gray-800 dark:text-gray-200">${item.rating}</span> </div> </div>
+                        </a>`;
+                    destinationContainer.innerHTML += itemHtml;
+                });
+            }
+            
+            function openModal(id) {
+                currentDestinationId = id;
+                const item = exploreData.find(d => d.id === id);
+                if (!item) return;
+
+                const imagesHtml = item.images.map(img => `<div class="swiper-slide"><img src="${img}" class="w-full h-full object-cover"></div>`).join('');
+                const reviewsHtml = item.reviews.map(r => `<div class="flex items-start space-x-4"><div class="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 flex-shrink-0 flex items-center justify-center font-bold text-primary dark:text-accent">${r.name.charAt(0)}</div><div><p class="font-bold">${r.name}</p><div class="flex text-yellow-400">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div><p class="text-sm text-gray-600 dark:text-gray-400 mt-1">${r.comment}</p></div></div>`).join('');
+                
+                modalContent.innerHTML = `
+                    <div class="w-full h-80 bg-gray-200 dark:bg-dark-900">
+                        <div class="swiper modal-image-swiper h-full">${imagesHtml}</div>
+                    </div>
+                    <div class="p-6 md:p-8">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <div class="lg:col-span-2">
+                                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">${item.name}</h2>
+                                <p class="text-gray-600 dark:text-gray-400 mt-1">${item.category}</p>
+                                <p class="text-gray-700 dark:text-gray-300 mt-4 leading-relaxed">${item.description}</p>
+                            </div>
+                            <div class="lg:col-span-1 space-y-4">
+                                <div class="bg-gray-100 dark:bg-dark-900 p-4 rounded-lg">
+                                    <h4 class="font-bold text-lg mb-2">Informasi Kunjungan</h4>
+                                    <div class="text-sm space-y-2 pt-2 border-t dark:border-gray-700">
+                                        <p><i class="fa-solid fa-ticket w-5 text-gray-500"></i> <b>Tiket:</b> ${item.ticketPrice}</p>
+                                        <p><i class="fa-solid fa-clock w-5 text-gray-500"></i> <b>Jam Buka:</b> ${item.openHours}</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-3">
+                                    <a href="tel:${item.contact}" class="w-full text-center flex items-center justify-center bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 font-semibold py-3 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-900 transition-colors"><i class="fa-solid fa-phone mr-2"></i>Hubungi Kontak</a>
+                                    <a href="${item.gmapsUrl}" target="_blank" class="w-full text-center flex items-center justify-center bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-300 font-semibold py-3 rounded-lg hover:bg-green-200 dark:hover:bg-green-900 transition-colors"><i class="fa-solid fa-diamond-turn-right mr-2"></i>Arahkan ke Lokasi</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 md:p-8 border-t border-gray-200 dark:border-gray-700">
+                        <h3 class="text-2xl font-bold mb-4">Peta Lokasi</h3>
+                        <div class="rounded-lg overflow-hidden border dark:border-gray-700"><iframe src="${item.mapEmbedUrl}" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
+                    </div>
+                    <div class="p-6 md:p-8 border-t border-gray-200 dark:border-gray-700"><h3 class="text-2xl font-bold mb-4">Ulasan Pengunjung</h3><div class="space-y-6">${reviewsHtml}</div></div>`;
+
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                
+                new Swiper('.modal-image-swiper', { loop: true, autoplay: { delay: 3000 } });
+            }
+
+            function closeModal() {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                modalContent.innerHTML = '';
+            }
+            
+            function navigateModal(direction) {
+                const currentFilter = filterContainer.querySelector('.active').dataset.filter;
+                let currentList = exploreData;
+                if(currentFilter !== 'Semua') {
+                    currentList = exploreData.filter(d => d.category === currentFilter);
+                }
+                const searchQuery = searchInput.value.toLowerCase();
+                if(searchQuery){
+                    currentList = currentList.filter(d => d.name.toLowerCase().includes(searchQuery));
+                }
+
+                let currentIndexInList = currentList.findIndex(d => d.id === currentDestinationId);
+                let nextIndexInList = (currentIndexInList + direction + currentList.length) % currentList.length;
+                openModal(currentList[nextIndexInList].id);
+            }
+
+            document.addEventListener('click', (e) => {
+                const link = e.target.closest('.destination-item-link');
+                if (link) { e.preventDefault(); openModal(parseInt(link.dataset.index, 10)); }
+            });
+
+            modalCloseBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+            modalNextBtn.addEventListener('click', () => navigateModal(1));
+            modalPrevBtn.addEventListener('click', () => navigateModal(-1));
+            
+            const categories = ['Semua', ...new Set(exploreData.map(item => item.category))];
+            filterContainer.innerHTML = categories.map(cat => `<button data-filter="${cat}" class="filter-btn flex-shrink-0 font-semibold text-sm px-4 py-2 rounded-full transition-colors bg-white dark:bg-dark-800 hover:bg-gray-100 dark:hover:bg-gray-700 ${cat === 'Semua' ? 'active' : ''}">${cat}</button>`).join('');
+            
+            function handleFilter() {
+                const activeFilter = filterContainer.querySelector('.active').dataset.filter;
+                const searchQuery = searchInput.value.toLowerCase();
+                let filteredData = exploreData;
+                if (activeFilter !== 'Semua') { filteredData = filteredData.filter(item => item.category === activeFilter); }
+                if (searchQuery) { filteredData = filteredData.filter(item => item.name.toLowerCase().includes(searchQuery)); }
+                renderDestinationItems(filteredData);
+            }
+
+            filterContainer.addEventListener('click', (e) => { if (e.target.matches('.filter-btn')) { filterContainer.querySelector('.active').classList.remove('active'); e.target.classList.add('active'); handleFilter(); } });
+            searchInput.addEventListener('input', handleFilter);
+            renderDestinationItems(exploreData);
+        });
+    </script>
+</body>
+</html>
+

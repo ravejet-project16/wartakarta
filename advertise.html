@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasang Iklan & Kemitraan - MediaKarya+</title>
+    
+    <!-- Dependencies (Tailwind, Fonts, Font Awesome) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        .faq-item .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; }
+        .faq-item.open .faq-answer { max-height: 200px; }
+        .faq-item.open .icon-rotate { transform: rotate(180deg); }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0D47A1',
+                        accent: '#FF9800',
+                        light: '#F7F9FC',
+                        dark: { 800: '#1F2937', 900: '#111827' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light dark:bg-dark-900 text-gray-800 dark:text-gray-300 transition-colors duration-300">
+
+    <!-- ===== HEADER UNIVERSAL ===== -->
+    <header class="bg-white/80 dark:bg-dark-800/80 backdrop-blur-lg shadow-sm sticky top-0 z-40">
+        <!-- (Konten header sama persis seperti di halaman lain) -->
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative bg-cover bg-center text-white text-center py-20" style="background-image: linear-gradient(rgba(13, 71, 161, 0.85), rgba(13, 71, 161, 0.85)), url('https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/sponsorship.jpeg');">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-extrabold">Pasang Iklan & Kemitraan</h1>
+            <p class="mt-4 text-lg max-w-3xl mx-auto text-gray-200">Jangkau ribuan audiens lokal yang loyal dan relevan. Mari tumbuh bersama kami dan berikan dampak positif bagi Cimaung.</p>
+        </div>
+    </section>
+
+    <!-- KONTEN UTAMA -->
+    <main class="container mx-auto px-4 py-16">
+        <section class="max-w-5xl mx-auto mb-16 text-center">
+             <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-10">Mengapa Beriklan di MediaKarya+?</h2>
+             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="bg-primary/10 dark:bg-accent/20 text-primary dark:text-accent w-16 h-16 rounded-full flex items-center justify-center mx-auto text-3xl"><i class="fa-solid fa-bullseye"></i></div>
+                    <h3 class="font-bold text-xl mt-4">Jangkauan Lokal Tertarget</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mt-2">Iklan Anda dilihat langsung oleh masyarakat Cimaung, audiens yang paling relevan untuk bisnis Anda.</p>
+                </div>
+                 <div>
+                    <div class="bg-primary/10 dark:bg-accent/20 text-primary dark:text-accent w-16 h-16 rounded-full flex items-center justify-center mx-auto text-3xl"><i class="fa-solid fa-users"></i></div>
+                    <h3 class="font-bold text-xl mt-4">Audiens Loyal & Terlibat</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mt-2">Pembaca kami adalah anggota komunitas yang aktif dan percaya pada platform kami sebagai sumber informasi.</p>
+                </div>
+                 <div>
+                    <div class="bg-primary/10 dark:bg-accent/20 text-primary dark:text-accent w-16 h-16 rounded-full flex items-center justify-center mx-auto text-3xl"><i class="fa-solid fa-handshake-angle"></i></div>
+                    <h3 class="font-bold text-xl mt-4">Dukung Ekonomi Lokal</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mt-2">Dengan beriklan, Anda juga mendukung keberlanjutan media lokal yang otentik.</p>
+                </div>
+             </div>
+        </section>
+
+        <section class="bg-white dark:bg-dark-800 rounded-lg p-8 shadow-lg mb-16">
+            <h2 class="text-3xl font-bold text-center mb-10 text-gray-900 dark:text-white">Paket Iklan Populer</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start max-w-6xl mx-auto">
+                <div class="bg-light dark:bg-dark-900 p-8 rounded-lg border dark:border-gray-700 transform hover:-translate-y-2 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold">Paket UKM Bangkit</h3>
+                    <p class="text-4xl font-bold my-4">Rp 450rb<span class="text-lg font-normal text-gray-500">/bln</span></p>
+                    <ul class="space-y-3 text-gray-600 dark:text-gray-400 mb-6"><li class="flex items-start"><i class="fa-solid fa-check text-green-500 w-5 mt-1"></i><span>1x Iklan Medium Rectangle (Sidebar)</span></li><li class="flex items-start"><i class="fa-solid fa-check text-green-500 w-5 mt-1"></i><span>1x Mention di Instagram Story</span></li></ul>
+                    <a href="contact.html" class="w-full block text-center bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-all">Pilih Paket</a>
+                </div>
+                <div class="bg-primary dark:bg-accent p-8 rounded-lg shadow-2xl relative transform lg:scale-105">
+                    <div class="absolute top-0 right-4 -mt-4 bg-accent dark:bg-white text-white dark:text-accent text-xs font-bold px-3 py-1 rounded-full">PALING POPULER</div>
+                    <h3 class="text-2xl font-bold text-white">Paket Mitra Juara</h3>
+                    <p class="text-4xl font-bold my-4 text-white">Rp 1.5jt<span class="text-lg font-normal text-gray-200">/bln</span></p>
+                    <ul class="space-y-3 text-gray-200 mb-6"><li class="flex items-start"><i class="fa-solid fa-check text-green-300 w-5 mt-1"></i><span>1x Iklan Big Rectangle (In-feed)</span></li><li class="flex items-start"><i class="fa-solid fa-check text-green-300 w-5 mt-1"></i><span>1x Artikel Advertorial Profesional</span></li><li class="flex items-start"><i class="fa-solid fa-check text-green-300 w-5 mt-1"></i><span>Listing Direktori Premium (Terverifikasi)</span></li></ul>
+                    <a href="contact.html" class="w-full block text-center bg-white text-primary dark:text-accent font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-all">Pilih Paket</a>
+                </div>
+                <div class="bg-light dark:bg-dark-900 p-8 rounded-lg border dark:border-gray-700 transform hover:-translate-y-2 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold">Sponsor Utama</h3>
+                    <p class="text-4xl font-bold my-4">Hubungi Kami</p>
+                    <ul class="space-y-3 text-gray-600 dark:text-gray-400 mb-6"><li class="flex items-start"><i class="fa-solid fa-check text-green-500 w-5 mt-1"></i><span>Branding Eksklusif</span></li><li class="flex items-start"><i class="fa-solid fa-check text-green-500 w-5 mt-1"></i><span>Paket Konten Komprehensif</span></li><li class="flex items-start"><i class="fa-solid fa-check text-green-500 w-5 mt-1"></i><span>Kemitraan Jangka Panjang</span></li></ul>
+                    <a href="contact.html" class="w-full block text-center bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-all">Hubungi Tim</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="max-w-3xl mx-auto">
+             <h2 class="text-3xl font-bold text-center mb-10 text-gray-900 dark:text-white">Pertanyaan Umum (FAQ)</h2>
+             <div id="faq-container" class="space-y-4">
+                <div class="faq-item bg-white dark:bg-dark-800 p-5 rounded-lg shadow-sm">
+                    <button class="faq-question w-full flex justify-between items-center text-left font-semibold"><span class="text-gray-900 dark:text-white">Bagaimana cara saya memulai beriklan?</span><i class="fa-solid fa-chevron-down icon-rotate transition-transform"></i></button>
+                    <div class="faq-answer text-gray-600 dark:text-gray-400 pt-4"><p>Sangat mudah! Cukup hubungi tim marketing kami melalui halaman kontak. Tim kami akan membantu Anda memilih paket yang paling sesuai dan memandu Anda melalui proses selanjutnya.</p></div>
+                </div>
+                <div class="faq-item bg-white dark:bg-dark-800 p-5 rounded-lg shadow-sm">
+                    <button class="faq-question w-full flex justify-between items-center text-left font-semibold"><span class="text-gray-900 dark:text-white">Materi iklan seperti apa yang perlu disiapkan?</span><i class="fa-solid fa-chevron-down icon-rotate transition-transform"></i></button>
+                    <div class="faq-answer text-gray-600 dark:text-gray-400 pt-4"><p>Untuk iklan display, Anda perlu menyiapkan file gambar (JPG/PNG). Untuk advertorial, Anda bisa menyiapkan draf tulisan atau biarkan tim redaksi kami yang membuatkan cerita menarik tentang bisnis Anda.</p></div>
+                </div>
+             </div>
+        </section>
+    </main>
+
+    <!-- ===== FOOTER UNIVERSAL ===== -->
+    <footer class="bg-gray-800 text-white mt-16">
+        <!-- (Konten footer sama persis seperti di halaman lain) -->
+    </footer>
+
+    <!-- Universal Scripts -->
+    <script>
+        // (Skrip universal untuk Dark Mode, Search Modal, Mobile Menu)
+        document.getElementById('faq-container').addEventListener('click', e => {
+            const questionBtn = e.target.closest('.faq-question');
+            if(questionBtn) { questionBtn.parentElement.classList.toggle('open'); }
+        });
+    </script>
+</body>
+</html>

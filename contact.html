@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubungi Kami - MediaKarya+</title>
+    
+    <!-- Dependencies (Tailwind, Fonts, Font Awesome) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0D47A1',
+                        accent: '#FF9800',
+                        light: '#F7F9FC',
+                        dark: { 800: '#1F2937', 900: '#111827' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light dark:bg-dark-900 text-gray-800 dark:text-gray-300 transition-colors duration-300">
+
+    <!-- ===== HEADER UNIVERSAL ===== -->
+    <header class="bg-white/80 dark:bg-dark-800/80 backdrop-blur-lg shadow-sm sticky top-0 z-40">
+        <!-- (Konten header sama persis seperti di halaman lain, sesuaikan link aktif jika perlu) -->
+    </header>
+
+    <!-- PAGE HEADER -->
+    <section class="bg-white dark:bg-dark-800 border-b border-gray-200 dark:border-gray-700 py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl font-extrabold text-gray-900 dark:text-white">Hubungi Kami</h1>
+            <p class="mt-2 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Punya masukan, pertanyaan, atau info menarik? Kami siap mendengarkan.</p>
+        </div>
+    </section>
+
+    <!-- KONTEN UTAMA -->
+    <main class="container mx-auto px-4 py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Kolom Informasi Kontak & Peta -->
+            <div class="space-y-8">
+                <div class="bg-white dark:bg-dark-800 p-8 rounded-xl shadow-lg">
+                    <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Informasi Redaksi</h2>
+                    <div class="space-y-4 text-gray-600 dark:text-gray-400">
+                        <div class="flex items-start"><i class="fa-solid fa-map-marker-alt text-primary dark:text-accent w-6 mt-1"></i><span>Jl. Raya Cimaung No. 25, Cimaung, Kabupaten Bandung, Jawa Barat 40374</span></div>
+                        <div class="flex items-center"><i class="fa-solid fa-envelope text-primary dark:text-accent w-6"></i><span>redaksi@mediakarya.plus</span></div>
+                        <div class="flex items-center"><i class="fa-solid fa-phone text-primary dark:text-accent w-6"></i><span>(022) 123-4567</span></div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-dark-800 rounded-xl shadow-lg overflow-hidden">
+                    <iframe src="https://maps.google.com/maps?q=-7.114497,107.573873&hl=id&z=15&output=embed" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+
+            <!-- Kolom Formulir -->
+            <div class="bg-white dark:bg-dark-800 p-8 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Sampaikan Pesan atau Berita</h2>
+                <p class="text-gray-600 dark:text-gray-400 mb-6">Jadilah mata dan telinga kami di komunitas Anda. Setiap informasi sangat berharga.</p>
+                <form id="report-form" class="space-y-6">
+                    <div><label for="report-name" class="block text-sm font-medium mb-1">Nama Anda</label><input type="text" id="report-name" placeholder="Contoh: Budi Santoso" class="w-full border-gray-300 dark:border-gray-600 dark:bg-dark-900 rounded-md shadow-sm focus:border-primary focus:ring-primary" required></div>
+                    <div><label for="report-contact" class="block text-sm font-medium mb-1">Email atau No. Telepon</label><input type="text" id="report-contact" placeholder="Untuk keperluan konfirmasi" class="w-full border-gray-300 dark:border-gray-600 dark:bg-dark-900 rounded-md shadow-sm focus:border-primary focus:ring-primary" required></div>
+                    <div><label for="report-title" class="block text-sm font-medium mb-1">Judul Berita/Informasi</label><input type="text" id="report-title" placeholder="Contoh: Ada Festival Layangan di Desa Kami" class="w-full border-gray-300 dark:border-gray-600 dark:bg-dark-900 rounded-md shadow-sm focus:border-primary focus:ring-primary" required></div>
+                    <div><label for="report-story" class="block text-sm font-medium mb-1">Ceritakan Kejadiannya (5W+1H)</label><textarea id="report-story" rows="5" class="w-full border-gray-300 dark:border-gray-600 dark:bg-dark-900 rounded-md shadow-sm focus:border-primary focus:ring-primary" required></textarea></div>
+                    <div><label for="report-file" class="block text-sm font-medium mb-1">Unggah Foto/Video (Opsional)</label><input type="file" id="report-file" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-blue-50 dark:file:bg-gray-700 file:text-primary dark:file:text-accent hover:file:bg-blue-100 dark:hover:file:bg-gray-600"></div>
+                    <button type="submit" class="w-full bg-primary text-white font-bold py-3 px-4 rounded-lg hover:bg-opacity-90 transition-all">Kirim Informasi</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    
+    <!-- ===== FOOTER UNIVERSAL ===== -->
+    <footer class="bg-gray-800 text-white mt-16">
+        <!-- (Konten footer sama persis seperti di halaman lain) -->
+    </footer>
+
+    <!-- Universal Scripts -->
+    <script>
+        // (Skrip universal untuk Dark Mode, Search Modal, Mobile Menu)
+    </script>
+</body>
+</html>
