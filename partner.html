@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Kemitraan & Sponsor - MediaKarya+</title>
+    
+    <!-- Dependencies (Tailwind, Fonts, Font Awesome) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; transition: background-color 0.5s ease, color 0.5s ease; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        .text-shadow-strong { text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
+        
+        /* Metallic Gradients for Tiers */
+        .bg-bronze { background: linear-gradient(135deg, #cd7f32 0%, #b06520 100%); }
+        .bg-silver { background: linear-gradient(135deg, #C0C0C0 0%, #959595 100%); }
+        .bg-gold { background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%); }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0D47A1',
+                        accent: '#FF9800',
+                        light: '#F7F9FC',
+                        dark: { 800: '#1F2937', 900: '#111827' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light dark:bg-dark-900 text-gray-800 dark:text-gray-300 transition-colors duration-300">
+
+    <!-- ===== HEADER UNIVERSAL ===== -->
+    <header class="bg-white/90 dark:bg-dark-800/90 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-colors duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html">
+                    <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/mediakarya.svg" alt="MediaKarya+ Logo" class="h-10 w-auto dark:invert">
+                </a>
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Beranda</a>
+                    <a href="kabarkarya.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Kabar Karya</a>
+                    <a href="directory.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Lapakita</a>
+                    <a href="explore.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Jarambah</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <button id="search-button" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white" aria-label="Cari"><i class="fa-solid fa-magnifying-glass text-lg"></i></button>
+                    <button id="theme-toggle-btn" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white" aria-label="Ganti tema">
+                        <i class="fa-solid fa-moon text-lg"></i>
+                        <i class="fa-solid fa-sun text-lg hidden"></i>
+                    </button>
+                    <a href="contact.html" class="hidden sm:block bg-accent text-white font-bold py-2 px-5 rounded-lg hover:bg-opacity-90 transition-all text-sm">Beritakan!</a>
+                    <button id="mobile-menu-btn" class="lg:hidden text-gray-800 dark:text-gray-300" aria-label="Menu"><i class="fa-solid fa-bars text-xl"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-nav" class="hidden lg:hidden bg-white dark:bg-dark-800 border-t border-gray-200 dark:border-gray-700 py-4 px-4">
+            <a href="index.html" class="block py-2 text-gray-600 dark:text-gray-400">Beranda</a>
+            <a href="kabarkarya.html" class="block py-2 text-gray-600 dark:text-gray-400">Kabar Karya</a>
+            <a href="directory.html" class="block py-2 text-gray-600 dark:text-gray-400">Lapakita</a>
+            <a href="explore.html" class="block py-2 text-gray-600 dark:text-gray-400">Jarambah</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative bg-cover bg-center text-white text-center py-28" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1632&auto=format&fit=crop');">
+        <div class="container mx-auto px-4 relative z-10">
+            <span class="text-accent font-bold tracking-widest uppercase text-sm mb-4 block animate-pulse">Program Kemitraan Eksklusif</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-shadow-strong mb-6">Tumbuh Bersama, <br>Membangun Cimaung</h1>
+            <p class="mt-4 text-xl max-w-3xl mx-auto text-gray-200 text-shadow-strong leading-relaxed">Jadilah mitra strategis MediaKarya+ dalam memajukan ekonomi digital dan literasi informasi di kawasan Cimaung dan sekitarnya.</p>
+            <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#pricing" class="bg-white text-primary font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg">Lihat Paket Partner</a>
+                <a href="#contact-partner" class="bg-primary/80 backdrop-blur-sm border border-white/30 text-white font-bold py-3 px-8 rounded-full hover:bg-primary transition-all">Hubungi Kami</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUE PROPOSITION -->
+    <section class="py-20 bg-white dark:bg-dark-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Lebih Dari Sekadar Logo</h2>
+                <p class="text-gray-600 dark:text-gray-400">Kemitraan dengan MediaKarya+ bukan hanya tentang eksposur merek, tetapi tentang kontribusi nyata bagi ekosistem digital lokal.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="text-center p-6 border border-gray-100 dark:border-gray-700 rounded-2xl hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-16 h-16 mx-auto bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-primary dark:text-blue-300 mb-6">
+                        <i class="fa-solid fa-network-wired text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Akses Komunitas</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Terhubung langsung dengan jaringan UMKM, tokoh masyarakat, dan audiens muda yang dinamis di Cimaung.</p>
+                </div>
+                <div class="text-center p-6 border border-gray-100 dark:border-gray-700 rounded-2xl hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-16 h-16 mx-auto bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center text-accent dark:text-orange-300 mb-6">
+                        <i class="fa-solid fa-heart text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Citra Positif (CSR)</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Tingkatkan reputasi brand Anda sebagai pendukung kemajuan ekonomi lokal dan literasi digital.</p>
+                </div>
+                <div class="text-center p-6 border border-gray-100 dark:border-gray-700 rounded-2xl hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-16 h-16 mx-auto bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center text-green-600 dark:text-green-300 mb-6">
+                        <i class="fa-solid fa-chart-line text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">Konten Eksklusif</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Kesempatan untuk co-creation konten video, artikel mendalam, dan liputan khusus kegiatan perusahaan Anda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING TIERS -->
+    <section id="pricing" class="py-20 bg-light dark:bg-dark-900 relative overflow-hidden">
+        <!-- Background blobs -->
+        <div class="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">Pilih Tingkat Kemitraan</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center max-w-6xl mx-auto">
+                
+                <!-- Bronze Tier -->
+                <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="bg-bronze p-1"></div> <!-- Color Strip -->
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-yellow-700 dark:text-yellow-500 mb-2">Sahabat Komunitas</h3>
+                        <p class="text-xs uppercase tracking-wide text-gray-500 mb-6">Bronze Partner</p>
+                        <div class="flex items-baseline mb-6">
+                            <span class="text-3xl font-extrabold text-gray-900 dark:text-white">Rp 2.5 Juta</span>
+                            <span class="text-gray-500 ml-2">/ bulan</span>
+                        </div>
+                        <ul class="space-y-4 mb-8 text-sm text-gray-600 dark:text-gray-400">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-yellow-600 mr-3"></i> Logo di Footer Website</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-yellow-600 mr-3"></i> 1x Artikel Advertorial / Bulan</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-yellow-600 mr-3"></i> 2x Iklan Instagram Story</li>
+                            <li class="flex items-center text-gray-400"><i class="fa-solid fa-xmark mr-3"></i> Liputan Video Eksklusif</li>
+                        </ul>
+                        <a href="#contact-partner" class="block w-full py-3 px-6 text-center rounded-lg border-2 border-yellow-700 text-yellow-700 dark:text-yellow-500 dark:border-yellow-500 font-bold hover:bg-yellow-50 dark:hover:bg-dark-700 transition-colors">Pilih Bronze</a>
+                    </div>
+                </div>
+
+                <!-- Gold Tier (Most Popular) -->
+                <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-2xl overflow-hidden border-2 border-accent transform scale-105 z-10">
+                    <div class="bg-gold p-2 text-center text-white text-xs font-bold tracking-widest uppercase">Best Value</div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-accent mb-2">Mitra Strategis</h3>
+                        <p class="text-xs uppercase tracking-wide text-gray-500 mb-6">Gold Partner</p>
+                        <div class="flex items-baseline mb-6">
+                            <span class="text-4xl font-extrabold text-gray-900 dark:text-white">Rp 5 Juta</span>
+                            <span class="text-gray-500 ml-2">/ bulan</span>
+                        </div>
+                        <ul class="space-y-4 mb-8 text-sm text-gray-600 dark:text-gray-400">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-accent mr-3"></i> <strong>Logo Eksklusif di Sidebar</strong></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-accent mr-3"></i> 2x Artikel Advertorial / Bulan</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-accent mr-3"></i> 1x Liputan Video Pendek (Reels)</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-accent mr-3"></i> Prioritas di Direktori Lapakita</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-accent mr-3"></i> Akses Data Insight Pembaca</li>
+                        </ul>
+                        <a href="#contact-partner" class="block w-full py-4 px-6 text-center rounded-lg bg-gradient-to-r from-orange-500 to-yellow-500 text-white font-bold hover:shadow-lg hover:from-orange-600 hover:to-yellow-600 transition-all">Jadi Mitra Gold</a>
+                    </div>
+                </div>
+
+                <!-- Platinum Tier -->
+                <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="bg-silver p-1"></div> <!-- Color Strip -->
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-700 dark:text-gray-300 mb-2">Sponsor Utama</h3>
+                        <p class="text-xs uppercase tracking-wide text-gray-500 mb-6">Platinum Partner</p>
+                        <div class="flex items-baseline mb-6">
+                            <span class="text-3xl font-extrabold text-gray-900 dark:text-white">Hubungi Kami</span>
+                        </div>
+                        <ul class="space-y-4 mb-8 text-sm text-gray-600 dark:text-gray-400">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-gray-400 mr-3"></i> <strong>Branding di Header Utama</strong></li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-gray-400 mr-3"></i> Co-Branding Event MediaKarya+</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-gray-400 mr-3"></i> Paket Konten Unlimited</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-gray-400 mr-3"></i> Konsultasi Digital Marketing</li>
+                        </ul>
+                        <a href="#contact-partner" class="block w-full py-3 px-6 text-center rounded-lg border-2 border-gray-300 text-gray-600 dark:text-gray-300 dark:border-gray-600 font-bold hover:bg-gray-100 dark:hover:bg-dark-700 transition-colors">Konsultasi</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT FORM SECTION -->
+    <section id="contact-partner" class="py-20 bg-white dark:bg-dark-800">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-light dark:bg-dark-900 rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
+                <!-- Left Info -->
+                <div class="bg-primary dark:bg-dark-800 p-10 md:w-2/5 text-white flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold mb-4">Siap Berkolaborasi?</h3>
+                    <p class="text-blue-100 dark:text-gray-400 text-sm mb-8">Isi formulir di samping untuk mendiskusikan paket kemitraan yang paling sesuai dengan tujuan bisnis Anda.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center"><i class="fa-solid fa-phone w-6"></i> <span>+62 812-3456-7890</span></div>
+                        <div class="flex items-center"><i class="fa-solid fa-envelope w-6"></i> <span>partners@mediakarya.plus</span></div>
+                        <div class="flex items-center"><i class="fa-solid fa-location-dot w-6"></i> <span>Cimaung, Kab. Bandung</span></div>
+                    </div>
+                </div>
+
+                <!-- Right Form -->
+                <div class="p-10 md:w-3/5">
+                    <form class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">Nama Perusahaan / Brand</label>
+                            <input type="text" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-800 focus:ring-2 focus:ring-primary outline-none transition">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">Nama Kontak</label>
+                                <input type="text" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-800 focus:ring-2 focus:ring-primary outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">No. WhatsApp</label>
+                                <input type="text" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-800 focus:ring-2 focus:ring-primary outline-none transition">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">Tertarik Paket</label>
+                            <select class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-800 focus:ring-2 focus:ring-primary outline-none transition">
+                                <option>Bronze Partner (Rp 2.5jt/bln)</option>
+                                <option selected>Gold Partner (Rp 5jt/bln)</option>
+                                <option>Platinum Partner (Custom)</option>
+                                <option>Belum Tahu / Konsultasi Dulu</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">Pesan Tambahan</label>
+                            <textarea rows="3" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-800 focus:ring-2 focus:ring-primary outline-none transition"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-accent hover:bg-orange-600 text-white font-bold py-3 rounded-lg transition-all shadow-md">Kirim Permintaan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER UNIVERSAL ===== -->
+    <footer class="bg-gray-800 text-white mt-0">
+        <div class="container mx-auto px-4 py-12">
+            <div class="text-center mb-8">
+                <h4 class="font-bold text-gray-400 uppercase tracking-wider">Didukung Oleh</h4>
+                <div class="flex justify-center items-center gap-8 mt-4 grayscale opacity-60">
+                     <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/sponsor1.svg" alt="Logo Sponsor 1" class="h-10">
+                     <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/sponsor2.svg" alt="Logo Sponsor 2" class="h-10">
+                     <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/sponsor3.svg" alt="Logo Sponsor 3" class="h-10">
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/mediakarya.svg" alt="MediaKarya+ Logo" class="h-10 w-auto brightness-0 invert mb-4"><p class="text-sm text-gray-400">Media digital independen untuk potensi, karya, dan kabar terbaru dari Kecamatan Cimaung.</p></div>
+                <div><h4 class="font-bold">Navigasi</h4><ul class="mt-4 space-y-2 text-sm text-gray-300"><li><a href="kabarkarya.html" class="hover:underline">Kabar Karya</a></li><li><a href="directory.html" class="hover:underline">Lapakita</a></li><li><a href="explore.html" class="hover:underline">Jarambah</a></li></ul></div>
+                <div><h4 class="font-bold">Tentang</h4><ul class="mt-4 space-y-2 text-sm text-gray-300"><li><a href="about.html" class="hover:underline">Tim Kami</a></li><li><a href="pedoman-media.html" class="hover:underline">Pedoman Media</a></li><li><a href="contact.html" class="hover:underline">Hubungi Kami</a></li></ul></div>
+                <div><h4 class="font-bold">Ikuti Kami</h4><div class="flex space-x-4 mt-4"><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-instagram"></i></a><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-tiktok"></i></a><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-youtube"></i></a><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-facebook"></i></a></div></div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-xs text-gray-500">&copy; 2025 Media Karya Kecamatan Cimaung. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 bg-black bg-opacity-70 p-4 opacity-0 invisible transition-opacity duration-300">
+        <div class="modal-container bg-white dark:bg-dark-800 w-full max-w-2xl rounded-xl shadow-xl transform -translate-y-10 transition-transform duration-300">
+            <div class="relative"><input type="text" id="search-input" placeholder="Ketik untuk mencari berita..." class="w-full bg-transparent border-2 border-transparent rounded-xl p-4 pr-12 text-lg focus:border-primary focus:ring-primary"><button class="absolute right-0 top-0 h-full px-5 text-gray-500 hover:text-primary"><i class="fa-solid fa-magnifying-glass text-xl"></i></button></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Universal Scripts ---
+            const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            const sunIcon = themeToggleBtn.querySelector('.fa-sun');
+            const moonIcon = themeToggleBtn.querySelector('.fa-moon');
+            const applyTheme = (theme) => {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    sunIcon.classList.remove('hidden'); moonIcon.classList.add('hidden');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    sunIcon.classList.add('hidden'); moonIcon.classList.remove('hidden');
+                }
+            };
+            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            applyTheme(savedTheme);
+            themeToggleBtn.addEventListener('click', () => {
+                const newTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+                localStorage.setItem('theme', newTheme); applyTheme(newTheme);
+            });
+            
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                document.getElementById('mobile-nav').classList.toggle('hidden');
+            });
+
+            const searchModal = document.getElementById('search-modal');
+            const searchButton = document.getElementById('search-button');
+            const searchInput = document.getElementById('search-input');
+            const toggleSearchModal = (show) => {
+                const container = searchModal.querySelector('.modal-container');
+                if(show) {
+                    searchModal.classList.remove('invisible', 'opacity-0');
+                    container.classList.remove('-translate-y-10');
+                    setTimeout(() => searchInput.focus(), 100);
+                } else {
+                    searchModal.classList.add('opacity-0');
+                    container.classList.add('-translate-y-10');
+                    setTimeout(() => searchModal.classList.add('invisible'), 300);
+                }
+            };
+            searchButton.addEventListener('click', (e) => { e.stopPropagation(); toggleSearchModal(true); });
+            document.addEventListener('click', (e) => { if (!searchModal.classList.contains('invisible') && !searchModal.querySelector('.modal-container').contains(e.target)) toggleSearchModal(false); });
+            document.addEventListener('keydown', (e) => { if(e.key === 'Escape') toggleSearchModal(false); });
+        });
+    </script>
+</body>
+</html>

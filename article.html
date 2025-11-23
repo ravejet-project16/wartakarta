@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMA Negeri 1 Cimaung Juara Umum Lomba Cerdas Cermat Tingkat Kabupaten - MediaKarya+</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* Base Transition */
+        body { transition: background-color 0.5s ease, color 0.5s ease; }
+        
+        /* Typography Setup */
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        .article-body { font-family: 'Merriweather', serif; line-height: 1.8; }
+        .article-body p { margin-bottom: 1.5rem; font-size: 1.125rem; color: #374151; }
+        html.dark .article-body p { color: #D1D5DB; }
+        
+        /* Reading Progress Bar */
+        #progress-bar { width: 0%; height: 4px; background-color: #FF9800; position: fixed; top: 0; left: 0; z-index: 100; transition: width 0.1s; }
+        
+        /* Ad Placeholders */
+        .ad-placeholder { background-color: #E2E8F0; border: 1px dashed #94A3B8; }
+        html.dark .ad-placeholder { background-color: #374151; border-color: #6B7280; }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0D47A1',
+                        accent: '#FF9800',
+                        light: '#F7F9FC',
+                        dark: { 800: '#1F2937', 900: '#111827' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light dark:bg-dark-900 text-gray-800 dark:text-gray-300">
+
+    <!-- Reading Progress Bar -->
+    <div id="progress-bar"></div>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="bg-white/90 dark:bg-dark-800/90 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-colors duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html">
+                    <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/mediakarya.svg" alt="MediaKarya+ Logo" class="h-10 w-auto dark:invert">
+                </a>
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Beranda</a>
+                    <a href="kabarkarya.html" class="font-bold text-primary dark:text-white border-b-2 border-accent pb-1">Kabar Karya</a>
+                    <a href="directory.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Lapakita</a>
+                    <a href="explore.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Jarambah</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <button id="search-button" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white"><i class="fa-solid fa-magnifying-glass text-lg"></i></button>
+                    <button id="theme-toggle-btn" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white">
+                        <i class="fa-solid fa-moon text-lg"></i>
+                        <i class="fa-solid fa-sun text-lg hidden"></i>
+                    </button>
+                    <button id="font-size-btn" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white font-serif font-bold text-lg" title="Atur Ukuran Huruf">Aa</button>
+                    <button id="mobile-menu-btn" class="lg:hidden text-gray-800 dark:text-gray-300"><i class="fa-solid fa-bars text-xl"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-nav" class="hidden lg:hidden bg-white dark:bg-dark-800 border-t border-gray-200 dark:border-gray-700 py-4 px-4">
+            <a href="index.html" class="block py-2 text-gray-600 dark:text-gray-400">Beranda</a>
+            <a href="kabarkarya.html" class="block py-2 text-primary dark:text-white font-semibold">Kabar Karya</a>
+            <a href="directory.html" class="block py-2 text-gray-600 dark:text-gray-400">Lapakita</a>
+            <a href="explore.html" class="block py-2 text-gray-600 dark:text-gray-400">Jarambah</a>
+        </div>
+    </header>
+
+    <!-- Font Size Controls (Hidden by default) -->
+    <div id="font-controls" class="fixed top-20 right-4 bg-white dark:bg-dark-800 shadow-xl rounded-lg p-4 z-40 hidden border border-gray-200 dark:border-gray-700 transform transition-all">
+        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wider">Ukuran Teks</p>
+        <div class="flex gap-2">
+            <button onclick="setFontSize('sm')" class="w-8 h-8 flex items-center justify-center rounded bg-gray-100 dark:bg-gray-700 hover:bg-primary hover:text-white text-sm">A</button>
+            <button onclick="setFontSize('md')" class="w-8 h-8 flex items-center justify-center rounded bg-gray-100 dark:bg-gray-700 hover:bg-primary hover:text-white text-base font-bold">A</button>
+            <button onclick="setFontSize('lg')" class="w-8 h-8 flex items-center justify-center rounded bg-gray-100 dark:bg-gray-700 hover:bg-primary hover:text-white text-xl font-bold">A</button>
+        </div>
+    </div>
+
+    <!-- ===== KONTEN ARTIKEL ===== -->
+    <main class="container mx-auto px-4 py-8">
+        
+        <!-- [IKLAN SPOT 1] Top Leaderboard -->
+        <div class="ad-placeholder rounded-lg text-center p-2 relative mb-8">
+            <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+            <img src="https://placehold.co/970x90/E2E8F0/4A5568?text=AD+LEADERBOARD+970x90" alt="Iklan Leaderboard" class="mx-auto hidden md:block">
+            <img src="https://placehold.co/320x100/E2E8F0/4A5568?text=AD+MOBILE" alt="Iklan Leaderboard Mobile" class="mx-auto md:hidden">
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            
+            <!-- Left Column: Article Content -->
+            <article class="lg:col-span-8">
+                <!-- Breadcrumb -->
+                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    <a href="index.html" class="hover:text-primary dark:hover:text-accent">Beranda</a>
+                    <i class="fa-solid fa-chevron-right text-xs mx-2"></i>
+                    <a href="kabarkarya.html" class="hover:text-primary dark:hover:text-accent">Kabar Karya</a>
+                    <i class="fa-solid fa-chevron-right text-xs mx-2"></i>
+                    <a href="#" class="hover:text-primary dark:hover:text-accent font-semibold text-primary dark:text-accent">Pendidikan</a>
+                </div>
+
+                <!-- Article Header -->
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight mb-4">
+                    SMA Negeri 1 Cimaung Juara Umum Lomba Cerdas Cermat Tingkat Kabupaten
+                </h1>
+                
+                <div class="flex flex-wrap items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-4 mb-6">
+                    <div class="flex items-center gap-4 mb-4 sm:mb-0">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-gray-300 overflow-hidden mr-3">
+                                <img src="https://i.pravatar.cc/150?u=siti" alt="Siti N">
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-gray-900 dark:text-white">Siti Nurhaliza</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">Jurnalis Pendidikan</p>
+                            </div>
+                        </div>
+                        <span class="text-gray-300 dark:text-gray-600">|</span>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">
+                            <i class="fa-regular fa-calendar mr-1"></i> 11 Oktober 2025
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="#" class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center hover:opacity-90"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center hover:opacity-90"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center hover:opacity-90"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-500 text-white flex items-center justify-center hover:opacity-90"><i class="fa-solid fa-link"></i></a>
+                    </div>
+                </div>
+
+                <!-- Featured Image -->
+                <figure class="mb-8">
+                    <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/juara.jpg" alt="Tim SMAN 1 Cimaung Juara" class="w-full h-auto rounded-xl shadow-lg object-cover">
+                    <figcaption class="text-sm text-gray-500 dark:text-gray-400 mt-2 text-center italic">Tim Cerdas Cermat SMAN 1 Cimaung saat menerima piala penghargaan. (Foto: Dok. Sekolah)</figcaption>
+                </figure>
+
+                <!-- Article Body -->
+                <div id="article-content" class="article-body text-gray-800 dark:text-gray-200">
+                    <p class="first-letter:text-5xl first-letter:font-bold first-letter:text-primary dark:first-letter:text-accent first-letter:float-left first-letter:mr-3 first-letter:mt-[-10px]">
+                        Prestasi membanggakan kembali ditorehkan oleh putra-putri terbaik Kecamatan Cimaung. Tim Cerdas Cermat SMA Negeri 1 Cimaung berhasil menyabet gelar Juara Umum dalam ajang Lomba Cerdas Cermat (LCC) tingkat Kabupaten Bandung yang digelar pada Sabtu (10/10) kemarin di Gedung Budaya Sabilulungan.
+                    </p>
+                    <p>
+                        Kemenangan ini tidak diraih dengan mudah. Tim yang beranggotakan Rina, Budi, dan Asep ini harus bersaing ketat dengan perwakilan dari 30 kecamatan lainnya. Di babak final, mereka berhasil mengungguli poin dari SMA Negeri 1 Soreang dan SMA Negeri 1 Banjaran dengan skor tipis namun meyakinkan.
+                    </p>
+
+                    <!-- [IKLAN SPOT 2] In-Article Native -->
+                    <div class="my-8 p-4 bg-gray-50 dark:bg-gray-800/50 border-l-4 border-accent rounded-r-lg">
+                        <span class="text-xs font-bold text-gray-400 tracking-widest block mb-2">SPONSORED CONTENT</span>
+                        <div class="flex items-center gap-4">
+                            <img src="https://placehold.co/100x100/FF9800/FFFFFF?text=Bimbel" class="w-16 h-16 rounded-lg object-cover">
+                            <div>
+                                <h4 class="font-bold text-gray-900 dark:text-white text-sm">Ingin Anak Anda Berprestasi?</h4>
+                                <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Daftarkan di Bimbingan Belajar Cimaung Cendekia. Diskon 20% bulan ini!</p>
+                                <a href="#" class="text-primary dark:text-accent text-xs font-bold mt-1 inline-block hover:underline">Info Selengkapnya &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 mt-8">Persiapan Matang Membuahkan Hasil</h3>
+                    <p>
+                        Kepala Sekolah SMAN 1 Cimaung, Bapak Drs. H. Suryana, mengungkapkan rasa syukurnya. "Ini adalah buah dari kerja keras anak-anak dan bimbingan para guru selama tiga bulan terakhir. Mereka melakukan simulasi setiap pulang sekolah hingga sore hari," ujarnya saat ditemui di ruang kerjanya.
+                    </p>
+                    <blockquote class="border-l-4 border-primary pl-4 italic my-6 text-xl text-gray-700 dark:text-gray-300">
+                        "Kami ingin membuktikan bahwa siswa dari Cimaung juga memiliki kualitas akademis yang mampu bersaing di tingkat daerah maupun nasional."
+                    </blockquote>
+                    <p>
+                        Salah satu anggota tim, Rina (17), mengaku sempat gugup saat babak rebutan. "Soal Matematika-nya susah banget, tapi untungnya Budi jago ngitung cepat. Jadi kami bisa curi poin di detik-detik terakhir," ungkapnya sambil tersenyum bangga.
+                    </p>
+                    
+                    <!-- Image in Content -->
+                    <figure class="my-8 float-right ml-6 w-1/2 mb-4">
+                        <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/sekolah.webp" class="rounded-lg shadow-md w-full">
+                        <figcaption class="text-xs text-gray-500 mt-1 text-center">Suasana penyambutan di sekolah.</figcaption>
+                    </figure>
+
+                    <p>
+                        Dengan kemenangan ini, SMAN 1 Cimaung berhak mewakili Kabupaten Bandung untuk melaju ke tingkat Provinsi Jawa Barat yang rencananya akan digelar bulan depan di Bandung. Dukungan dari seluruh warga Cimaung sangat diharapkan agar mereka dapat kembali mengharumkan nama daerah.
+                    </p>
+                    <p>
+                        Pihak kecamatan pun turut memberikan apresiasi. Camat Cimaung rencananya akan memberikan penghargaan khusus pada upacara hari Senin mendatang sebagai bentuk motivasi bagi siswa-siswa lain untuk terus berprestasi.
+                    </p>
+                </div>
+
+                <!-- Tags -->
+                <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                    <span class="font-bold text-gray-700 dark:text-gray-300 mr-2">Tag:</span>
+                    <a href="#" class="inline-block bg-gray-100 dark:bg-gray-700 hover:bg-primary hover:text-white text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full text-sm mr-2 mb-2 transition-colors">#Pendidikan</a>
+                    <a href="#" class="inline-block bg-gray-100 dark:bg-gray-700 hover:bg-primary hover:text-white text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full text-sm mr-2 mb-2 transition-colors">#Prestasi</a>
+                    <a href="#" class="inline-block bg-gray-100 dark:bg-gray-700 hover:bg-primary hover:text-white text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full text-sm mr-2 mb-2 transition-colors">#SMAN1Cimaung</a>
+                    <a href="#" class="inline-block bg-gray-100 dark:bg-gray-700 hover:bg-primary hover:text-white text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full text-sm mr-2 mb-2 transition-colors">#KabupatenBandung</a>
+                </div>
+
+                <!-- Author Box -->
+                <div class="mt-10 bg-gray-50 dark:bg-gray-800 p-6 rounded-xl flex items-center gap-4 border border-gray-100 dark:border-gray-700">
+                    <img src="https://i.pravatar.cc/150?u=siti" class="w-16 h-16 rounded-full object-cover border-2 border-white shadow-sm">
+                    <div>
+                        <h4 class="font-bold text-gray-900 dark:text-white text-lg">Siti Nurhaliza</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Jurnalis muda yang fokus pada isu pendidikan dan pengembangan pemuda di Cimaung. Suka kopi dan senja.</p>
+                    </div>
+                </div>
+
+                <!-- Related News -->
+                <div class="mt-12">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 border-l-4 border-accent pl-3">Baca Juga</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <a href="#" class="group flex gap-4 items-start">
+                            <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/sekolah.webp" class="w-24 h-24 rounded-lg object-cover flex-shrink-0 group-hover:opacity-80 transition">
+                            <div>
+                                <h4 class="font-bold text-gray-800 dark:text-gray-200 group-hover:text-primary dark:group-hover:text-accent text-sm leading-snug">Sekolah Baru di Desa Jagabaya Siap Tampung Ratusan Siswa</h4>
+                                <span class="text-xs text-gray-500 mt-1 block">2 Hari lalu</span>
+                            </div>
+                        </a>
+                        <a href="#" class="group flex gap-4 items-start">
+                            <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/tarkam.jpg" class="w-24 h-24 rounded-lg object-cover flex-shrink-0 group-hover:opacity-80 transition">
+                            <div>
+                                <h4 class="font-bold text-gray-800 dark:text-gray-200 group-hover:text-primary dark:group-hover:text-accent text-sm leading-snug">Turnamen Futsal Pelajar Digelar Minggu Depan</h4>
+                                <span class="text-xs text-gray-500 mt-1 block">4 Hari lalu</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Comments Section (Simulation) -->
+                <div class="mt-12">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Komentar (2)</h3>
+                    
+                    <!-- Comment Form -->
+                    <form class="mb-8">
+                        <textarea class="w-full p-4 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-900 focus:ring-2 focus:ring-primary outline-none" rows="3" placeholder="Tulis komentar Anda..."></textarea>
+                        <div class="mt-2 flex justify-end">
+                            <button type="button" class="bg-primary text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition">Kirim</button>
+                        </div>
+                    </form>
+
+                    <!-- Comment List -->
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600">A</div>
+                            <div>
+                                <h5 class="font-bold text-sm text-gray-900 dark:text-white">Agus Supriadi <span class="text-xs font-normal text-gray-500 ml-2">1 jam lalu</span></h5>
+                                <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">Mantap SMAN 1 Cimaung! Lanjutkan prestasinya sampai nasional.</p>
+                                <button class="text-xs text-primary hover:underline mt-1">Balas</button>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600">D</div>
+                            <div>
+                                <h5 class="font-bold text-sm text-gray-900 dark:text-white">Dedeh Kurniasih <span class="text-xs font-normal text-gray-500 ml-2">2 jam lalu</span></h5>
+                                <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">Selamat ya buat Rina dan teman-teman. Ibu bangga!</p>
+                                <button class="text-xs text-primary hover:underline mt-1">Balas</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+
+            <!-- Right Column: Sidebar -->
+            <aside class="lg:col-span-4">
+                <div class="sticky top-24 space-y-8">
+                    
+                    <!-- [IKLAN SPOT 3] Sidebar Top -->
+                    <div class="ad-placeholder rounded-lg text-center p-2 relative">
+                        <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+                        <img src="https://placehold.co/300x250/E2E8F0/4A5568?text=AD+SIDEBAR+300x250" alt="Iklan Sidebar" class="mx-auto">
+                    </div>
+
+                    <!-- Trending Widget -->
+                    <div class="bg-white dark:bg-dark-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-3 mb-4 flex items-center">
+                            <i class="fa-solid fa-fire text-red-500 mr-2"></i> Sedang Hangat
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex gap-3 group cursor-pointer">
+                                <span class="text-2xl font-bold text-gray-300 group-hover:text-primary transition">1</span>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-800 dark:text-gray-200 group-hover:text-primary dark:group-hover:text-accent transition line-clamp-2">Peresmian Jembatan Cimaung, Akses Ekonomi Warga Terbuka</h4>
+                                </div>
+                            </li>
+                            <li class="flex gap-3 group cursor-pointer">
+                                <span class="text-2xl font-bold text-gray-300 group-hover:text-primary transition">2</span>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-800 dark:text-gray-200 group-hover:text-primary dark:group-hover:text-accent transition line-clamp-2">Panen Raya Kopi, Petani Optimis Ekspor Meningkat</h4>
+                                </div>
+                            </li>
+                            <li class="flex gap-3 group cursor-pointer">
+                                <span class="text-2xl font-bold text-gray-300 group-hover:text-primary transition">3</span>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-800 dark:text-gray-200 group-hover:text-primary dark:group-hover:text-accent transition line-clamp-2">Festival UKM Cimaung Tembus Ribuan Pengunjung</h4>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Categories Widget -->
+                    <div class="bg-white dark:bg-dark-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-3 mb-4">Kategori</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="#" class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-sm rounded hover:bg-primary hover:text-white transition">Pendidikan (12)</a>
+                            <a href="#" class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-sm rounded hover:bg-primary hover:text-white transition">Kesehatan (8)</a>
+                            <a href="#" class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-sm rounded hover:bg-primary hover:text-white transition">Ekonomi (15)</a>
+                            <a href="#" class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-sm rounded hover:bg-primary hover:text-white transition">Wisata (20)</a>
+                            <a href="#" class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-sm rounded hover:bg-primary hover:text-white transition">Olahraga (5)</a>
+                        </div>
+                    </div>
+
+                    <!-- [IKLAN SPOT 4] Sidebar Vertical -->
+                    <div class="ad-placeholder rounded-lg text-center p-2 relative">
+                        <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+                        <img src="https://placehold.co/300x600/E2E8F0/4A5568?text=AD+VERTICAL+300x600" alt="Iklan Sidebar Vertikal" class="mx-auto">
+                    </div>
+
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- [IKLAN SPOT 5] Bottom Leaderboard -->
+    <div class="container mx-auto px-4 mt-8 mb-8">
+        <div class="ad-placeholder rounded-lg text-center p-2 relative">
+            <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+            <img src="https://placehold.co/970x90/E2E8F0/4A5568?text=AD+BOTTOM+LEADERBOARD" alt="Iklan Footer" class="mx-auto">
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="bg-gray-800 text-white mt-0">
+        <div class="container mx-auto px-4 py-12">
+            <div class="border-t border-gray-700 pt-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/mediakarya.svg" alt="MediaKarya+ Logo" class="h-10 w-auto brightness-0 invert mb-4"><p class="text-sm text-gray-400">Media digital independen untuk potensi, karya, dan kabar terbaru dari Kecamatan Cimaung.</p></div>
+                <div><h4 class="font-bold">Navigasi</h4><ul class="mt-4 space-y-2 text-sm text-gray-300"><li><a href="kabarkarya.html" class="hover:underline">Kabar Karya</a></li><li><a href="directory.html" class="hover:underline">Lapakita</a></li><li><a href="explore.html" class="hover:underline">Jarambah</a></li></ul></div>
+                <div><h4 class="font-bold">Tentang</h4><ul class="mt-4 space-y-2 text-sm text-gray-300"><li><a href="about.html" class="hover:underline">Tim Kami</a></li><li><a href="pedoman-media.html" class="hover:underline">Pedoman Media</a></li><li><a href="contact.html" class="hover:underline">Hubungi Kami</a></li></ul></div>
+                <div><h4 class="font-bold">Ikuti Kami</h4><div class="flex space-x-4 mt-4"><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-instagram"></i></a><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-tiktok"></i></a><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-youtube"></i></a><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-facebook"></i></a></div></div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-xs text-gray-500">&copy; 2025 Media Karya Kecamatan Cimaung. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 bg-black bg-opacity-70 p-4 opacity-0 invisible transition-opacity duration-300">
+        <div class="modal-container bg-white dark:bg-dark-800 w-full max-w-2xl rounded-xl shadow-xl transform -translate-y-10 transition-transform duration-300">
+            <div class="relative"><input type="text" id="global-search-input" placeholder="Ketik untuk mencari..." class="w-full bg-transparent border-2 border-transparent rounded-xl p-4 pr-12 text-lg focus:border-primary focus:ring-primary"><button class="absolute right-0 top-0 h-full px-5 text-gray-500 hover:text-primary"><i class="fa-solid fa-magnifying-glass text-xl"></i></button></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Universal Scripts ---
+            const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            const sunIcon = themeToggleBtn.querySelector('.fa-sun');
+            const moonIcon = themeToggleBtn.querySelector('.fa-moon');
+            const applyTheme = (theme) => {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    sunIcon.classList.remove('hidden'); moonIcon.classList.add('hidden');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    sunIcon.classList.add('hidden'); moonIcon.classList.remove('hidden');
+                }
+            };
+            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            applyTheme(savedTheme);
+            themeToggleBtn.addEventListener('click', () => {
+                const newTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+                localStorage.setItem('theme', newTheme); applyTheme(newTheme);
+            });
+            
+            // Mobile Menu & Search
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => document.getElementById('mobile-nav').classList.toggle('hidden'));
+            const searchModal = document.getElementById('search-modal');
+            const searchButton = document.getElementById('search-button');
+            const searchInput = document.getElementById('global-search-input');
+            const toggleSearchModal = (show) => {
+                const container = searchModal.querySelector('.modal-container');
+                if(show) {
+                    searchModal.classList.remove('invisible', 'opacity-0');
+                    container.classList.remove('-translate-y-10');
+                    setTimeout(() => searchInput.focus(), 100);
+                } else {
+                    searchModal.classList.add('opacity-0');
+                    container.classList.add('-translate-y-10');
+                    setTimeout(() => searchModal.classList.add('invisible'), 300);
+                }
+            };
+            searchButton.addEventListener('click', (e) => { e.stopPropagation(); toggleSearchModal(true); });
+            document.addEventListener('click', (e) => { if (!searchModal.classList.contains('invisible') && !searchModal.querySelector('.modal-container').contains(e.target)) toggleSearchModal(false); });
+            document.addEventListener('keydown', (e) => { if(e.key === 'Escape') toggleSearchModal(false); });
+
+            // --- FEATURE: Font Size Resizer ---
+            const fontBtn = document.getElementById('font-size-btn');
+            const fontControls = document.getElementById('font-controls');
+            const articleContent = document.getElementById('article-content');
+            
+            fontBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                fontControls.classList.toggle('hidden');
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!fontControls.contains(e.target) && e.target !== fontBtn) {
+                    fontControls.classList.add('hidden');
+                }
+            });
+
+            window.setFontSize = (size) => {
+                articleContent.classList.remove('text-base', 'text-lg', 'text-xl');
+                if (size === 'sm') articleContent.classList.add('text-base');
+                if (size === 'md') articleContent.classList.add('text-lg');
+                if (size === 'lg') articleContent.classList.add('text-xl');
+            };
+
+            // --- FEATURE: Reading Progress Bar ---
+            window.onscroll = function() {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById("progress-bar").style.width = scrolled + "%";
+            };
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarambah - Jelajahi Keindahan Cimaung</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- SwiperJS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; transition: background-color 0.5s ease, color 0.5s ease; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        
+        /* Custom Scrollbar for Map List */
+        .map-list::-webkit-scrollbar { width: 6px; }
+        .map-list::-webkit-scrollbar-thumb { background-color: #CBD5E1; border-radius: 10px; }
+        html.dark .map-list::-webkit-scrollbar-thumb { background-color: #4B5563; }
+
+        /* Masonry Grid Trick */
+        .masonry-grid { column-count: 1; column-gap: 1.5rem; }
+        @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+        .masonry-item { break-inside: avoid; margin-bottom: 1.5rem; }
+
+        /* Map Pin Pulse Animation */
+        .pin-pulse {
+            position: absolute;
+            width: 20px; height: 20px;
+            background: #0D47A1;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 rgba(13, 71, 161, 0.4);
+            animation: pulse 2s infinite;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .pin-pulse:hover { transform: scale(1.2); background: #FF9800; }
+        html.dark .pin-pulse { border-color: #1F2937; }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(13, 71, 161, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(13, 71, 161, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(13, 71, 161, 0); }
+        }
+        
+        .ad-placeholder {
+            background-color: #E2E8F0;
+            border: 1px dashed #94A3B8;
+        }
+        html.dark .ad-placeholder {
+            background-color: #374151;
+            border-color: #6B7280;
+        }
+        .text-shadow-strong { text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0D47A1',
+                        accent: '#FF9800',
+                        light: '#F7F9FC',
+                        dark: { 800: '#1F2937', 900: '#111827' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light dark:bg-dark-900 text-gray-800 dark:text-gray-300 transition-colors duration-300">
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="bg-white/90 dark:bg-dark-800/90 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-colors duration-300">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html">
+                    <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/mediakarya.svg" alt="MediaKarya+ Logo" class="h-10 w-auto dark:invert">
+                </a>
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Beranda</a>
+                    <a href="kabarkarya.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Kabar Karya</a>
+                    <a href="directory.html" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors">Lapakita</a>
+                    <a href="explore.html" class="font-bold text-primary dark:text-white border-b-2 border-accent pb-1">Jarambah</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle-btn" class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white">
+                        <i class="fa-solid fa-moon text-lg"></i>
+                        <i class="fa-solid fa-sun text-lg hidden"></i>
+                    </button>
+                    <a href="contact.html" class="hidden sm:block bg-accent text-white font-bold py-2 px-5 rounded-lg hover:bg-opacity-90 transition-all text-sm">Beritakan!</a>
+                    <button id="mobile-menu-btn" class="lg:hidden text-gray-800 dark:text-gray-300"><i class="fa-solid fa-bars text-xl"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-nav" class="hidden lg:hidden bg-white dark:bg-dark-800 border-t border-gray-200 dark:border-gray-700 py-4 px-4">
+            <a href="index.html" class="block py-2 text-gray-600 dark:text-gray-400">Beranda</a>
+            <a href="kabarkarya.html" class="block py-2 text-gray-600 dark:text-gray-400">Kabar Karya</a>
+            <a href="directory.html" class="block py-2 text-gray-600 dark:text-gray-400">Lapakita</a>
+            <a href="explore.html" class="block py-2 text-primary dark:text-white font-semibold">Jarambah</a>
+        </div>
+    </header>
+
+    <!-- ===== CINEMATIC HERO ===== -->
+    <section class="relative h-[80vh] flex items-center justify-center overflow-hidden">
+        <!-- Video Background Simulation (Using Image for now) -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/drone.webp" class="w-full h-full object-cover" alt="Pemandangan Cimaung">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-light dark:to-dark-900"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto" data-aos="fade-up">
+            <span class="inline-block py-1 px-3 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white text-sm font-bold mb-4 animate-bounce">#ExploreCimaung</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 text-shadow-strong tracking-tight">Surga Tersembunyi di Selatan Bandung</h1>
+            <p class="text-xl text-gray-100 mb-8 max-w-2xl mx-auto text-shadow-strong">Temukan keindahan alam, jejak sejarah, dan kearifan lokal yang belum pernah Anda bayangkan sebelumnya.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="document.getElementById('interactive-map').scrollIntoView({behavior: 'smooth'})" class="bg-primary hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg flex items-center justify-center">
+                    <i class="fa-solid fa-map-location-dot mr-2"></i> Lihat Peta Wisata
+                </button>
+                <button onclick="playHeroVideo()" class="bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/50 text-white font-bold py-3 px-8 rounded-full transition-all flex items-center justify-center">
+                    <i class="fa-solid fa-play mr-2"></i> Tonton Video
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- [BARU] Spot Iklan 1: Top Leaderboard (Post-Hero) -->
+    <div class="container mx-auto px-4 mt-12">
+        <div class="ad-placeholder rounded-lg text-center p-2 relative">
+            <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+            <img src="https://placehold.co/970x90/E2E8F0/4A5568?text=AD+LEADERBOARD+970x90" alt="Iklan Leaderboard" class="mx-auto hidden md:block">
+            <img src="https://placehold.co/320x100/E2E8F0/4A5568?text=AD+MOBILE" alt="Iklan Leaderboard Mobile" class="mx-auto md:hidden">
+        </div>
+    </div>
+
+    <!-- ===== INTERACTIVE MAP SIMULATION ===== -->
+    <section id="interactive-map" class="py-16 container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Peta Destinasi Unggulan</h2>
+            <p class="text-gray-600 dark:text-gray-400 mt-2">Klik lokasi pada peta atau daftar untuk melihat detail.</p>
+        </div>
+
+        <div class="bg-white dark:bg-dark-800 rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-3 min-h-[600px]">
+            <!-- List Lokasi (Kiri) -->
+            <div class="lg:col-span-1 border-r border-gray-200 dark:border-gray-700 flex flex-col h-[600px]">
+                <div class="p-6 bg-gray-50 dark:bg-gray-700/50 border-b border-gray-200 dark:border-gray-700">
+                    <div class="relative">
+                        <input type="text" id="map-search" placeholder="Cari lokasi wisata..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-900 focus:ring-2 focus:ring-primary outline-none">
+                        <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+                <div id="location-list" class="map-list overflow-y-auto flex-grow p-4 space-y-3">
+                    <!-- Items injected by JS -->
+                </div>
+            </div>
+
+            <!-- Visual Peta & Info Card (Kanan) -->
+            <div class="lg:col-span-2 relative bg-gray-200 dark:bg-gray-900 overflow-hidden group">
+                <!-- Map Background (Static Image Simulation) -->
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700" style="background-image: url('https://placehold.co/1200x800/1e293b/cbd5e1?text=Peta+Digital+Cimaung');">
+                    <!-- Simulated Pins (Positioned absolutely via JS/CSS) -->
+                    <div id="map-pins-container"></div>
+                </div>
+
+                <!-- Info Card Overlay (Floating) -->
+                <div id="map-info-card" class="absolute bottom-6 left-6 right-6 bg-white/95 dark:bg-dark-800/95 backdrop-blur-md p-6 rounded-xl shadow-2xl transform translate-y-[120%] transition-transform duration-500 flex flex-col md:flex-row gap-6 border border-gray-100 dark:border-gray-700">
+                    <img id="info-img" src="" class="w-full md:w-48 h-32 object-cover rounded-lg flex-shrink-0 bg-gray-300">
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 id="info-title" class="text-xl font-bold text-primary dark:text-accent">Nama Lokasi</h3>
+                                <span id="info-category" class="text-xs font-bold px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-gray-600 dark:text-gray-300 mt-1 inline-block">Kategori</span>
+                            </div>
+                            <button onclick="closeInfoCard()" class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-xmark text-xl"></i></button>
+                        </div>
+                        <p id="info-desc" class="text-sm text-gray-600 dark:text-gray-300 mt-2 line-clamp-2">Deskripsi singkat lokasi wisata akan muncul di sini.</p>
+                        <div class="mt-4 flex gap-3">
+                            <button class="bg-primary text-white text-sm font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition"><i class="fa-solid fa-location-arrow mr-1"></i> Rute</button>
+                            <button class="border border-primary text-primary dark:text-white dark:border-white text-sm font-bold py-2 px-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">Detail</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [BARU] Spot Iklan 2: Middle Leaderboard -->
+    <div class="container mx-auto px-4 mb-8">
+        <div class="ad-placeholder rounded-lg text-center p-2 relative">
+            <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+            <img src="https://placehold.co/970x90/E2E8F0/4A5568?text=AD+MIDDLE+BANNER" alt="Iklan Banner Tengah" class="mx-auto hidden md:block">
+            <img src="https://placehold.co/320x100/E2E8F0/4A5568?text=AD+MOBILE" alt="Iklan Banner Tengah Mobile" class="mx-auto md:hidden">
+        </div>
+    </div>
+
+    <!-- ===== KATEGORI & FILTER ===== -->
+    <div class="container mx-auto px-4 mb-8">
+        <div class="flex flex-wrap justify-center gap-4" id="gallery-filters">
+            <button class="filter-btn active px-6 py-2 rounded-full border border-primary bg-primary text-white font-semibold transition-all shadow-md" data-filter="all">Semua</button>
+            <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-800 hover:bg-gray-50 dark:hover:bg-gray-700 font-semibold transition-all" data-filter="Alam">🌿 Alam</button>
+            <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-800 hover:bg-gray-50 dark:hover:bg-gray-700 font-semibold transition-all" data-filter="Sejarah">🏛️ Sejarah</button>
+            <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-800 hover:bg-gray-50 dark:hover:bg-gray-700 font-semibold transition-all" data-filter="Kuliner">☕ Kuliner</button>
+        </div>
+    </div>
+
+    <!-- ===== MASONRY GALLERY ===== -->
+    <section class="container mx-auto px-4 pb-16">
+        <!-- Galeri foto akan disuntikkan di sini oleh JS, termasuk Iklan Native -->
+        <div class="masonry-grid" id="masonry-gallery"></div>
+        
+        <div class="text-center mt-12">
+            <button id="load-more-btn" class="text-primary dark:text-accent font-bold hover:underline">Muat Lebih Banyak <i class="fa-solid fa-chevron-down ml-1"></i></button>
+        </div>
+    </section>
+
+    <!-- [BARU] Spot Iklan 3: Bottom Leaderboard -->
+    <div class="container mx-auto px-4 mb-16">
+        <div class="ad-placeholder rounded-lg text-center p-2 relative">
+            <span class="absolute top-1 right-2 text-xs text-gray-500 dark:text-gray-400">IKLAN</span>
+            <img src="https://placehold.co/970x250/E2E8F0/4A5568?text=JELAJAHI+CIMAUNG+BERSAMA+KAMI" alt="Iklan Banner Bawah" class="mx-auto">
+        </div>
+    </div>
+
+    <!-- ===== VIDEO DIARIES ===== -->
+    <section class="bg-gray-100 dark:bg-dark-800 py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-end mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Video Diaries</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-2">Cerita visual dari para kreator lokal.</p>
+                </div>
+                <a href="#" class="text-primary dark:text-accent font-semibold hover:underline">Lihat Channel YouTube &rarr;</a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Video Item 1 -->
+                <div class="group relative rounded-xl overflow-hidden cursor-pointer shadow-lg aspect-video">
+                    <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/lomba.webp" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-300 flex items-center justify-center">
+                        <div class="w-12 h-12 bg-white/20 backdrop-blur rounded-full flex items-center justify-center group-hover:scale-110 transition duration-300">
+                            <i class="fa-solid fa-play text-white"></i>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                        <h4 class="text-white font-bold text-sm truncate">Keseruan Lomba 17-an Desa</h4>
+                        <p class="text-gray-300 text-xs">Durasi: 05:20</p>
+                    </div>
+                </div>
+                 <!-- Video Item 2 -->
+                 <div class="group relative rounded-xl overflow-hidden cursor-pointer shadow-lg aspect-video">
+                    <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/jemgan.webp" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-300 flex items-center justify-center">
+                        <div class="w-12 h-12 bg-white/20 backdrop-blur rounded-full flex items-center justify-center group-hover:scale-110 transition duration-300">
+                            <i class="fa-solid fa-play text-white"></i>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                        <h4 class="text-white font-bold text-sm truncate">Drone View: Jembatan Baru</h4>
+                        <p class="text-gray-300 text-xs">Durasi: 02:15</p>
+                    </div>
+                </div>
+                 <!-- Video Item 3 -->
+                 <div class="group relative rounded-xl overflow-hidden cursor-pointer shadow-lg aspect-video">
+                    <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/kedai-min.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-300 flex items-center justify-center">
+                        <div class="w-12 h-12 bg-white/20 backdrop-blur rounded-full flex items-center justify-center group-hover:scale-110 transition duration-300">
+                            <i class="fa-solid fa-play text-white"></i>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                        <h4 class="text-white font-bold text-sm truncate">Vlog Kuliner: Ngopi di Sawah</h4>
+                        <p class="text-gray-300 text-xs">Durasi: 08:45</p>
+                    </div>
+                </div>
+                 <!-- Video Item 4 -->
+                 <div class="group relative rounded-xl overflow-hidden cursor-pointer shadow-lg aspect-video">
+                    <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/wayang.webp" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-300 flex items-center justify-center">
+                        <div class="w-12 h-12 bg-white/20 backdrop-blur rounded-full flex items-center justify-center group-hover:scale-110 transition duration-300">
+                            <i class="fa-solid fa-play text-white"></i>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                        <h4 class="text-white font-bold text-sm truncate">Profil Pengrajin Wayang</h4>
+                        <p class="text-gray-300 text-xs">Durasi: 12:00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="bg-gray-800 text-white mt-0">
+        <div class="container mx-auto px-4 py-12">
+            <div class="border-t border-gray-700 pt-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div><img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/mediakarya.svg" alt="MediaKarya+ Logo" class="h-10 w-auto brightness-0 invert mb-4"><p class="text-sm text-gray-400">Media digital independen untuk potensi, karya, dan kabar terbaru dari Kecamatan Cimaung.</p></div>
+                <div><h4 class="font-bold">Navigasi</h4><ul class="mt-4 space-y-2 text-sm text-gray-300"><li><a href="kabarkarya.html" class="hover:underline">Kabar Karya</a></li><li><a href="directory.html" class="hover:underline">Lapakita</a></li><li><a href="#" class="hover:underline">Jarambah</a></li></ul></div>
+                <div><h4 class="font-bold">Tentang</h4><ul class="mt-4 space-y-2 text-sm text-gray-300"><li><a href="about.html" class="hover:underline">Tim Kami</a></li><li><a href="pedoman-media.html" class="hover:underline">Pedoman Media</a></li><li><a href="contact.html" class="hover:underline">Hubungi Kami</a></li></ul></div>
+                <div><h4 class="font-bold">Ikuti Kami</h4><div class="flex space-x-4 mt-4"><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-instagram"></i></a><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-tiktok"></i></a><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-youtube"></i></a><a href="#" class="text-2xl hover:text-accent"><i class="fa-brands fa-facebook"></i></a></div></div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-xs text-gray-500">&copy; 2025 Media Karya Kecamatan Cimaung. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="fixed inset-0 z-[60] hidden bg-black/90 items-center justify-center p-4">
+        <div class="relative w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
+            <button onclick="closeVideoModal()" class="absolute top-4 right-4 text-white hover:text-red-500 z-10"><i class="fa-solid fa-xmark text-2xl"></i></button>
+            <div class="w-full h-full flex items-center justify-center text-white">
+                <p>Simulasi Video Player (Embed YouTube)</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Universal: Dark Mode & Mobile Menu ---
+            const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            const sunIcon = themeToggleBtn.querySelector('.fa-sun');
+            const moonIcon = themeToggleBtn.querySelector('.fa-moon');
+            const applyTheme = (theme) => {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    sunIcon.classList.remove('hidden'); moonIcon.classList.add('hidden');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    sunIcon.classList.add('hidden'); moonIcon.classList.remove('hidden');
+                }
+            };
+            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            applyTheme(savedTheme);
+            themeToggleBtn.addEventListener('click', () => {
+                const newTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+                localStorage.setItem('theme', newTheme); applyTheme(newTheme);
+            });
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => document.getElementById('mobile-nav').classList.toggle('hidden'));
+
+            // --- DATA: Wisata & Gallery ---
+            const places = [
+                { id: 1, name: 'Gunung Puntang', category: 'Alam', desc: 'Situs bersejarah Radio Malabar dengan panorama alam yang memukau dan camping ground.', img: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/situpatenggang.webp', coords: { top: '30%', left: '40%' } },
+                { id: 2, name: 'Curug Cinulang', category: 'Alam', desc: 'Air terjun kembar yang legendaris, cocok untuk menenangkan pikiran.', img: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/curugpanganten-min.jpg', coords: { top: '60%', left: '70%' } },
+                { id: 3, name: 'Kedai Kopi Sawah', category: 'Kuliner', desc: 'Nikmati kopi asli Cimaung dengan pemandangan sawah terasering.', img: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/kedaisawah.jpeg', coords: { top: '50%', left: '20%' } },
+                { id: 4, name: 'Taman Sejarah', category: 'Sejarah', desc: 'Mengenal lebih dekat sejarah perjuangan masyarakat Cimaung.', img: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/wayang.webp', coords: { top: '20%', left: '60%' } },
+                { id: 5, name: 'Jembatan Cimaung', category: 'Spot Foto', desc: 'Landmark baru yang estetik, menghubungkan akses ekonomi warga.', img: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/jemgan.webp', coords: { top: '80%', left: '40%' } }
+            ];
+
+            const galleryImages = [
+                { src: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/situpatenggang.webp', cat: 'Alam', caption: 'Kabut pagi di Puntang' },
+                { src: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/wayang.webp', cat: 'Sejarah', caption: 'Wayang Golek Heritage' },
+                { src: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/kedai-min.jpg', cat: 'Kuliner', caption: 'Manual Brew V60' },
+                { src: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/curugpanganten-min.jpg', cat: 'Alam', caption: 'Kesegaran Curug' },
+                { src: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/drone.webp', cat: 'Alam', caption: 'View dari Langit' },
+                { src: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/jemgan.webp', cat: 'Spot Foto', caption: 'Arsitektur Jembatan' },
+                 { src: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/upas-min.jpg', cat: 'Alam', caption: 'Ranca Upas' },
+                  { src: 'https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/glamping-min.jpg', cat: 'Kuliner', caption: 'Glamping Lakeside' },
+            ];
+
+            // --- FEATURE 1: Interactive Map Logic ---
+            const locationList = document.getElementById('location-list');
+            const mapPinsContainer = document.getElementById('map-pins-container');
+            const infoCard = document.getElementById('map-info-card');
+
+            function renderMap() {
+                locationList.innerHTML = '';
+                mapPinsContainer.innerHTML = '';
+                
+                places.forEach(place => {
+                    // 1. Render List Item
+                    const listItem = document.createElement('div');
+                    listItem.className = 'p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition flex items-center space-x-3';
+                    listItem.innerHTML = `<img src="${place.img}" class="w-12 h-12 rounded object-cover"><div class="flex-grow"><h4 class="font-bold text-sm text-gray-800 dark:text-gray-200">${place.name}</h4><p class="text-xs text-gray-500">${place.category}</p></div><i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>`;
+                    listItem.onclick = () => activateLocation(place);
+                    locationList.appendChild(listItem);
+
+                    // 2. Render Map Pin
+                    const pin = document.createElement('div');
+                    pin.className = 'pin-pulse';
+                    pin.style.top = place.coords.top;
+                    pin.style.left = place.coords.left;
+                    pin.title = place.name;
+                    pin.onclick = (e) => { e.stopPropagation(); activateLocation(place); };
+                    mapPinsContainer.appendChild(pin);
+                });
+            }
+
+            function activateLocation(place) {
+                document.getElementById('info-img').src = place.img;
+                document.getElementById('info-title').textContent = place.name;
+                document.getElementById('info-category').textContent = place.category;
+                document.getElementById('info-desc').textContent = place.desc;
+                infoCard.classList.remove('translate-y-[120%]');
+            }
+
+            window.closeInfoCard = () => infoCard.classList.add('translate-y-[120%]');
+            renderMap();
+
+            // --- FEATURE 2: Masonry Gallery & Filtering (With Native Ad Injection) ---
+            const galleryContainer = document.getElementById('masonry-gallery');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+
+            function renderGallery(filter = 'all') {
+                galleryContainer.innerHTML = '';
+                const filtered = filter === 'all' ? galleryImages : galleryImages.filter(img => img.cat === filter);
+                
+                filtered.forEach((img, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'masonry-item group relative rounded-xl overflow-hidden cursor-zoom-in';
+                    item.innerHTML = `<img src="${img.src}" class="w-full h-auto transform transition duration-500 group-hover:scale-105" alt="${img.caption}">
+                                      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
+                                        <p class="text-white font-bold text-lg">${img.caption}</p>
+                                        <span class="text-accent text-xs uppercase tracking-wider">${img.cat}</span>
+                                      </div>`;
+                    galleryContainer.appendChild(item);
+
+                    // [BARU] Inject Ad setelah item ke-4 (index 3)
+                    if (index === 3) {
+                        const adItem = document.createElement('div');
+                        adItem.className = 'masonry-item break-inside-avoid mb-6';
+                        adItem.innerHTML = `
+                            <div class="ad-placeholder rounded-xl text-center p-4 relative h-full min-h-[200px] flex items-center justify-center bg-gray-100 dark:bg-gray-800 border-2 border-dashed border-gray-300 dark:border-gray-700">
+                                <span class="absolute top-2 right-2 text-xs text-gray-400 font-bold tracking-widest">SPONSORED</span>
+                                <div class="text-center">
+                                    <p class="text-gray-500 dark:text-gray-400 font-bold mb-2">IKLAN</p>
+                                    <img src="https://placehold.co/300x250/E2E8F0/4A5568?text=AD+MASONRY" class="mx-auto rounded-lg shadow-sm">
+                                </div>
+                            </div>`;
+                        galleryContainer.appendChild(adItem);
+                    }
+                });
+            }
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelector('.filter-btn.active').classList.remove('active', 'bg-primary', 'text-white', 'border-primary');
+                    document.querySelector('.filter-btn.active').classList.add('bg-white', 'dark:bg-dark-800', 'border-gray-300');
+                    
+                    btn.classList.add('active', 'bg-primary', 'text-white', 'border-primary');
+                    btn.classList.remove('bg-white', 'dark:bg-dark-800', 'border-gray-300');
+                    renderGallery(btn.dataset.filter);
+                });
+            });
+            renderGallery();
+
+            // --- FEATURE 3: Video Modal ---
+            window.playHeroVideo = () => document.getElementById('video-modal').classList.remove('hidden', 'flex'); // Simple toggle
+            window.closeVideoModal = () => document.getElementById('video-modal').classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

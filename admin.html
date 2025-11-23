@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediaKarya+ Admin Dashboard</title>
+    
+    <!-- Dependencies -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Chart.js for Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .sidebar-link.active { background-color: #0D47A1; color: white; }
+        .sidebar-link:hover:not(.active) { background-color: #E5E7EB; color: #0D47A1; }
+        html.dark .sidebar-link:hover:not(.active) { background-color: #374151; color: #60A5FA; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-thumb { background-color: #CBD5E1; border-radius: 4px; }
+        html.dark ::-webkit-scrollbar-thumb { background-color: #4B5563; }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0D47A1',
+                        accent: '#FF9800',
+                        dark: {
+                            800: '#1F2937',
+                            900: '#111827',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-dark-900 text-gray-800 dark:text-gray-300 h-screen flex overflow-hidden transition-colors duration-300">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="w-64 bg-white dark:bg-dark-800 border-r border-gray-200 dark:border-gray-700 hidden md:flex flex-col z-20 transition-colors duration-300">
+        <div class="h-16 flex items-center justify-center border-b border-gray-200 dark:border-gray-700 px-4">
+            <img src="https://raw.githubusercontent.com/ravejet-project16/wartakarta/main/public/assets/images/mediakarya.svg" alt="Logo" class="h-8 dark:invert">
+            <span class="ml-2 font-bold text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-500 dark:text-gray-300">ADMIN</span>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto py-4">
+            <ul class="space-y-1 px-3">
+                <li>
+                    <button onclick="switchTab('dashboard')" class="sidebar-link active w-full flex items-center px-4 py-3 rounded-lg transition-colors group">
+                        <i class="fa-solid fa-chart-line w-6"></i> <span class="font-medium">Dashboard</span>
+                    </button>
+                </li>
+                
+                <li class="pt-4 pb-2 px-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Konten</li>
+                <li>
+                    <button onclick="switchTab('berita')" class="sidebar-link w-full flex items-center px-4 py-3 rounded-lg transition-colors text-gray-600 dark:text-gray-400">
+                        <i class="fa-solid fa-newspaper w-6"></i> <span class="font-medium">Berita / Artikel</span>
+                    </button>
+                </li>
+                <li>
+                    <button onclick="switchTab('lapakita')" class="sidebar-link w-full flex items-center px-4 py-3 rounded-lg transition-colors text-gray-600 dark:text-gray-400">
+                        <i class="fa-solid fa-store w-6"></i> <span class="font-medium">Direktori UMKM</span>
+                    </button>
+                </li>
+                <li>
+                    <button onclick="switchTab('wisata')" class="sidebar-link w-full flex items-center px-4 py-3 rounded-lg transition-colors text-gray-600 dark:text-gray-400">
+                        <i class="fa-solid fa-map-location-dot w-6"></i> <span class="font-medium">Wisata & Video</span>
+                    </button>
+                </li>
+                <li>
+                    <button onclick="switchTab('iklan')" class="sidebar-link w-full flex items-center px-4 py-3 rounded-lg transition-colors text-gray-600 dark:text-gray-400">
+                        <i class="fa-solid fa-rectangle-ad w-6"></i> <span class="font-medium">Manajemen Iklan</span>
+                    </button>
+                </li>
+
+                <li class="pt-4 pb-2 px-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Komunitas</li>
+                <li>
+                    <button onclick="switchTab('inbox')" class="sidebar-link w-full flex items-center px-4 py-3 rounded-lg transition-colors text-gray-600 dark:text-gray-400 flex justify-between">
+                        <div class="flex items-center"><i class="fa-solid fa-inbox w-6"></i> <span class="font-medium">Inbox Laporan</span></div>
+                        <span class="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">3</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+            <button onclick="window.location.href='home.html'" class="w-full flex items-center px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors mb-2">
+                <i class="fa-solid fa-arrow-right-from-bracket w-6"></i> Ke Website Utama
+            </button>
+            <button class="w-full flex items-center px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors">
+                <i class="fa-solid fa-power-off w-6"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="flex-1 flex flex-col h-screen overflow-hidden relative">
+        
+        <!-- Topbar -->
+        <header class="h-16 bg-white dark:bg-dark-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-6 z-10 transition-colors duration-300">
+            <button class="md:hidden text-gray-600 dark:text-gray-300"><i class="fa-solid fa-bars text-xl"></i></button>
+            
+            <div class="flex items-center space-x-4 ml-auto">
+                <!-- Dark Mode Toggle -->
+                <button id="theme-toggle-btn" class="p-2 text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-white transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <i class="fa-solid fa-moon text-lg"></i>
+                    <i class="fa-solid fa-sun text-lg hidden"></i>
+                </button>
+
+                <button class="relative p-2 text-gray-400 hover:text-primary transition">
+                    <i class="fa-regular fa-bell text-xl"></i>
+                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                </button>
+                <div class="flex items-center space-x-3 border-l pl-4 border-gray-200 dark:border-gray-700">
+                    <div class="text-right hidden sm:block">
+                        <p class="text-sm font-bold text-gray-900 dark:text-white">Admin Redaksi</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Super Admin</p>
+                    </div>
+                    <img src="https://i.pravatar.cc/150?u=admin" class="w-9 h-9 rounded-full bg-gray-300 border border-gray-200 dark:border-gray-600">
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Scrollable Area -->
+        <main class="flex-1 overflow-y-auto bg-gray-50 dark:bg-dark-900 p-6 transition-colors duration-300" id="main-container">
+            
+            <!-- TAB: DASHBOARD -->
+            <div id="tab-dashboard" class="content-tab block animate-fade-in">
+                <div class="mb-6 flex justify-between items-end">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Ringkasan Hari Ini</h1>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm">Update Terakhir: Baru Saja</p>
+                    </div>
+                    <button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-700 transition shadow-md"><i class="fa-solid fa-plus mr-2"></i> Tulis Berita</button>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <!-- Stat 1 -->
+                    <div class="bg-white dark:bg-dark-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-xs font-bold text-gray-400 uppercase">Total Pembaca</p>
+                                <h3 class="text-3xl font-bold text-gray-900 dark:text-white mt-1">24.5K</h3>
+                                <p class="text-xs text-green-500 mt-1 font-semibold"><i class="fa-solid fa-arrow-up"></i> 12% dari kemarin</p>
+                            </div>
+                            <div class="p-3 bg-blue-50 dark:bg-blue-900/30 text-primary dark:text-blue-300 rounded-lg"><i class="fa-solid fa-eye text-xl"></i></div>
+                        </div>
+                    </div>
+                    <!-- Stat 2 -->
+                    <div class="bg-white dark:bg-dark-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-xs font-bold text-gray-400 uppercase">Berita Tayang</p>
+                                <h3 class="text-3xl font-bold text-gray-900 dark:text-white mt-1">1,204</h3>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 font-semibold">8 artikel minggu ini</p>
+                            </div>
+                            <div class="p-3 bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-300 rounded-lg"><i class="fa-solid fa-newspaper text-xl"></i></div>
+                        </div>
+                    </div>
+                    <!-- Stat 3 -->
+                    <div class="bg-white dark:bg-dark-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-xs font-bold text-gray-400 uppercase">Lapak UMKM</p>
+                                <h3 class="text-3xl font-bold text-gray-900 dark:text-white mt-1">86</h3>
+                                <p class="text-xs text-orange-500 mt-1 font-semibold"><i class="fa-solid fa-circle-exclamation"></i> 4 perlu verifikasi</p>
+                            </div>
+                            <div class="p-3 bg-orange-50 dark:bg-orange-900/30 text-accent dark:text-orange-300 rounded-lg"><i class="fa-solid fa-store text-xl"></i></div>
+                        </div>
+                    </div>
+                    <!-- Stat 4 -->
+                    <div class="bg-white dark:bg-dark-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-xs font-bold text-gray-400 uppercase">Pendapatan Iklan</p>
+                                <h3 class="text-3xl font-bold text-gray-900 dark:text-white mt-1">Rp 8.5jt</h3>
+                                <p class="text-xs text-green-500 mt-1 font-semibold">Bulan ini</p>
+                            </div>
+                            <div class="p-3 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-300 rounded-lg"><i class="fa-solid fa-wallet text-xl"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts & Recent -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2 bg-white dark:bg-dark-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+                        <h3 class="font-bold text-gray-900 dark:text-white mb-4">Analisis Trafik (Mingguan)</h3>
+                        <div class="relative h-64 w-full">
+                            <canvas id="trafficChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-dark-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+                        <h3 class="font-bold text-gray-900 dark:text-white mb-4">Laporan Terbaru</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-3 p-3 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition cursor-pointer">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm">B</div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white truncate">Jalan Rusak di Jagabaya</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">Dari: Budi • 10 menit lalu</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition cursor-pointer">
+                                <div class="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center font-bold text-sm">S</div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white truncate">Iklan Banner Samping</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">Dari: Toko Subur • 2 jam lalu</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition cursor-pointer">
+                                <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-sm">A</div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-semibold text-gray-900 dark:text-white truncate">Koreksi Berita SMAN 1</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">Dari: Anonim • 5 jam lalu</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="switchTab('inbox')" class="w-full mt-4 text-center text-primary dark:text-accent text-sm font-bold hover:underline">Lihat Semua Laporan</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: BERITA -->
+            <div id="tab-berita" class="content-tab hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Manajemen Berita</h1>
+                    <div class="flex gap-2">
+                        <input type="text" placeholder="Cari judul..." class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-dark-800 text-sm focus:ring-2 focus:ring-primary outline-none">
+                        <button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-700 transition"><i class="fa-solid fa-pen-nib mr-2"></i> Tulis Baru</button>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-dark-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <table class="w-full text-left text-sm text-gray-600 dark:text-gray-300">
+                        <thead class="bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white font-bold uppercase text-xs">
+                            <tr>
+                                <th class="px-6 py-4">Judul</th>
+                                <th class="px-6 py-4">Kategori</th>
+                                <th class="px-6 py-4">Penulis</th>
+                                <th class="px-6 py-4">Status</th>
+                                <th class="px-6 py-4">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
+                                <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">SMA Negeri 1 Cimaung Juara Umum LCC</td>
+                                <td class="px-6 py-4"><span class="bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 px-2 py-1 rounded text-xs font-bold">Pendidikan</span></td>
+                                <td class="px-6 py-4">Siti N.</td>
+                                <td class="px-6 py-4"><span class="bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-2 py-1 rounded-full text-xs font-bold flex w-fit items-center"><span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span> Tayang</span></td>
+                                <td class="px-6 py-4 flex gap-2">
+                                    <button class="text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 p-2 rounded"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 p-2 rounded"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
+                                <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">Puskesmas Adakan Vaksinasi Gratis</td>
+                                <td class="px-6 py-4"><span class="bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-2 py-1 rounded text-xs font-bold">Kesehatan</span></td>
+                                <td class="px-6 py-4">Dr. Budi</td>
+                                <td class="px-6 py-4"><span class="bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-2 py-1 rounded-full text-xs font-bold flex w-fit items-center"><span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span> Tayang</span></td>
+                                <td class="px-6 py-4 flex gap-2">
+                                    <button class="text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 p-2 rounded"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 p-2 rounded"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
+                                <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">Draf: Profil Kades Baru</td>
+                                <td class="px-6 py-4"><span class="bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-xs font-bold">Pemerintahan</span></td>
+                                <td class="px-6 py-4">Redaksi</td>
+                                <td class="px-6 py-4"><span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300 px-2 py-1 rounded-full text-xs font-bold flex w-fit items-center"><span class="w-2 h-2 bg-yellow-500 rounded-full mr-1"></span> Draf</span></td>
+                                <td class="px-6 py-4 flex gap-2">
+                                    <button class="text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 p-2 rounded"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 p-2 rounded"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB: LAPAKITA -->
+            <div id="tab-lapakita" class="content-tab hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Direktori UMKM</h1>
+                    <div class="flex gap-2">
+                        <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-3 py-1 rounded-lg text-xs font-bold flex items-center"><i class="fa-solid fa-triangle-exclamation mr-1"></i> 4 Menunggu Verifikasi</span>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-dark-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <table class="w-full text-left text-sm text-gray-600 dark:text-gray-300">
+                        <thead class="bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white font-bold uppercase text-xs">
+                            <tr>
+                                <th class="px-6 py-4">Nama Usaha</th>
+                                <th class="px-6 py-4">Pemilik</th>
+                                <th class="px-6 py-4">Kategori</th>
+                                <th class="px-6 py-4">Status Verifikasi</th>
+                                <th class="px-6 py-4 text-right">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
+                                <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">Kopi Asli Cimaung</td>
+                                <td class="px-6 py-4">Kang Asep</td>
+                                <td class="px-6 py-4">Kuliner</td>
+                                <td class="px-6 py-4"><span class="bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-2 py-1 rounded-full text-xs font-bold"><i class="fa-solid fa-check-circle"></i> Terverifikasi</span></td>
+                                <td class="px-6 py-4 text-right">
+                                    <button class="text-gray-400 hover:text-primary dark:hover:text-accent">Detail</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition">
+                                <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">Sanggar Wayang Golek</td>
+                                <td class="px-6 py-4">Abah Anom</td>
+                                <td class="px-6 py-4">Kerajinan</td>
+                                <td class="px-6 py-4"><span class="bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-2 py-1 rounded-full text-xs font-bold"><i class="fa-solid fa-check-circle"></i> Terverifikasi</span></td>
+                                <td class="px-6 py-4 text-right">
+                                    <button class="text-gray-400 hover:text-primary dark:hover:text-accent">Detail</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 bg-yellow-50/50 dark:bg-yellow-900/10">
+                                <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">Keripik Pedas Ma Ijah <span class="ml-2 bg-red-500 text-white text-[10px] px-1 rounded">BARU</span></td>
+                                <td class="px-6 py-4">Ijah Hadijah</td>
+                                <td class="px-6 py-4">Makanan Ringan</td>
+                                <td class="px-6 py-4"><span class="bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-200 px-2 py-1 rounded-full text-xs font-bold">Pending</span></td>
+                                <td class="px-6 py-4 text-right flex justify-end gap-2">
+                                    <button class="bg-green-500 text-white p-1.5 rounded hover:bg-green-600 text-xs" title="Setujui"><i class="fa-solid fa-check"></i></button>
+                                    <button class="bg-red-500 text-white p-1.5 rounded hover:bg-red-600 text-xs" title="Tolak"><i class="fa-solid fa-xmark"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB: INBOX -->
+            <div id="tab-inbox" class="content-tab hidden">
+                <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Inbox Laporan</h1>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[600px]">
+                    <!-- Message List -->
+                    <div class="bg-white dark:bg-dark-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-y-auto">
+                        <div class="p-4 border-b border-gray-100 dark:border-gray-700 font-bold text-gray-500 text-xs uppercase">Hari Ini</div>
+                        <div class="p-4 hover:bg-blue-50 dark:hover:bg-blue-900/20 cursor-pointer border-l-4 border-blue-500 transition bg-blue-50/30 dark:bg-blue-900/10">
+                            <div class="flex justify-between items-start mb-1">
+                                <h4 class="font-bold text-gray-900 dark:text-white text-sm">Budi Santoso</h4>
+                                <span class="text-[10px] text-gray-400">10:30</span>
+                            </div>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 font-semibold mb-1">Laporan: Jalan Rusak di...</p>
+                            <p class="text-xs text-gray-400 line-clamp-2">Selamat pagi admin, saya mau melaporkan kondisi jalan di desa Jagabaya yang semakin parah...</p>
+                        </div>
+                        <div class="p-4 hover:bg-gray-50 dark:hover:bg-gray-700/30 cursor-pointer border-l-4 border-transparent transition">
+                            <div class="flex justify-between items-start mb-1">
+                                <h4 class="font-bold text-gray-900 dark:text-white text-sm">Toko Subur</h4>
+                                <span class="text-[10px] text-gray-400">08:15</span>
+                            </div>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 font-semibold mb-1">Tanya Harga Iklan</p>
+                            <p class="text-xs text-gray-400 line-clamp-2">Halo min, boleh minta rate card untuk iklan banner di halaman utama? Trims.</p>
+                        </div>
+                    </div>
+                    <!-- Message Detail -->
+                    <div class="lg:col-span-2 bg-white dark:bg-dark-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-8 flex flex-col">
+                        <div class="flex justify-between items-start border-b border-gray-100 dark:border-gray-700 pb-6 mb-6">
+                            <div>
+                                <h2 class="text-xl font-bold text-gray-900 dark:text-white">Laporan: Jalan Rusak di Desa Jagabaya</h2>
+                                <p class="text-sm text-gray-500 mt-1">Dari: <strong>Budi Santoso</strong> (budi@email.com)</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 bg-gray-100 dark:bg-gray-700 p-2 rounded"><i class="fa-solid fa-print"></i></button>
+                                <button class="text-gray-400 hover:text-red-600 bg-gray-100 dark:bg-gray-700 p-2 rounded"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="flex-1 overflow-y-auto text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-6">
+                            <p class="mb-4">Selamat pagi admin MediaKarya,</p>
+                            <p class="mb-4">Saya mau melaporkan kondisi jalan di desa Jagabaya, tepatnya di RW 05 dekat balai desa, yang semakin parah lubangnya. Sudah ada dua pengendara motor yang jatuh minggu ini karena menghindari lubang.</p>
+                            <p class="mb-4">Mohon dibantu untuk diberitakan agar segera mendapat perhatian dari pihak terkait. Saya lampirkan fotonya.</p>
+                            <div class="w-48 h-32 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center text-gray-400 text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                                <i class="fa-solid fa-image mr-2"></i> Foto_Jalan.jpg
+                            </div>
+                        </div>
+                        <div class="border-t border-gray-100 dark:border-gray-700 pt-6">
+                            <label class="block text-xs font-bold text-gray-500 mb-2">Balas Pesan</label>
+                            <textarea class="w-full border border-gray-300 dark:border-gray-600 dark:bg-dark-900 dark:text-white rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary outline-none" rows="3" placeholder="Tulis balasan..."></textarea>
+                            <div class="flex justify-end mt-3">
+                                <button class="bg-primary text-white px-6 py-2 rounded-lg text-sm font-bold hover:bg-blue-700 transition">Kirim Balasan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Placeholder for other tabs -->
+            <div id="tab-wisata" class="content-tab hidden text-center py-20 text-gray-400">
+                <i class="fa-solid fa-map-location-dot text-6xl mb-4"></i>
+                <h2 class="text-xl font-bold text-gray-600 dark:text-gray-400">Manajemen Konten Jarambah</h2>
+                <p>Atur lokasi peta, galeri foto, dan video unggulan di sini.</p>
+            </div>
+            <div id="tab-iklan" class="content-tab hidden text-center py-20 text-gray-400">
+                <i class="fa-solid fa-rectangle-ad text-6xl mb-4"></i>
+                <h2 class="text-xl font-bold text-gray-600 dark:text-gray-400">Modul Manajemen Iklan</h2>
+                <p>Fitur ini akan menampilkan slot iklan aktif, statistik klik, dan tanggal kadaluarsa.</p>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // --- DARK MODE LOGIC ---
+        const themeToggleBtn = document.getElementById('theme-toggle-btn');
+        const sunIcon = themeToggleBtn.querySelector('.fa-sun');
+        const moonIcon = themeToggleBtn.querySelector('.fa-moon');
+        
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                document.documentElement.classList.remove('dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        };
+        
+        // Check local storage or system preference
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        applyTheme(savedTheme);
+        
+        themeToggleBtn.addEventListener('click', () => {
+            const newTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+            localStorage.setItem('theme', newTheme);
+            applyTheme(newTheme);
+        });
+
+        // --- TAB SWITCHING LOGIC ---
+        function switchTab(tabId) {
+            // 1. Hide all content
+            document.querySelectorAll('.content-tab').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            // 2. Show selected content
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            document.getElementById('tab-' + tabId).classList.add('animate-fade-in');
+
+            // 3. Update Sidebar Active State
+            document.querySelectorAll('.sidebar-link').forEach(el => {
+                el.classList.remove('active');
+            });
+            // Find the button that called this function
+            event.currentTarget.classList.add('active');
+        }
+
+        // --- CHART.JS LOGIC ---
+        let trafficChart;
+
+        function initChart() {
+            const ctx = document.getElementById('trafficChart').getContext('2d');
+            const isDark = document.documentElement.classList.contains('dark');
+            
+            // Colors based on theme
+            const gridColor = isDark ? '#374151' : '#E5E7EB';
+            const textColor = isDark ? '#9CA3AF' : '#6B7280';
+            const primaryColor = '#0D47A1'; // Blue
+            const accentColor = '#FF9800'; // Orange/Secondary
+
+            // Create Gradient
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, isDark ? 'rgba(13, 71, 161, 0.5)' : 'rgba(13, 71, 161, 0.2)');
+            gradient.addColorStop(1, isDark ? 'rgba(13, 71, 161, 0)' : 'rgba(13, 71, 161, 0)');
+
+            if (trafficChart) {
+                trafficChart.destroy();
+            }
+
+            trafficChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
+                    datasets: [
+                        {
+                            label: 'Minggu Ini',
+                            data: [1200, 1900, 3000, 5000, 2300, 3400, 4500],
+                            borderColor: primaryColor,
+                            backgroundColor: gradient,
+                            borderWidth: 3,
+                            tension: 0.4,
+                            fill: true,
+                            pointBackgroundColor: '#ffffff',
+                            pointBorderColor: primaryColor,
+                            pointBorderWidth: 2,
+                            pointRadius: 4,
+                            pointHoverRadius: 6
+                        },
+                        {
+                            label: 'Minggu Lalu',
+                            data: [1000, 1500, 2200, 4800, 2000, 3100, 4100],
+                            borderColor: isDark ? '#6B7280' : '#CBD5E1', // Gray
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            tension: 0.4,
+                            fill: false,
+                            pointRadius: 0,
+                            pointHoverRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            align: 'end',
+                            labels: {
+                                color: textColor,
+                                usePointStyle: true,
+                                boxWidth: 8
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: isDark ? '#1F2937' : '#ffffff',
+                            titleColor: isDark ? '#ffffff' : '#111827',
+                            bodyColor: isDark ? '#D1D5DB' : '#4B5563',
+                            borderColor: isDark ? '#374151' : '#E5E7EB',
+                            borderWidth: 1,
+                            padding: 10,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('id-ID').format(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true,
+                            grid: { color: gridColor, borderDash: [2, 2] },
+                            ticks: { color: textColor, font: { size: 11 } }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: textColor, font: { size: 11 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', initChart);
+
+        // Update chart when theme changes
+        // We need to hook into the existing theme toggle logic or observe class changes
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === "class") {
+                    initChart(); // Re-render chart with new colors
+                }
+            });
+        });
+        observer.observe(document.documentElement, { attributes: true });
+    </script>
+    
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+    </style>
+</body>
+</html>
